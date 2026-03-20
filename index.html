@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>llm-collab Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #c9d1d9; padding: 2rem; }
+    h1 { color: #58a6ff; margin-bottom: 0.5rem; }
+    .subtitle { color: #8b949e; margin-bottom: 2rem; font-size: 0.9rem; }
+    .stats { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .stat { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.5rem; min-width: 120px; }
+    .stat-value { font-size: 2rem; font-weight: bold; }
+    .stat-label { color: #8b949e; font-size: 0.85rem; margin-top: 0.25rem; }
+    .stat-done .stat-value { color: #3fb950; }
+    .stat-progress .stat-value { color: #d29922; }
+    .stat-pending .stat-value { color: #8b949e; }
+    .stat-blocked .stat-value { color: #f85149; }
+    .section { margin-bottom: 2rem; }
+    .section h2 { color: #c9d1d9; font-size: 1.1rem; margin-bottom: 0.75rem; border-bottom: 1px solid #30363d; padding-bottom: 0.5rem; }
+    .task { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; }
+    .task:hover { border-color: #58a6ff; }
+    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 600; white-space: nowrap; }
+    .badge-done { background: #238636; color: #fff; }
+    .badge-in_progress { background: #9e6a03; color: #fff; }
+    .badge-pending { background: #30363d; color: #8b949e; }
+    .badge-blocked { background: #da3633; color: #fff; }
+    .badge-skipped { background: #30363d; color: #8b949e; }
+    .task-title { flex: 1; font-weight: 500; }
+    .task-assignee { color: #58a6ff; font-size: 0.85rem; white-space: nowrap; }
+    .task-result { color: #8b949e; font-size: 0.8rem; margin-top: 0.25rem; }
+    .agents { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .agent-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem; min-width: 200px; flex: 1; }
+    .agent-name { color: #58a6ff; font-weight: 600; margin-bottom: 0.5rem; }
+    .agent-detail { color: #8b949e; font-size: 0.85rem; line-height: 1.6; }
+    .progress-bar { background: #30363d; border-radius: 4px; height: 8px; margin-top: 1rem; overflow: hidden; }
+    .progress-fill { height: 100%; background: #3fb950; border-radius: 4px; transition: width 0.3s; }
+    .updated { color: #8b949e; font-size: 0.8rem; margin-top: 1rem; text-align: center; }
+    .error { color: #f85149; text-align: center; padding: 2rem; }
+    #loading { text-align: center; padding: 2rem; color: #8b949e; }
+  </style>
+</head>
+<body>
+  <h1>🦞 llm-collab Dashboard</h1>
+  <p class="subtitle">Multi-agent coordination for local LLM server setup</p>
+  <div id="loading">Loading plan.json...</div>
+  <div id="dashboard" style="display:none">
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+    <p id="progress-text" style="color:#8b949e;font-size:0.85rem;margin:0.5rem 0 1.5rem"></p>
+    <div class="stats" id="stats"></div>
+    <div class="section"><h2>Agents</h2><div class="agents" id="agents"></div></div>
+    <div class="section"><h2>Tasks</h2><div id="tasks"></div></div>
+    <p class="updated" id="updated"></p>
+  </div>
+  <div id="error" style="display:none" class="error"></div>
+
+  <script>
+    const PLAN_URL = 'plan.json';
+    const COLLABS_URL = 'https://api.github.com/repos/PeerDiego/llm-collab/contents/collaborators';
+
+    async function loadDashboard() {
+      try {
+        const planRes = await fetch(PLAN_URL);
+        if (!planRes.ok) throw new Error(`Failed to load plan.json: ${planRes.status}`);
+        const plan = await planRes.json();
+        renderDashboard(plan);
+
+        try {
+          const collabRes = await fetch(COLLABS_URL);
+          if (collabRes.ok) {
+            const files = await collabRes.json();
+            const agents = files
+              .filter(f => f.name.endsWith('.md'))
+              .map(f => f.name.replace('.md', ''));
+            renderAgents(agents, plan.tasks || []);
+          }
+        } catch (e) {
+          console.log('Could not load collaborators (private repo):', e);
+          renderAgentsFromPlan(plan.tasks || []);
+        }
+      } catch (e) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error').style.display = 'block';
+        document.getElementById('error').textContent = e.message;
+      }
+    }
+
+    function renderDashboard(plan) {
+      const tasks = plan.tasks || [];
+      const counts = { done: 0, in_progress: 0, pending: 0, blocked: 0, skipped: 0 };
+      tasks.forEach(t => { counts[t.status] = (counts[t.status] || 0) + 1; });
+      const total = tasks.length;
+      const pct = total ? Math.round((counts.done / total) * 100) : 0;
+
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('progress').style.width = pct + '%';
+      document.getElementById('progress-text').textContent = `${pct}% complete (${counts.done}/${total} tasks)`;
+
+      const statsEl = document.getElementById('stats');
+      statsEl.innerHTML = [
+        { cls: 'done', val: counts.done, label: 'Done' },
+        { cls: 'progress', val: counts.in_progress, label: 'In Progress' },
+        { cls: 'pending', val: counts.pending, label: 'Pending' },
+        { cls: 'blocked', val: counts.blocked, label: 'Blocked' },
+      ].map(s => `<div class="stat stat-${s.cls}"><div class="stat-value">${s.val}</div><div class="stat-label">${s.label}</div></div>`).join('');
+
+      const tasksEl = document.getElementById('tasks');
+      const statusOrder = { in_progress: 0, pending: 1, blocked: 2, done: 3, skipped: 4 };
+      const sorted = [...tasks].sort((a, b) => (statusOrder[a.status] ?? 5) - (statusOrder[b.status] ?? 5));
+      tasksEl.innerHTML = sorted.map(t => `
+        <div class="task">
+          <span class="badge badge-${t.status}">${t.status.replace('_', ' ')}</span>
+          <span class="task-title">
+            ${t.title}
+            ${t.result ? `<div class="task-result">${t.result}</div>` : ''}
+          </span>
+          ${t.assignee ? `<span class="task-assignee">${t.assignee}</span>` : ''}
+        </div>
+      `).join('');
+
+      if (plan.updated_at) {
+        document.getElementById('updated').textContent = `Last updated: ${new Date(plan.updated_at).toLocaleString()}`;
+      }
+    }
+
+    function renderAgents(agentIds, tasks) {
+      const el = document.getElementById('agents');
+      el.innerHTML = agentIds.map(id => {
+        const agentTasks = tasks.filter(t => t.assignee === id);
+        const done = agentTasks.filter(t => t.status === 'done').length;
+        return `<div class="agent-card">
+          <div class="agent-name">${id}</div>
+          <div class="agent-detail">${done}/${agentTasks.length} tasks done</div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderAgentsFromPlan(tasks) {
+      const assignees = [...new Set(tasks.map(t => t.assignee).filter(Boolean))];
+      renderAgents(assignees, tasks);
+    }
+
+    loadDashboard();
+  </script>
+</body>
+</html>
