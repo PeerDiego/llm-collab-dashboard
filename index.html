@@ -42,8 +42,10 @@
     .theme-btn.active { border-color: var(--accent); color: var(--accent); background: var(--bg); }
 
     .stats { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; min-width: 120px; transition: border-color 0.3s, transform 0.3s, background 0.3s; }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; min-width: 120px; transition: border-color 0.3s, transform 0.3s, background 0.3s; cursor: pointer; user-select: none; }
+    .stat:hover { border-color: var(--accent); }
     .stat.changed { border-color: var(--accent); transform: scale(1.05); }
+    .stat.filter-active { border-color: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
     .stat-value { font-size: 2rem; font-weight: bold; transition: color 0.3s; }
     .stat-label { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem; }
     .stat-done .stat-value { color: var(--green); }
@@ -53,6 +55,7 @@
     .section { margin-bottom: 2rem; }
     .section h2 { color: var(--text); font-size: 1.1rem; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
     .task { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; transition: all 0.4s ease; max-height: 200px; opacity: 1; overflow: hidden; }
+    .task.filtered-out { max-height: 0; opacity: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
     .task:hover { border-color: var(--accent); }
     .task.new-task { animation: slideIn 0.6s ease-out; }
     .task.changed-task { animation: flashBorder 1s ease-out; }
@@ -139,6 +142,8 @@
 
     let previousPlan = null;
     let pollTimer = null;
+    let activeFilters = new Set();
+    let currentTasks = [];
 
     // Theme switcher
     function setTheme(theme) {
@@ -243,8 +248,23 @@
       statsEl.innerHTML = statItems.map(s => {
         const changedCls = countChanges && countChanges[s.key] ? ' changed' : '';
         const valCls = countChanges && countChanges[s.key] ? ' count-changed' : '';
-        return `<div class="stat stat-${s.cls}${changedCls}"><div class="stat-value${valCls}">${s.val}</div><div class="stat-label">${s.label}</div></div>`;
+        const filterCls = activeFilters.has(s.key) ? ' filter-active' : '';
+        return `<div class="stat stat-${s.cls}${changedCls}${filterCls}" data-status="${s.key}"><div class="stat-value${valCls}">${s.val}</div><div class="stat-label">${s.label}</div></div>`;
       }).join('');
+
+      statsEl.querySelectorAll('.stat').forEach(el => {
+        el.addEventListener('click', () => {
+          const status = el.dataset.status;
+          if (activeFilters.has(status)) {
+            activeFilters.delete(status);
+            el.classList.remove('filter-active');
+          } else {
+            activeFilters.add(status);
+            el.classList.add('filter-active');
+          }
+          applyFilters();
+        });
+      });
 
       if (countChanges) {
         setTimeout(() => {
@@ -254,6 +274,7 @@
 
       renderAgentsFromPlan(tasks, diff);
       renderTasks(tasks, diff);
+      currentTasks = tasks;
 
       if (plan.updated_at) {
         document.getElementById('updated').textContent = `Plan last updated: ${new Date(plan.updated_at).toLocaleString()}`;
@@ -314,6 +335,20 @@
           <div class="agent-detail">${done}/${agentTasks.length} tasks done${inProg ? ` · ${inProg} in progress` : ''}</div>
         </div>`;
       }).join('');
+    }
+
+    function applyFilters() {
+      const taskEls = document.querySelectorAll('.task[data-task-id]');
+      taskEls.forEach(el => {
+        const taskId = el.dataset.taskId;
+        const task = currentTasks.find(t => t.id === taskId);
+        if (!task) return;
+        if (activeFilters.size === 0) {
+          el.classList.remove('filtered-out');
+        } else {
+          el.classList.toggle('filtered-out', !activeFilters.has(task.status));
+        }
+      });
     }
 
     // Initial load
