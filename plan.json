@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-20T17:55:07Z",
+  "updated_at": "2026-03-20T20:15:00Z",
   "tasks": [
     {
       "id": "install-node",
@@ -162,6 +162,50 @@
       ],
       "result": "laptop-setup.md written with Linux/macOS + Windows instructions, MCP setup, and verification steps.",
       "completed_at": "2026-03-20T16:26:18Z"
+    },
+    {
+      "id": "bright-spark-ssh-tunnel",
+      "title": "Configure SSH tunnel (Linux)",
+      "description": "Set up an SSH tunnel from the Linux client to the LLM server to forward Ollama (port 11434). Run: ssh -N -L 11434:localhost:11434 <user>@<server> (add -f to background). Verify with: curl http://localhost:11434/api/tags",
+      "assignee": "bright-spark",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-20T20:14:30Z"
+    },
+    {
+      "id": "bright-spark-install-openclaw",
+      "title": "Install + configure OpenClaw (Linux)",
+      "description": "Install OpenClaw on the Linux client: npm install -g openclaw@latest. Create ~/.openclaw/openclaw.json with primary model ollama/llama3.1:8b. Create ~/.openclaw/.env with OLLAMA_API_KEY=ollama-local. Verify: openclaw config validate && openclaw models status.",
+      "assignee": "bright-spark",
+      "status": "pending",
+      "depends_on": [
+        "bright-spark-ssh-tunnel"
+      ],
+      "created_at": "2026-03-20T20:14:30Z"
+    },
+    {
+      "id": "bright-spark-setup-mcp",
+      "title": "Set up MCP coordination server (Linux)",
+      "description": "Install Python venv + mcp package: cd ~/collab && python3 -m venv .venv && source .venv/bin/activate && pip install mcp. Configure ~/.copilot/mcp.json with command pointing to ~/collab/.venv/bin/python3 and args [~/collab/server.py]. Restart Copilot CLI to activate. Verify with get_plan() tool.",
+      "assignee": "bright-spark",
+      "status": "done",
+      "depends_on": [],
+      "created_at": "2026-03-20T20:14:30Z",
+      "started_at": "2026-03-20T20:14:52Z",
+      "result": "Python venv created at ~/collab/.venv, mcp package installed, ~/.copilot/mcp.json configured with collab-coordinator pointing to server.py. MCP server tested and responding.",
+      "completed_at": "2026-03-20T20:15:00Z"
+    },
+    {
+      "id": "bright-spark-verify-setup",
+      "title": "Verify full setup (Linux)",
+      "description": "Verify the complete setup: 1) SSH tunnel active (curl localhost:11434/api/tags). 2) OpenClaw configured (openclaw models status shows ollama). 3) MCP tools available (get_plan returns task board). Mark done only when all three checks pass.",
+      "assignee": "bright-spark",
+      "status": "pending",
+      "depends_on": [
+        "bright-spark-install-openclaw",
+        "bright-spark-setup-mcp"
+      ],
+      "created_at": "2026-03-20T20:14:30Z"
     }
   ]
 }
