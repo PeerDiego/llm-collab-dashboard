@@ -1,55 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>llm-collab Dashboard</title>
   <style>
+    :root[data-theme="dark"] {
+      --bg: #0d1117; --surface: #161b22; --border: #30363d;
+      --text: #c9d1d9; --text-muted: #8b949e; --text-faint: #484f58;
+      --heading: #e6edf3; --accent: #bc8cff; --accent-glow: rgba(188,140,255,0.5);
+      --green: #3fb950; --yellow: #d29922; --red: #f85149;
+      --badge-pending-bg: #30363d; --badge-pending-fg: #8b949e;
+    }
+    :root[data-theme="light"] {
+      --bg: #ffffff; --surface: #f6f8fa; --border: #d0d7de;
+      --text: #1f2328; --text-muted: #656d76; --text-faint: #8b949e;
+      --heading: #1f2328; --accent: #8250df; --accent-glow: rgba(130,80,223,0.4);
+      --green: #1a7f37; --yellow: #9a6700; --red: #cf222e;
+      --badge-pending-bg: #eaeef2; --badge-pending-fg: #656d76;
+    }
+    :root[data-theme="solarized"] {
+      --bg: #002b36; --surface: #073642; --border: #586e75;
+      --text: #839496; --text-muted: #657b83; --text-faint: #586e75;
+      --heading: #93a1a1; --accent: #d33682; --accent-glow: rgba(211,54,130,0.4);
+      --green: #859900; --yellow: #b58900; --red: #dc322f;
+      --badge-pending-bg: #073642; --badge-pending-fg: #657b83;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #c9d1d9; padding: 2rem; }
-    h1 { color: #58a6ff; margin-bottom: 0.5rem; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 2rem; transition: background 0.3s, color 0.3s; }
+    h1 { color: var(--heading); margin-bottom: 0.5rem; }
     .header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
-    .subtitle { color: #8b949e; margin-bottom: 0.5rem; font-size: 0.9rem; }
-    .poll-status { color: #484f58; font-size: 0.75rem; position: fixed; top: 2rem; right: 2rem; }
-    .poll-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #3fb950; margin-right: 0.4rem; vertical-align: middle; }
-    .poll-dot.fetching { background: #d29922; animation: pulse-dot 0.6s ease-in-out infinite; }
+    .subtitle { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
+    .top-bar { position: fixed; top: 2rem; right: 2rem; display: flex; align-items: center; gap: 1.5rem; z-index: 10; }
+    .poll-status { color: var(--text-faint); font-size: 0.75rem; }
+    .poll-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-right: 0.4rem; vertical-align: middle; }
+    .poll-dot.fetching { background: var(--yellow); animation: pulse-dot 0.6s ease-in-out infinite; }
+    .theme-switcher { display: flex; gap: 0.25rem; }
+    .theme-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); font-size: 0.7rem; padding: 0.25rem 0.5rem; cursor: pointer; transition: all 0.2s; }
+    .theme-btn:hover { border-color: var(--accent); color: var(--text); }
+    .theme-btn.active { border-color: var(--accent); color: var(--accent); background: var(--bg); }
+
     .stats { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .stat { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.5rem; min-width: 120px; transition: border-color 0.3s, transform 0.3s; }
-    .stat.changed { border-color: #58a6ff; transform: scale(1.05); }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; min-width: 120px; transition: border-color 0.3s, transform 0.3s, background 0.3s; }
+    .stat.changed { border-color: var(--accent); transform: scale(1.05); }
     .stat-value { font-size: 2rem; font-weight: bold; transition: color 0.3s; }
-    .stat-label { color: #8b949e; font-size: 0.85rem; margin-top: 0.25rem; }
-    .stat-done .stat-value { color: #3fb950; }
-    .stat-progress .stat-value { color: #d29922; }
-    .stat-pending .stat-value { color: #8b949e; }
-    .stat-blocked .stat-value { color: #f85149; }
+    .stat-label { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem; }
+    .stat-done .stat-value { color: var(--green); }
+    .stat-progress .stat-value { color: var(--yellow); }
+    .stat-pending .stat-value { color: var(--text-muted); }
+    .stat-blocked .stat-value { color: var(--red); }
     .section { margin-bottom: 2rem; }
-    .section h2 { color: #c9d1d9; font-size: 1.1rem; margin-bottom: 0.75rem; border-bottom: 1px solid #30363d; padding-bottom: 0.5rem; }
-    .task { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; transition: all 0.4s ease; max-height: 200px; opacity: 1; overflow: hidden; }
-    .task:hover { border-color: #58a6ff; }
+    .section h2 { color: var(--text); font-size: 1.1rem; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .task { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; transition: all 0.4s ease; max-height: 200px; opacity: 1; overflow: hidden; }
+    .task:hover { border-color: var(--accent); }
     .task.new-task { animation: slideIn 0.6s ease-out; }
     .task.changed-task { animation: flashBorder 1s ease-out; }
     .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 600; white-space: nowrap; transition: all 0.3s; }
     .badge-done { background: #238636; color: #fff; }
     .badge-in_progress { background: #9e6a03; color: #fff; }
-    .badge-pending { background: #30363d; color: #8b949e; }
+    .badge-pending { background: var(--badge-pending-bg); color: var(--badge-pending-fg); }
     .badge-blocked { background: #da3633; color: #fff; }
-    .badge-skipped { background: #30363d; color: #8b949e; }
+    .badge-skipped { background: var(--badge-pending-bg); color: var(--badge-pending-fg); }
     .badge.status-changed { animation: popBadge 0.5s ease-out; }
     .task-title { flex: 1; font-weight: 500; }
-    .task-assignee { color: #58a6ff; font-size: 0.85rem; white-space: nowrap; transition: all 0.3s; }
+    .task-assignee { color: var(--accent); font-size: 0.85rem; white-space: nowrap; transition: all 0.3s; }
     .task-assignee.assignee-changed { animation: glowText 1s ease-out; }
-    .task-result { color: #8b949e; font-size: 0.8rem; margin-top: 0.25rem; }
+    .task-result { color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem; }
     .agents { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .agent-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem; min-width: 200px; flex: 1; transition: all 0.4s; }
+    .agent-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; min-width: 200px; flex: 1; transition: all 0.4s; }
     .agent-card.new-agent { animation: slideIn 0.6s ease-out; }
     .agent-card.changed { animation: flashBorder 1s ease-out; }
-    .agent-name { color: #58a6ff; font-weight: 600; margin-bottom: 0.5rem; }
-    .agent-detail { color: #8b949e; font-size: 0.85rem; line-height: 1.6; }
-    .progress-bar { background: #30363d; border-radius: 4px; height: 8px; margin-top: 1rem; overflow: hidden; }
-    .progress-fill { height: 100%; background: #3fb950; border-radius: 4px; transition: width 0.8s ease-in-out; }
-    .updated { color: #8b949e; font-size: 0.8rem; margin-top: 1rem; text-align: center; }
-    .error { color: #f85149; text-align: center; padding: 2rem; }
-    #loading { text-align: center; padding: 2rem; color: #8b949e; }
+    .agent-name { color: var(--accent); font-weight: 600; margin-bottom: 0.5rem; }
+    .agent-detail { color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; }
+    .progress-bar { background: var(--border); border-radius: 4px; height: 8px; margin-top: 1rem; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--green); border-radius: 4px; transition: width 0.8s ease-in-out; }
+    .updated { color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem; text-align: center; }
+    .error { color: var(--red); text-align: center; padding: 2rem; }
+    #loading { text-align: center; padding: 2rem; color: var(--text-muted); }
 
     @keyframes slideIn {
       0% { opacity: 0; max-height: 0; transform: translateY(-10px); margin-bottom: 0; padding: 0 1rem; }
@@ -57,8 +85,8 @@
       100% { opacity: 1; max-height: 200px; transform: translateY(0); margin-bottom: 0.5rem; padding: 0.75rem 1rem; }
     }
     @keyframes flashBorder {
-      0% { border-color: #58a6ff; box-shadow: 0 0 8px rgba(88,166,255,0.4); }
-      100% { border-color: #30363d; box-shadow: none; }
+      0% { border-color: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+      100% { border-color: var(--border); box-shadow: none; }
     }
     @keyframes popBadge {
       0% { transform: scale(1); }
@@ -66,8 +94,8 @@
       100% { transform: scale(1); }
     }
     @keyframes glowText {
-      0% { color: #fff; text-shadow: 0 0 8px rgba(88,166,255,0.8); }
-      100% { color: #58a6ff; text-shadow: none; }
+      0% { color: #fff; text-shadow: 0 0 8px var(--accent-glow); }
+      100% { color: var(--accent); text-shadow: none; }
     }
     @keyframes pulse-dot {
       0%, 100% { opacity: 1; }
@@ -86,11 +114,18 @@
 <body>
   <div class="header"><h1>🦞 llm-collab Dashboard</h1></div>
   <p class="subtitle">Multi-agent coordination project</p>
-  <p class="poll-status"><span class="poll-dot" id="poll-dot"></span><span id="poll-text">Connecting...</span></p>
+  <div class="top-bar">
+    <div class="theme-switcher">
+      <button class="theme-btn active" data-theme="dark">Dark</button>
+      <button class="theme-btn" data-theme="light">Light</button>
+      <button class="theme-btn" data-theme="solarized">Solarized</button>
+    </div>
+    <p class="poll-status"><span class="poll-dot" id="poll-dot"></span><span id="poll-text">Connecting...</span></p>
+  </div>
   <div id="loading">Loading plan.json...</div>
   <div id="dashboard" style="display:none">
     <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
-    <p id="progress-text" style="color:#8b949e;font-size:0.85rem;margin:0.5rem 0 1.5rem"></p>
+    <p id="progress-text" style="color:var(--text-muted);font-size:0.85rem;margin:0.5rem 0 1.5rem"></p>
     <div class="stats" id="stats"></div>
     <div class="section"><h2>Agents</h2><div class="agents" id="agents"></div></div>
     <div class="section"><h2>Tasks</h2><div id="tasks"></div></div>
@@ -104,6 +139,22 @@
 
     let previousPlan = null;
     let pollTimer = null;
+
+    // Theme switcher
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('dashboard-theme', theme);
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === theme);
+      });
+    }
+
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => setTheme(btn.dataset.theme));
+    });
+
+    const savedTheme = localStorage.getItem('dashboard-theme');
+    if (savedTheme) setTheme(savedTheme);
 
     function taskKey(t) { return t.id; }
 
@@ -195,7 +246,6 @@
         return `<div class="stat stat-${s.cls}${changedCls}"><div class="stat-value${valCls}">${s.val}</div><div class="stat-label">${s.label}</div></div>`;
       }).join('');
 
-      // Remove "changed" class after animation
       if (countChanges) {
         setTimeout(() => {
           document.querySelectorAll('.stat.changed').forEach(el => el.classList.remove('changed'));
