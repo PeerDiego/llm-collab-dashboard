@@ -287,7 +287,12 @@
     function renderTasks(tasks, diff) {
       const tasksEl = document.getElementById('tasks');
       const statusOrder = { in_progress: 0, pending: 1, blocked: 2, done: 3, skipped: 4 };
-      const sorted = [...tasks].sort((a, b) => (statusOrder[a.status] ?? 5) - (statusOrder[b.status] ?? 5));
+      const indexed = tasks.map((t, i) => ({ ...t, _idx: i }));
+      const sorted = indexed.sort((a, b) => {
+        const statusDiff = (statusOrder[a.status] ?? 5) - (statusOrder[b.status] ?? 5);
+        if (statusDiff !== 0) return statusDiff;
+        return b._idx - a._idx;
+      });
 
       const addedSet = new Set(diff ? diff.added : []);
       const changedMap = new Map(diff ? diff.changed.map(c => [c.id, c]) : []);
