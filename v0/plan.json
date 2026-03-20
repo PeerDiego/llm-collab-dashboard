@@ -1,0 +1,220 @@
+{
+  "project": "Local LLM Server + OpenClaw + Copilot Coordination",
+  "created_at": "2026-03-19T19:36:00Z",
+  "updated_at": "2026-03-20T20:25:04Z",
+  "tasks": [
+    {
+      "id": "install-node",
+      "title": "Install Node.js LTS + npm",
+      "description": "Install Node.js LTS and npm on the server. Needed for OpenClaw.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [],
+      "result": "Node.js v24.14.0 + npm 11.9.0 installed.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "install-gh-cli",
+      "title": "Install GitHub CLI + auth",
+      "description": "Install gh CLI and authenticate. Needed for repo management. (Skippable \u2014 PAT-based git push already working.)",
+      "assignee": "claw-machine",
+      "status": "skipped",
+      "result": "Not needed \u2014 using fine-grained PAT for git push.",
+      "depends_on": []
+    },
+    {
+      "id": "create-collab-repo",
+      "title": "Create collab git repo",
+      "description": "Create ~/collab/ dir, init git, create private GitHub repo PeerDiego/llm-collab, push.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "result": "Repo live at github.com/PeerDiego/llm-collab. PAT-based auth configured.",
+      "depends_on": []
+    },
+    {
+      "id": "setup-cron",
+      "title": "Cron: auto-sync collab repo",
+      "description": "Cron job every 5 min \u2014 only commits+pushes if there are changes.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "result": "auto-sync.sh running via cron every 5 min. Dirty-check via git status --porcelain.",
+      "depends_on": [
+        "create-collab-repo"
+      ]
+    },
+    {
+      "id": "install-ollama",
+      "title": "Install Ollama",
+      "description": "Install Ollama for CPU-only LLM inference on this server.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [],
+      "result": "Ollama installed, systemd enabled, CPU-only mode.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "pull-model",
+      "title": "Pull LLM model",
+      "description": "Pull a suitable quantized model (e.g., llama3.1:8b or qwen2.5-coder:7b) via Ollama.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [
+        "install-ollama"
+      ],
+      "result": "llama3.1:8b pulled successfully.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "verify-ollama",
+      "title": "Verify Ollama works",
+      "description": "Test that Ollama is serving and responding to inference requests.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [
+        "pull-model"
+      ],
+      "result": "Ollama responding at localhost:11434. Tested inference OK.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "setup-ollama-service",
+      "title": "Ollama systemd service",
+      "description": "Ensure Ollama starts on boot via systemd.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [
+        "install-ollama"
+      ],
+      "result": "Ollama systemd service enabled and running on boot.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "build-mcp-server",
+      "title": "Build MCP coordination server",
+      "description": "Python MCP server with tools: get_plan, claim_task, complete_task, add_task, post_message, get_messages. Stores state in ~/collab/plan.json and messages.json.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [
+        "create-collab-repo"
+      ],
+      "result": "MCP coordination server built (server.py). Tools: get_plan, get_my_tasks, claim_task, complete_task, add_task, block_task, post_message, get_messages.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "configure-mcp-llmco",
+      "title": "Configure MCP for LLMCo",
+      "description": "Add MCP server config to LLMCo's Copilot CLI so coordination tools are available.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [
+        "build-mcp-server"
+      ],
+      "result": "MCP config added to ~/.copilot/mcp.json. Will take effect on next Copilot CLI restart.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "test-mcp",
+      "title": "Test MCP tools",
+      "description": "Verify MCP tools work from LLMCo's Copilot CLI.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [
+        "configure-mcp-llmco"
+      ],
+      "result": "MCP server responds correctly to initialize + reads plan.json.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "install-openclaw",
+      "title": "Install OpenClaw on server",
+      "description": "Install OpenClaw via npm on this server.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [
+        "install-node"
+      ],
+      "result": "OpenClaw 2026.3.13 installed globally via npm.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "configure-openclaw-server",
+      "title": "Configure OpenClaw for Ollama",
+      "description": "Configure OpenClaw to use local Ollama at localhost:11434.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [
+        "install-openclaw",
+        "verify-ollama"
+      ],
+      "result": "OpenClaw configured with ollama/llama3.1:8b as primary model. Config at ~/.openclaw/openclaw.json, env at ~/.openclaw/.env.",
+      "completed_at": "2026-03-19T21:13:51Z"
+    },
+    {
+      "id": "write-laptop-instructions",
+      "title": "Write laptop setup instructions",
+      "description": "Comprehensive instructions for LapCo: SSH tunnels, OpenClaw install+config, MCP connection, verification steps. Save to ~/collab/laptop-setup.md.",
+      "assignee": "claw-machine",
+      "status": "done",
+      "depends_on": [
+        "test-mcp",
+        "configure-openclaw-server",
+        "setup-cron"
+      ],
+      "result": "laptop-setup.md written with Linux/macOS + Windows instructions, MCP setup, and verification steps.",
+      "completed_at": "2026-03-20T16:26:18Z"
+    },
+    {
+      "id": "bright-spark-ssh-tunnel",
+      "title": "Configure SSH tunnel (Linux)",
+      "description": "Set up an SSH tunnel from the Linux client to the LLM server to forward Ollama (port 11434). Run: ssh -N -L 11434:localhost:11434 <user>@<server> (add -f to background). Verify with: curl http://localhost:11434/api/tags",
+      "assignee": "bright-spark",
+      "status": "done",
+      "depends_on": [],
+      "created_at": "2026-03-20T20:14:30Z",
+      "started_at": "2026-03-20T20:17:10Z",
+      "result": "SSH tunnel established: ssh -p 45554 -f -N -L 11434:localhost:11434 claw@mw-016.myworkspace.microsoft.com. Verified: curl localhost:11434/api/tags shows phi3:medium, qwen2.5-coder:7b, llama3.1:8b.",
+      "completed_at": "2026-03-20T20:17:29Z"
+    },
+    {
+      "id": "bright-spark-install-openclaw",
+      "title": "Install + configure OpenClaw (Linux)",
+      "description": "Install OpenClaw on the Linux client: npm install -g openclaw@latest. Create ~/.openclaw/openclaw.json with primary model ollama/llama3.1:8b. Create ~/.openclaw/.env with OLLAMA_API_KEY=ollama-local. Verify: openclaw config validate && openclaw models status.",
+      "assignee": "bright-spark",
+      "status": "done",
+      "depends_on": [
+        "bright-spark-ssh-tunnel"
+      ],
+      "created_at": "2026-03-20T20:14:30Z",
+      "started_at": "2026-03-20T20:17:38Z",
+      "result": "OpenClaw 2026.3.13 installed globally via npm (Node 22.22.1). Config at ~/.openclaw/openclaw.json with ollama/llama3.1:8b as primary model. Auth detected from env.",
+      "completed_at": "2026-03-20T20:24:23Z"
+    },
+    {
+      "id": "bright-spark-setup-mcp",
+      "title": "Set up MCP coordination server (Linux)",
+      "description": "Install Python venv + mcp package: cd ~/collab && python3 -m venv .venv && source .venv/bin/activate && pip install mcp. Configure ~/.copilot/mcp.json with command pointing to ~/collab/.venv/bin/python3 and args [~/collab/server.py]. Restart Copilot CLI to activate. Verify with get_plan() tool.",
+      "assignee": "bright-spark",
+      "status": "done",
+      "depends_on": [],
+      "created_at": "2026-03-20T20:14:30Z",
+      "started_at": "2026-03-20T20:14:52Z",
+      "result": "Python venv created at ~/collab/.venv, mcp package installed, ~/.copilot/mcp.json configured with collab-coordinator pointing to server.py. MCP server tested and responding.",
+      "completed_at": "2026-03-20T20:15:00Z"
+    },
+    {
+      "id": "bright-spark-verify-setup",
+      "title": "Verify full setup (Linux)",
+      "description": "Verify the complete setup: 1) SSH tunnel active (curl localhost:11434/api/tags). 2) OpenClaw configured (openclaw models status shows ollama). 3) MCP tools available (get_plan returns task board). Mark done only when all three checks pass.",
+      "assignee": "bright-spark",
+      "status": "done",
+      "depends_on": [
+        "bright-spark-install-openclaw",
+        "bright-spark-setup-mcp"
+      ],
+      "created_at": "2026-03-20T20:14:30Z",
+      "started_at": "2026-03-20T20:24:38Z",
+      "result": "All 3 checks pass: 1) SSH tunnel active \u2014 3 models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b. 3) MCP tools responding correctly.",
+      "completed_at": "2026-03-20T20:25:04Z"
+    }
+  ]
+}
