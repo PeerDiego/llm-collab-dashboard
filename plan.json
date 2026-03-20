@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-19T21:58:50Z",
+  "updated_at": "2026-03-20T16:26:18Z",
   "tasks": [
     {
       "id": "install-node",
@@ -154,12 +154,14 @@
       "title": "Write laptop setup instructions",
       "description": "Comprehensive instructions for LapCo: SSH tunnels, OpenClaw install+config, MCP connection, verification steps. Save to ~/collab/laptop-setup.md.",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "done",
       "depends_on": [
         "test-mcp",
         "configure-openclaw-server",
         "setup-cron"
-      ]
+      ],
+      "result": "laptop-setup.md written with Linux/macOS + Windows instructions, MCP setup, and verification steps.",
+      "completed_at": "2026-03-20T16:26:18Z"
     },
     {
       "id": "laptop-ssh-tunnel",
