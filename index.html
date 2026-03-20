@@ -8,10 +8,15 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #c9d1d9; padding: 2rem; }
     h1 { color: #58a6ff; margin-bottom: 0.5rem; }
-    .subtitle { color: #8b949e; margin-bottom: 2rem; font-size: 0.9rem; }
+    .header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #8b949e; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .poll-status { color: #484f58; font-size: 0.75rem; margin-bottom: 2rem; }
+    .poll-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #3fb950; margin-right: 0.4rem; vertical-align: middle; }
+    .poll-dot.fetching { background: #d29922; animation: pulse-dot 0.6s ease-in-out infinite; }
     .stats { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .stat { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.5rem; min-width: 120px; }
-    .stat-value { font-size: 2rem; font-weight: bold; }
+    .stat { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.5rem; min-width: 120px; transition: border-color 0.3s, transform 0.3s; }
+    .stat.changed { border-color: #58a6ff; transform: scale(1.05); }
+    .stat-value { font-size: 2rem; font-weight: bold; transition: color 0.3s; }
     .stat-label { color: #8b949e; font-size: 0.85rem; margin-top: 0.25rem; }
     .stat-done .stat-value { color: #3fb950; }
     .stat-progress .stat-value { color: #d29922; }
@@ -19,31 +24,69 @@
     .stat-blocked .stat-value { color: #f85149; }
     .section { margin-bottom: 2rem; }
     .section h2 { color: #c9d1d9; font-size: 1.1rem; margin-bottom: 0.75rem; border-bottom: 1px solid #30363d; padding-bottom: 0.5rem; }
-    .task { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; }
+    .task { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; transition: all 0.4s ease; max-height: 200px; opacity: 1; overflow: hidden; }
     .task:hover { border-color: #58a6ff; }
-    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 600; white-space: nowrap; }
+    .task.new-task { animation: slideIn 0.6s ease-out; }
+    .task.changed-task { animation: flashBorder 1s ease-out; }
+    .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 600; white-space: nowrap; transition: all 0.3s; }
     .badge-done { background: #238636; color: #fff; }
     .badge-in_progress { background: #9e6a03; color: #fff; }
     .badge-pending { background: #30363d; color: #8b949e; }
     .badge-blocked { background: #da3633; color: #fff; }
     .badge-skipped { background: #30363d; color: #8b949e; }
+    .badge.status-changed { animation: popBadge 0.5s ease-out; }
     .task-title { flex: 1; font-weight: 500; }
-    .task-assignee { color: #58a6ff; font-size: 0.85rem; white-space: nowrap; }
+    .task-assignee { color: #58a6ff; font-size: 0.85rem; white-space: nowrap; transition: all 0.3s; }
+    .task-assignee.assignee-changed { animation: glowText 1s ease-out; }
     .task-result { color: #8b949e; font-size: 0.8rem; margin-top: 0.25rem; }
     .agents { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .agent-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem; min-width: 200px; flex: 1; }
+    .agent-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem; min-width: 200px; flex: 1; transition: all 0.4s; }
+    .agent-card.new-agent { animation: slideIn 0.6s ease-out; }
+    .agent-card.changed { animation: flashBorder 1s ease-out; }
     .agent-name { color: #58a6ff; font-weight: 600; margin-bottom: 0.5rem; }
     .agent-detail { color: #8b949e; font-size: 0.85rem; line-height: 1.6; }
     .progress-bar { background: #30363d; border-radius: 4px; height: 8px; margin-top: 1rem; overflow: hidden; }
-    .progress-fill { height: 100%; background: #3fb950; border-radius: 4px; transition: width 0.3s; }
+    .progress-fill { height: 100%; background: #3fb950; border-radius: 4px; transition: width 0.8s ease-in-out; }
     .updated { color: #8b949e; font-size: 0.8rem; margin-top: 1rem; text-align: center; }
     .error { color: #f85149; text-align: center; padding: 2rem; }
     #loading { text-align: center; padding: 2rem; color: #8b949e; }
+
+    @keyframes slideIn {
+      0% { opacity: 0; max-height: 0; transform: translateY(-10px); margin-bottom: 0; padding: 0 1rem; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; max-height: 200px; transform: translateY(0); margin-bottom: 0.5rem; padding: 0.75rem 1rem; }
+    }
+    @keyframes flashBorder {
+      0% { border-color: #58a6ff; box-shadow: 0 0 8px rgba(88,166,255,0.4); }
+      100% { border-color: #30363d; box-shadow: none; }
+    }
+    @keyframes popBadge {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    @keyframes glowText {
+      0% { color: #fff; text-shadow: 0 0 8px rgba(88,166,255,0.8); }
+      100% { color: #58a6ff; text-shadow: none; }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    @keyframes countUp {
+      0% { transform: translateY(100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .stat-value.count-changed {
+      display: inline-block;
+      animation: countUp 0.4s ease-out;
+    }
   </style>
 </head>
 <body>
-  <h1>🦞 llm-collab Dashboard</h1>
-  <p class="subtitle">Multi-agent coordination for local LLM server setup</p>
+  <div class="header"><h1>🦞 llm-collab Dashboard</h1></div>
+  <p class="subtitle">Multi-agent coordination project</p>
+  <p class="poll-status"><span class="poll-dot" id="poll-dot"></span><span id="poll-text">Connecting...</span></p>
   <div id="loading">Loading plan.json...</div>
   <div id="dashboard" style="display:none">
     <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
@@ -56,37 +99,78 @@
   <div id="error" style="display:none" class="error"></div>
 
   <script>
+    const POLL_INTERVAL_MS = 30000;
     const PLAN_URL = 'plan.json';
-    const COLLABS_URL = 'https://api.github.com/repos/PeerDiego/llm-collab/contents/collaborators';
 
-    async function loadDashboard() {
-      try {
-        const planRes = await fetch(PLAN_URL);
-        if (!planRes.ok) throw new Error(`Failed to load plan.json: ${planRes.status}`);
-        const plan = await planRes.json();
-        renderDashboard(plan);
+    let previousPlan = null;
+    let pollTimer = null;
 
-        try {
-          const collabRes = await fetch(COLLABS_URL);
-          if (collabRes.ok) {
-            const files = await collabRes.json();
-            const agents = files
-              .filter(f => f.name.endsWith('.md'))
-              .map(f => f.name.replace('.md', ''));
-            renderAgents(agents, plan.tasks || []);
+    function taskKey(t) { return t.id; }
+
+    function diffTasks(oldTasks, newTasks) {
+      const oldMap = new Map(oldTasks.map(t => [taskKey(t), t]));
+      const newMap = new Map(newTasks.map(t => [taskKey(t), t]));
+      const added = [];
+      const changed = [];
+      for (const [id, task] of newMap) {
+        if (!oldMap.has(id)) {
+          added.push(id);
+        } else {
+          const old = oldMap.get(id);
+          if (old.status !== task.status || old.assignee !== task.assignee || old.result !== task.result) {
+            changed.push({ id, statusChanged: old.status !== task.status, assigneeChanged: old.assignee !== task.assignee });
           }
-        } catch (e) {
-          console.log('Could not load collaborators (private repo):', e);
-          renderAgentsFromPlan(plan.tasks || []);
         }
+      }
+      return { added, changed };
+    }
+
+    function diffCounts(oldTasks, newTasks) {
+      const count = (tasks, s) => tasks.filter(t => t.status === s).length;
+      const statuses = ['done', 'in_progress', 'pending', 'blocked'];
+      const changes = {};
+      for (const s of statuses) {
+        if (count(oldTasks, s) !== count(newTasks, s)) changes[s] = true;
+      }
+      return changes;
+    }
+
+    function setPollStatus(text, fetching) {
+      document.getElementById('poll-text').textContent = text;
+      const dot = document.getElementById('poll-dot');
+      dot.classList.toggle('fetching', !!fetching);
+    }
+
+    async function fetchPlan() {
+      setPollStatus('Checking for updates...', true);
+      try {
+        const res = await fetch(PLAN_URL + '?_=' + Date.now());
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const plan = await res.json();
+        const tasks = plan.tasks || [];
+
+        let diff = null;
+        let countChanges = {};
+        if (previousPlan) {
+          const oldTasks = previousPlan.tasks || [];
+          diff = diffTasks(oldTasks, tasks);
+          countChanges = diffCounts(oldTasks, tasks);
+          if (diff.added.length === 0 && diff.changed.length === 0) {
+            setPollStatus(`Live · No changes · Last checked ${new Date().toLocaleTimeString()}`, false);
+            return;
+          }
+        }
+
+        renderDashboard(plan, diff, countChanges);
+        previousPlan = plan;
+        setPollStatus(`Live · Updated ${new Date().toLocaleTimeString()}`, false);
       } catch (e) {
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('error').style.display = 'block';
-        document.getElementById('error').textContent = e.message;
+        setPollStatus(`Error: ${e.message} · Retrying...`, false);
+        console.error('Poll error:', e);
       }
     }
 
-    function renderDashboard(plan) {
+    function renderDashboard(plan, diff, countChanges) {
       const tasks = plan.tasks || [];
       const counts = { done: 0, in_progress: 0, pending: 0, blocked: 0, skipped: 0 };
       tasks.forEach(t => { counts[t.status] = (counts[t.status] || 0) + 1; });
@@ -99,50 +183,93 @@
       document.getElementById('progress-text').textContent = `${pct}% complete (${counts.done}/${total} tasks)`;
 
       const statsEl = document.getElementById('stats');
-      statsEl.innerHTML = [
-        { cls: 'done', val: counts.done, label: 'Done' },
-        { cls: 'progress', val: counts.in_progress, label: 'In Progress' },
-        { cls: 'pending', val: counts.pending, label: 'Pending' },
-        { cls: 'blocked', val: counts.blocked, label: 'Blocked' },
-      ].map(s => `<div class="stat stat-${s.cls}"><div class="stat-value">${s.val}</div><div class="stat-label">${s.label}</div></div>`).join('');
+      const statItems = [
+        { cls: 'done', key: 'done', val: counts.done, label: 'Done' },
+        { cls: 'progress', key: 'in_progress', val: counts.in_progress, label: 'In Progress' },
+        { cls: 'pending', key: 'pending', val: counts.pending, label: 'Pending' },
+        { cls: 'blocked', key: 'blocked', val: counts.blocked, label: 'Blocked' },
+      ];
+      statsEl.innerHTML = statItems.map(s => {
+        const changedCls = countChanges && countChanges[s.key] ? ' changed' : '';
+        const valCls = countChanges && countChanges[s.key] ? ' count-changed' : '';
+        return `<div class="stat stat-${s.cls}${changedCls}"><div class="stat-value${valCls}">${s.val}</div><div class="stat-label">${s.label}</div></div>`;
+      }).join('');
 
-      const tasksEl = document.getElementById('tasks');
-      const statusOrder = { in_progress: 0, pending: 1, blocked: 2, done: 3, skipped: 4 };
-      const sorted = [...tasks].sort((a, b) => (statusOrder[a.status] ?? 5) - (statusOrder[b.status] ?? 5));
-      tasksEl.innerHTML = sorted.map(t => `
-        <div class="task">
-          <span class="badge badge-${t.status}">${t.status.replace('_', ' ')}</span>
-          <span class="task-title">
-            ${t.title}
-            ${t.result ? `<div class="task-result">${t.result}</div>` : ''}
-          </span>
-          ${t.assignee ? `<span class="task-assignee">${t.assignee}</span>` : ''}
-        </div>
-      `).join('');
+      // Remove "changed" class after animation
+      if (countChanges) {
+        setTimeout(() => {
+          document.querySelectorAll('.stat.changed').forEach(el => el.classList.remove('changed'));
+        }, 1000);
+      }
+
+      renderAgentsFromPlan(tasks, diff);
+      renderTasks(tasks, diff);
 
       if (plan.updated_at) {
-        document.getElementById('updated').textContent = `Last updated: ${new Date(plan.updated_at).toLocaleString()}`;
+        document.getElementById('updated').textContent = `Plan last updated: ${new Date(plan.updated_at).toLocaleString()}`;
       }
     }
 
-    function renderAgents(agentIds, tasks) {
+    function renderTasks(tasks, diff) {
+      const tasksEl = document.getElementById('tasks');
+      const statusOrder = { in_progress: 0, pending: 1, blocked: 2, done: 3, skipped: 4 };
+      const sorted = [...tasks].sort((a, b) => (statusOrder[a.status] ?? 5) - (statusOrder[b.status] ?? 5));
+
+      const addedSet = new Set(diff ? diff.added : []);
+      const changedMap = new Map(diff ? diff.changed.map(c => [c.id, c]) : []);
+
+      tasksEl.innerHTML = sorted.map(t => {
+        const isNew = addedSet.has(t.id);
+        const change = changedMap.get(t.id);
+        const taskCls = isNew ? ' new-task' : (change ? ' changed-task' : '');
+        const badgeCls = change && change.statusChanged ? ' status-changed' : '';
+        const assigneeCls = change && change.assigneeChanged ? ' assignee-changed' : '';
+
+        return `
+          <div class="task${taskCls}" data-task-id="${t.id}">
+            <span class="badge badge-${t.status}${badgeCls}">${t.status.replace('_', ' ')}</span>
+            <span class="task-title">
+              ${t.title}
+              ${t.result ? `<div class="task-result">${t.result}</div>` : ''}
+            </span>
+            ${t.assignee ? `<span class="task-assignee${assigneeCls}">${t.assignee}</span>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderAgentsFromPlan(tasks, diff) {
       const el = document.getElementById('agents');
-      el.innerHTML = agentIds.map(id => {
+      const assignees = [...new Set(tasks.map(t => t.assignee).filter(Boolean))];
+
+      const oldAssignees = previousPlan
+        ? [...new Set((previousPlan.tasks || []).map(t => t.assignee).filter(Boolean))]
+        : [];
+      const newAgents = new Set(assignees.filter(a => !oldAssignees.includes(a)));
+
+      el.innerHTML = assignees.map(id => {
         const agentTasks = tasks.filter(t => t.assignee === id);
         const done = agentTasks.filter(t => t.status === 'done').length;
-        return `<div class="agent-card">
+        const inProg = agentTasks.filter(t => t.status === 'in_progress').length;
+        const isNew = newAgents.has(id);
+
+        const oldDone = previousPlan
+          ? (previousPlan.tasks || []).filter(t => t.assignee === id && t.status === 'done').length
+          : done;
+        const hasChange = diff && done !== oldDone;
+        const cls = isNew ? ' new-agent' : (hasChange ? ' changed' : '');
+
+        return `<div class="agent-card${cls}">
           <div class="agent-name">${id}</div>
-          <div class="agent-detail">${done}/${agentTasks.length} tasks done</div>
+          <div class="agent-detail">${done}/${agentTasks.length} tasks done${inProg ? ` · ${inProg} in progress` : ''}</div>
         </div>`;
       }).join('');
     }
 
-    function renderAgentsFromPlan(tasks) {
-      const assignees = [...new Set(tasks.map(t => t.assignee).filter(Boolean))];
-      renderAgents(assignees, tasks);
-    }
-
-    loadDashboard();
+    // Initial load
+    fetchPlan().then(() => {
+      pollTimer = setInterval(fetchPlan, POLL_INTERVAL_MS);
+    });
   </script>
 </body>
 </html>
