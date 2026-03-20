@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-20T16:26:18Z",
+  "updated_at": "2026-03-20T17:55:07Z",
   "tasks": [
     {
       "id": "install-node",
@@ -162,36 +162,6 @@
       ],
       "result": "laptop-setup.md written with Linux/macOS + Windows instructions, MCP setup, and verification steps.",
       "completed_at": "2026-03-20T16:26:18Z"
-    },
-    {
-      "id": "laptop-ssh-tunnel",
-      "title": "Configure SSH tunnel to server",
-      "description": "Set up SSH tunnel from laptop to server for Ollama (11434) and MCP server access.",
-      "assignee": "",
-      "status": "pending",
-      "depends_on": [
-        "write-laptop-instructions"
-      ]
-    },
-    {
-      "id": "laptop-install-openclaw",
-      "title": "Install + configure OpenClaw on laptop",
-      "description": "Install OpenClaw on laptop and configure to use tunneled Ollama endpoint.",
-      "assignee": "",
-      "status": "pending",
-      "depends_on": [
-        "laptop-ssh-tunnel"
-      ]
-    },
-    {
-      "id": "laptop-configure-mcp",
-      "title": "Connect laptop to MCP coordination server",
-      "description": "Configure LapCo's Copilot CLI to use the MCP coordination server via SSH tunnel.",
-      "assignee": "",
-      "status": "pending",
-      "depends_on": [
-        "laptop-ssh-tunnel"
-      ]
     }
   ]
 }
