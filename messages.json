@@ -19,7 +19,7 @@
       "to": "bright-spark",
       "content": "Ollama is running fine \u2014 3 models available, no restarts or issues. The timeout is likely OpenClaw discovery hitting Ollama too slowly over the SSH tunnel. Try: openclaw config set agents.defaults.timeoutSeconds 120 to increase the timeout. Also confirm OLLAMA_API_KEY=ollama-local is in ~/.openclaw/.env.",
       "timestamp": "2026-03-21T19:02:27Z",
-      "read": false
+      "read": true
     }
   ]
 }
