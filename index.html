@@ -136,6 +136,29 @@
     @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     @keyframes countUp { 0% { transform: translateY(100%); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
     @media (max-width: 600px) { .container { padding: 1rem; } .page-header { flex-direction: column; } .page-header h1 { font-size: 1.25rem; } .stats { grid-template-columns: repeat(2, 1fr); } .stat-value { font-size: 1.4rem; } .progress-pct { font-size: 1.5rem; } .agents { grid-template-columns: 1fr; } }
+
+    /* Messages */
+    .msg-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .msg-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.65rem 1rem; display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.85rem; }
+    .msg-item.unread { border-left: 3px solid var(--accent); }
+    .msg-meta { flex-shrink: 0; display: flex; flex-direction: column; gap: 0.15rem; min-width: 90px; }
+    .msg-from { font-weight: 600; color: var(--accent); font-size: 0.8rem; }
+    .msg-to { color: var(--text-faint); font-size: 0.7rem; }
+    .msg-time { color: var(--text-faint); font-size: 0.7rem; }
+    .msg-content { flex: 1; color: var(--text-secondary); line-height: 1.5; }
+
+    /* Inbox Log */
+    .log-list { display: flex; flex-direction: column; gap: 0.35rem; }
+    .log-entry { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.75rem; display: flex; gap: 0.75rem; align-items: center; font-size: 0.8rem; }
+    .log-entry.log-delivered { border-left: 3px solid var(--green); }
+    .log-entry.log-unauthorized { border-left: 3px solid var(--red); }
+    .log-entry.log-bad_syntax { border-left: 3px solid var(--yellow); }
+    .log-type { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; min-width: 80px; flex-shrink: 0; }
+    .log-delivered .log-type { color: var(--green); }
+    .log-unauthorized .log-type { color: var(--red); }
+    .log-bad_syntax .log-type { color: var(--yellow); }
+    .log-detail { color: var(--text-muted); flex: 1; }
+    .log-time { color: var(--text-faint); font-size: 0.7rem; flex-shrink: 0; }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -170,6 +193,14 @@
         <div class="section-header"><span class="section-title">Agents</span><span class="section-count" id="agent-count"></span></div>
         <div class="agents" id="agents"></div>
       </div>
+      <div class="section" id="messages-section" style="display:none">
+        <div class="section-header"><span class="section-title">Messages</span><span class="section-count" id="msg-count"></span></div>
+        <div class="msg-list" id="messages"></div>
+      </div>
+      <div class="section" id="inbox-log-section" style="display:none">
+        <div class="section-header"><span class="section-title">Inbox Log</span><span class="section-count" id="log-count"></span></div>
+        <div class="log-list" id="inbox-log"></div>
+      </div>
       <div class="section">
         <div class="section-header"><span class="section-title">Tasks</span><span class="section-count" id="task-count"></span></div>
         <div class="task-list" id="tasks"></div>
@@ -196,7 +227,48 @@
     function renderTasks(tasks,diff){const el=document.getElementById('tasks'),so={in_progress:0,pending:1,blocked:2,on_hold:3,backlog:4,done:5,skipped:6},ix=tasks.map((t,i)=>({...t,_idx:i})),sorted=ix.sort((a,b)=>{const d=(so[a.status]??7)-(so[b.status]??7);return d!==0?d:b._idx-a._idx}),addS=new Set(diff?diff.added:[]),chM=new Map(diff?diff.changed.map(c=>[c.id,c]):[]);el.innerHTML=sorted.map(t=>{const isN=addS.has(t.id),ch=chM.get(t.id),tc=isN?' new-task':(ch?' changed-task':''),bc=ch&&ch.statusChanged?' status-changed':'',ac=ch&&ch.assigneeChanged?' assignee-changed':'',hd=t.result||t.description||t.notes;return'<div class="task'+tc+'" data-task-id="'+t.id+'"'+(hd?' data-expandable':'')+'><div class="task-row"><span class="badge badge-'+t.status+bc+'">'+t.status.replace('_',' ')+'</span><span class="task-title">'+t.title+'</span>'+(t.assignee?'<span class="task-assignee'+ac+'">'+t.assignee+'</span>':'')+(hd?'<span class="task-chevron">▸</span>':'')+'</div>'+(hd?'<div class="task-detail">'+(t.result?'<strong>Result:</strong> '+t.result:'')+(t.notes?'<strong>Notes:</strong> '+t.notes:'')+(t.description&&!t.result&&!t.notes?t.description:'')+'</div>':'')+'</div>'}).join('');el.querySelectorAll('.task[data-expandable]').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('expanded')));applyFilters()}
     function updateTaskCount(){const v=document.querySelectorAll('.task[data-task-id]:not(.filtered-out)').length;document.getElementById('task-count').textContent=v+' shown'}
     function applyFilters(){document.querySelectorAll('.task[data-task-id]').forEach(el=>{const t=currentTasks.find(x=>x.id===el.dataset.taskId);if(!t)return;const sOk=!activeFilters.size||activeFilters.has(t.status),aOk=!activeAgentFilters.size||activeAgentFilters.has(t.assignee||'');el.classList.toggle('filtered-out',!(sOk&&aOk))});updateTaskCount()}
-    fetchPlan().then(()=>{pollTimer=setInterval(fetchPlan,POLL_INTERVAL_MS)});
+
+    async function fetchMessages(){
+      try{
+        const r=await fetch('messages.json?_='+Date.now());
+        if(!r.ok)return;
+        const data=await r.json();
+        const msgs=(data.messages||[]).slice().reverse();
+        const sec=document.getElementById('messages-section');
+        const el=document.getElementById('messages');
+        if(!msgs.length){sec.style.display='none';return}
+        sec.style.display='block';
+        const unread=msgs.filter(m=>!m.read).length;
+        document.getElementById('msg-count').textContent=unread?unread+' unread':msgs.length+' total';
+        el.innerHTML=msgs.slice(0,20).map(m=>{
+          const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';
+          const cls=m.read?'':'unread';
+          return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">→ '+m.to+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+m.content+'</div></div>'
+        }).join('');
+      }catch(e){}
+    }
+
+    async function fetchInboxLog(){
+      try{
+        const r=await fetch('inbox-log.json?_='+Date.now());
+        if(!r.ok)return;
+        const data=await r.json();
+        const entries=(data.entries||[]).slice().reverse();
+        const sec=document.getElementById('inbox-log-section');
+        const el=document.getElementById('inbox-log');
+        if(!entries.length){sec.style.display='none';return}
+        sec.style.display='block';
+        document.getElementById('log-count').textContent=entries.length+' entries';
+        el.innerHTML=entries.slice(0,30).map(e=>{
+          const ts=e.timestamp?new Date(e.timestamp).toLocaleString():'';
+          const label=e.type==='delivered'?'delivered':e.type==='unauthorized'?'unauth\'d':'bad syntax';
+          return'<div class="log-entry log-'+e.type+'"><span class="log-type">'+label+'</span><span class="log-detail">'+e.detail+'</span><span class="log-time">'+ts+'</span></div>'
+        }).join('');
+      }catch(e){}
+    }
+
+    async function fetchAll(){await fetchPlan();await fetchMessages();await fetchInboxLog()}
+    fetchAll().then(()=>{pollTimer=setInterval(fetchAll,POLL_INTERVAL_MS)});
   </script>
 </body>
 </html>
