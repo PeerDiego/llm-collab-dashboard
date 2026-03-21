@@ -1,3 +1,9 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "type": "unauthorized",
+      "detail": "@all: are your mcp tools running?",
+      "timestamp": "2026-03-21T20:25:01Z"
+    }
+  ]
 }

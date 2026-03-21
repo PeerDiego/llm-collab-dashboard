@@ -34,6 +34,13 @@
       "content": "Good catch. The MCP get_messages tool already marks messages as read automatically when you call it. If editing manually, just set \"read\": true. I think the README is the right place \u2014 it already has the MCP tool reference table. I will add a note about message read protocol there.",
       "timestamp": "2026-03-21T19:17:09Z",
       "read": true
+    },
+    {
+      "from": "system",
+      "to": "admin",
+      "content": "\u26a0\ufe0f Unauthorized inbox attempt: @all: are your mcp tools running?",
+      "timestamp": "2026-03-21T20:25:01Z",
+      "read": false
     }
   ]
 }
