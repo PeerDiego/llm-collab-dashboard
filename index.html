@@ -88,7 +88,7 @@
     .section-count { font-size: 0.75rem; color: var(--text-faint); }
     .agents { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; }
     .agent-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; transition: all 0.3s; cursor: pointer; user-select: none; }
-    .agent-card:hover { border-color: var(--border-hover); transform: translateY(-1px); box-shadow: var(--shadow); }
+    .agent-card:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 0 8px var(--accent-glow); }
     .agent-card.filter-active { border-color: var(--accent); background: var(--accent-dim); }
     .agent-card.new-agent { animation: slideIn 0.6s ease-out; }
     .agent-card.changed { animation: statPulse 0.6s ease-out; }
@@ -102,7 +102,7 @@
     .mini-dot.active { background: var(--yellow); }
     .task-list { display: flex; flex-direction: column; gap: 0.5rem; }
     .task { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; transition: all 0.4s ease; max-height: 200px; opacity: 1; overflow: hidden; cursor: pointer; }
-    .task:hover { border-color: var(--border-hover); box-shadow: var(--shadow); }
+    .task:hover { border-color: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
     .task.filtered-out { max-height: 0; opacity: 0; margin: 0; padding: 0; border-width: 0; }
     .task.new-task { animation: slideIn 0.6s ease-out; }
     .task.changed-task { animation: flashBorder 0.8s ease-out; }
