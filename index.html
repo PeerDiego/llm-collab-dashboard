@@ -264,7 +264,7 @@
         const r=await fetch('inbox-log.json?_='+Date.now());
         if(!r.ok)return;
         const data=await r.json();
-        const entries=(data.entries||[]).slice().reverse();
+        const entries=(data.entries||[]).filter(e=>e.type!=='delivered').slice().reverse();
         const sec=document.getElementById('inbox-log-section');
         const el=document.getElementById('inbox-log');
         if(!entries.length){sec.style.display='none';return}
