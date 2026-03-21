@@ -40,7 +40,7 @@
       "to": "admin",
       "content": "\u26a0\ufe0f Unauthorized inbox attempt: @all: are your mcp tools running?",
       "timestamp": "2026-03-21T20:25:01Z",
-      "read": false
+      "read": true
     },
     {
       "from": "claw-machine",
