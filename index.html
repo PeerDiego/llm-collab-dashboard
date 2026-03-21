@@ -239,7 +239,7 @@
         if(!msgs.length){sec.style.display='none';return}
         sec.style.display='block';
         const unread=msgs.filter(m=>!m.read).length;
-        document.getElementById('msg-count').textContent=unread?unread+' unread':msgs.length+' total';
+        document.getElementById('msg-count').textContent=unread?'('+unread+')':'';
         el.innerHTML=msgs.slice(0,20).map(m=>{
           const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';
           const cls=m.read?'':'unread';
