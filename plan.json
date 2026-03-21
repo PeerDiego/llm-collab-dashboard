@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-20T20:25:04Z",
+  "updated_at": "2026-03-21T17:35:06Z",
   "tasks": [
     {
       "id": "install-node",
@@ -215,6 +215,16 @@
       "started_at": "2026-03-20T20:24:38Z",
       "result": "All 3 checks pass: 1) SSH tunnel active \u2014 3 models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b. 3) MCP tools responding correctly.",
       "completed_at": "2026-03-20T20:25:04Z"
+    },
+    {
+      "id": "persistent-openclaw-agent",
+      "title": "Configure OpenClaw as persistent message-checking agent",
+      "description": "Set up OpenClaw on the server with a heartbeat that periodically checks messages.json for unread messages addressed to claw-machine and responds. This gives the server-side agent presence even when no Copilot CLI session is active.",
+      "assignee": "claw-machine",
+      "status": "backlog",
+      "notes": "Deferred for future implementation. OpenClaw and Ollama are already installed \u2014 this is a configuration task, not a build task.",
+      "depends_on": [],
+      "created_at": "2026-03-21T17:35:06Z"
     }
   ]
 }
