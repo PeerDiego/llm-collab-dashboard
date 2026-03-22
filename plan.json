@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-22T03:38:39Z",
+  "updated_at": "2026-03-22T04:02:46Z",
   "tasks": [
     {
       "id": "install-node",
@@ -237,6 +237,15 @@
       "started_at": "2026-03-22T03:37:47Z",
       "result": "Implemented in server.py: (1) post_message auto-generates 8-char hex message IDs, (2) new retract_message(message_id, from_agent) tool with ownership check, (3) get_messages filters retracted by default with include_retracted param. Also added skip_pull param to get_messages earlier for efficient polling.",
       "completed_at": "2026-03-22T03:38:39Z"
+    },
+    {
+      "id": "task-polling-protocol",
+      "title": "Add 10-minute task polling protocol to agent instructions",
+      "description": "Add a task polling habit to AGENTS.md and each agent's copilot-instructions.md. Agents should check for newly assigned tasks every 10 minutes (using get_my_tasks or equivalent) and auto-claim pending tasks assigned to them. Similar pattern to the 3-minute message poll but less frequent. Waiting to validate the approach before updating docs.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-22T04:02:46Z"
     }
   ]
 }
