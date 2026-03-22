@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-22T23:21:48Z",
+  "updated_at": "2026-03-22T23:25:49Z",
   "tasks": [
     {
       "id": "install-node",
@@ -344,10 +344,11 @@
       "title": "Benchmark with OpenClaw's actual prompt sizes",
       "description": "Bright-spark reported that bootstrapTotalMaxChars=40000 doesn't truncate OpenClaw's actual 28.6K char prompt. Previous benchmarks used synthetic prompts. Need to: (1) Validate by testing at exactly 28.6K chars and nearby sizes (15K non-project only, 20K, 25K, 28.6K full) to see where caching actually breaks down. (2) Test if OpenClaw has a minimal/reduced prompt mode. (3) Determine a viable config that actually improves performance. Update openclaw-optimization.md with corrected findings.",
       "assignee": "claw-machine",
-      "status": "in_progress",
+      "status": "blocked",
       "depends_on": [],
       "created_at": "2026-03-22T23:21:40Z",
-      "started_at": "2026-03-22T23:21:48Z"
+      "started_at": "2026-03-22T23:21:48Z",
+      "notes": "Benchmark script ready but waiting for bright-spark to finish using Ollama before running. Cannot run concurrent benchmarks against the same server."
     }
   ]
 }
