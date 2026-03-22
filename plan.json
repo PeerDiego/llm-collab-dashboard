@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-22T05:37:43Z",
+  "updated_at": "2026-03-22T05:37:50Z",
   "tasks": [
     {
       "id": "install-node",
@@ -262,10 +262,12 @@
       "title": "Fix @all message read tracking (per-agent read_by)",
       "description": "Fix broadcast message read tracking: @all messages use read_by (list of agent IDs) instead of single read boolean. Update server.py get_messages, poll-messages.sh, and dashboard rendering. Dashboard determines @all read status by comparing read_by against agent list from plan.json.",
       "assignee": "claw-machine",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-22T05:37:37Z",
-      "started_at": "2026-03-22T05:37:43Z"
+      "started_at": "2026-03-22T05:37:43Z",
+      "result": "Implemented per-agent read tracking for @all broadcasts. Direct messages keep read:true/false. Broadcasts use read_by:[agent-ids]. Updated server.py (get_messages + helpers), poll-messages.sh, and dashboard (compares read_by against agent list from plan.json). Notified bright-spark.",
+      "completed_at": "2026-03-22T05:37:50Z"
     }
   ]
 }
