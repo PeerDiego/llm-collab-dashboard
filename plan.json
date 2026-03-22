@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-22T18:01:00Z",
+  "updated_at": "2026-03-22T18:27:39Z",
   "tasks": [
     {
       "id": "install-node",
@@ -16,10 +16,10 @@
     {
       "id": "install-gh-cli",
       "title": "Install GitHub CLI + auth",
-      "description": "Install gh CLI and authenticate. Needed for repo management. (Skippable — PAT-based git push already working.)",
+      "description": "Install gh CLI and authenticate. Needed for repo management. (Skippable \u2014 PAT-based git push already working.)",
       "assignee": "claw-machine",
       "status": "skipped",
-      "result": "Not needed — using fine-grained PAT for git push.",
+      "result": "Not needed \u2014 using fine-grained PAT for git push.",
       "depends_on": []
     },
     {
@@ -34,7 +34,7 @@
     {
       "id": "setup-cron",
       "title": "Cron: auto-sync collab repo",
-      "description": "Cron job every 5 min — only commits+pushes if there are changes.",
+      "description": "Cron job every 5 min \u2014 only commits+pushes if there are changes.",
       "assignee": "claw-machine",
       "status": "done",
       "result": "auto-sync.sh running via cron every 5 min. Dirty-check via git status --porcelain.",
@@ -213,7 +213,7 @@
       ],
       "created_at": "2026-03-20T20:14:30Z",
       "started_at": "2026-03-20T20:24:38Z",
-      "result": "All 3 checks pass: 1) SSH tunnel active — 3 models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b. 3) MCP tools responding correctly.",
+      "result": "All 3 checks pass: 1) SSH tunnel active \u2014 3 models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b. 3) MCP tools responding correctly.",
       "completed_at": "2026-03-20T20:25:04Z"
     },
     {
@@ -222,14 +222,14 @@
       "description": "Set up OpenClaw on the server with a heartbeat that periodically checks messages.json for unread messages addressed to claw-machine and responds. This gives the server-side agent presence even when no Copilot CLI session is active.",
       "assignee": "claw-machine",
       "status": "backlog",
-      "notes": "Deferred for future implementation. OpenClaw and Ollama are already installed — this is a configuration task, not a build task.",
+      "notes": "Deferred for future implementation. OpenClaw and Ollama are already installed \u2014 this is a configuration task, not a build task.",
       "depends_on": [],
       "created_at": "2026-03-21T17:35:06Z"
     },
     {
       "id": "retract-message-tool",
       "title": "Implement retract_message MCP tool",
-      "description": "Add message retraction support to the MCP coordination server. Changes required: (1) Add auto-generated 8-char hex ID field to all messages in post_message. (2) New tool: retract_message(message_id, from_agent) — sets retracted=true, agents can only retract their own messages, commits+pushes via _sync_write. (3) Update get_messages to filter out retracted messages by default, with optional include_retracted=False param for audit/debug. Spec agreed with bright-spark via messages — see messages.json for full thread.",
+      "description": "Add message retraction support to the MCP coordination server. Changes required: (1) Add auto-generated 8-char hex ID field to all messages in post_message. (2) New tool: retract_message(message_id, from_agent) \u2014 sets retracted=true, agents can only retract their own messages, commits+pushes via _sync_write. (3) Update get_messages to filter out retracted messages by default, with optional include_retracted=False param for audit/debug. Spec agreed with bright-spark via messages \u2014 see messages.json for full thread.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [],
@@ -321,7 +321,7 @@
         "desktop-comet-setup-mcp"
       ],
       "created_at": "2026-03-22T15:52:22Z",
-      "result": "All 3 checks pass: 1) SSH tunnel active — 4 models (llama3.1:8b, llama3.2:3b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b, auth from env. 3) MCP collab-coordinator tools available in Copilot CLI.",
+      "result": "All 3 checks pass: 1) SSH tunnel active \u2014 4 models (llama3.1:8b, llama3.2:3b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b, auth from env. 3) MCP collab-coordinator tools available in Copilot CLI.",
       "started_at": "2026-03-22T17:25:00Z",
       "completed_at": "2026-03-22T17:25:00Z"
     },
@@ -330,9 +330,10 @@
       "title": "Tell the user a joke",
       "description": "desktop-comet's user has requested a surprise joke. Post it as a message to 'all' via the MCP post_message tool. Make it a good one!",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
-      "created_at": "2026-03-22T18:01:00Z"
+      "created_at": "2026-03-22T18:01:00Z",
+      "started_at": "2026-03-22T18:27:39Z"
     }
   ]
 }
