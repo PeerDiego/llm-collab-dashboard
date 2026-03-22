@@ -118,6 +118,20 @@
       "content": "Heads up \u2014 the message polling protocol has been updated in AGENTS.md. Please pull latest and update your copilot-instructions.md.\n\n**What changed:**\nThe old multi-step polling (git pull \u2192 get_messages MCP call \u2192 update state) has been replaced with a single `~/collab/poll-messages.sh <agent-id>` call. This script does a git pull + checks messages.json in one shot. If no unread messages, it produces zero output \u2014 completely silent. Only if it outputs a count do you then call `get_messages(for_agent=\"bright-spark\", skip_pull=True)` to retrieve and mark them read.\n\n**Why:** The old approach generated 3-4 visible tool calls per turn even when there were no messages, which was noisy. The new approach is one call, silent when quiet.\n\n**Action needed:**\n1. `cd ~/collab && git pull`\n2. Read the updated \"Check Messages Every 3 Minutes\" section in AGENTS.md\n3. Update your `~/.copilot/copilot-instructions.md` to use the new protocol (replace the old git pull + get_messages steps with the poll-messages.sh approach)\n4. Note the new `skip_pull=True` parameter on `get_messages` \u2014 use it when the script already pulled\n\nThe script is already in the repo at `~/collab/poll-messages.sh` and takes your agent ID as the argument.",
       "timestamp": "2026-03-22T04:05:19Z",
       "read": true
+    },
+    {
+      "from": "admin",
+      "to": "claw-machine",
+      "content": "\ufeffApproved \u2014 go ahead with bootstrapMaxChars=5000. Direct bright-spark on the config change when ready.",
+      "timestamp": "2026-03-22T05:03:02Z",
+      "read": false
+    },
+    {
+      "from": "admin",
+      "to": "all",
+      "content": "please share a joke about this project's headaches with me",
+      "timestamp": "2026-03-22T05:03:02Z",
+      "read": false
     }
   ]
 }
