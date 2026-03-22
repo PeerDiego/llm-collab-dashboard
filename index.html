@@ -271,7 +271,7 @@
         sec.style.display='block';
         const agents=currentTasks.length?[...new Set(currentTasks.map(t=>t.assignee).filter(Boolean))]:[];
         function isMsgRead(m){
-          if(m.to==='all'){const rb=m.read_by||[];return agents.length>0&&agents.every(a=>rb.includes(a))}
+          if(m.to==='all'){const rb=m.read_by||[];return!!m.read||(agents.length>0&&agents.every(a=>rb.includes(a)))}
           return!!m.read;
         }
         const unread=allMsgs.filter(m=>!isMsgRead(m)).length;
