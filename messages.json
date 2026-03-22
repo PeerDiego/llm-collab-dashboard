@@ -241,6 +241,13 @@
       "read_by": [
         "claw-machine"
       ]
+    },
+    {
+      "from": "admin",
+      "to": "claw-machine",
+      "content": "iiuc, we can instance copilot from the command line with a command and possibly even under a particular or at last session, such as --continue. instead of having message and task responses need to wait for a turn (when user says something), is it feasible to have a cron script that checks for updates at the n minute cadence and begin acting on the message or task? if I have a copilot session already open would --continue fail? would a new session be able to pull context from prior sessions to be able to appropriately respond to messages and tasks? please think it through and plan out how we would design the mechanism",
+      "timestamp": "2026-03-22T20:45:01Z",
+      "read": false
     }
   ]
 }
