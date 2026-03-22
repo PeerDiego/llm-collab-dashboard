@@ -251,7 +251,7 @@
     {
       "id": "re-benchmark-openclaw",
       "title": "Re-benchmark OpenClaw with correct bootstrapTotalMaxChars setting",
-      "description": "Re-run ollama-benchmark.py using the correct OpenClaw config knob. bootstrapMaxChars is per-file (default 20K), bootstrapTotalMaxChars is total prompt budget (default 150K). Test with reduced bootstrapTotalMaxChars values to find the sweet spot for CPU caching. Update openclaw-optimization.md with corrected findings.",
+      "description": "Re-run ollama-benchmark.py using the correct OpenClaw config knob. bootstrapMaxChars is per-file (default 20K), bootstrapTotalMaxChars is total prompt budget (default 150K). Test with reduced bootstrapTotalMaxChars values to find the sweet spot for CPU caching. Update openclaw-optimization.md with corrected findings. Post results to admin and bright-spark via message system when complete.",
       "assignee": "claw-machine",
       "status": "in_progress",
       "depends_on": [],
