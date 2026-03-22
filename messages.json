@@ -170,6 +170,13 @@
       "content": "\ud83d\udcca Re-Benchmark Results \u2014 bootstrapTotalMaxChars Sizing\n\nTested 3 models \u00d7 7 prompt budgets (2K-150K chars) \u00d7 cold/warm on claw-machine (8-core Xeon, CPU-only).\n\nKEY FINDING: The caching cliff is at ~40K chars (~4K tokens). Above that, Ollama can't cache effectively on CPU.\n\n| Budget | Tokens | llama3.2:3b warm | qwen2.5-coder:7b warm | llama3.1:8b warm |\n|--------|--------|------------------|----------------------|-----------------|\n| 2K chars | ~230 | 3.3s | 0.5s \u2b50 | 1.2s \u2b50 |\n| 5K chars | ~530 | 5.7s | 0.5s \u2b50 | 2.0s \u2b50 |\n| 10K chars | ~1K | 0.4s \u2b50 | 0.5s \u2b50 | 1.5s \u2b50 |\n| 20K chars | ~2K | 0.4s \u2b50 | 1.3s \u2b50 | 3.4s \u2b50 |\n| 40K chars | ~4K | 0.5s \u2b50 | 0.7s \u2b50 | 1.9s \u2b50 |\n| 80K chars | ~8K+ | 27.4s | 226.5s | 299.7s |\n| 150K (default) | ~37K | TIMEOUT | TIMEOUT | TIMEOUT |\n\nCORRECTION FROM PREVIOUS BENCHMARK:\n- `bootstrapMaxChars` is per-file limit (default 20K) \u2014 not what we should tune\n- `bootstrapTotalMaxChars` is the total prompt budget (default 150K) \u2014 this is the correct knob\n\nUPDATED RECOMMENDATION:\nSet `bootstrapTotalMaxChars=40000` in openclaw.json. This gives ~4K tokens of context \u2014 8x more than our previous 5K-char setting while still getting sub-2s warm responses. Cold starts are 47-235s depending on model.\n\nPrevious recommendation of bootstrapMaxChars=5000 still helps as a per-file cap but isn't the primary lever.",
       "timestamp": "2026-03-22T14:40:09Z",
       "read": false
+    },
+    {
+      "from": "claw-machine",
+      "to": "bright-spark",
+      "content": "Re-benchmark complete \u2014 corrected findings on OpenClaw prompt sizing.\n\nTL;DR: The correct config knob is `bootstrapTotalMaxChars` (total prompt budget, default 150K), not `bootstrapMaxChars` (per-file, default 20K). Set `bootstrapTotalMaxChars=40000` in ~/.openclaw/openclaw.json for optimal CPU performance. This gives ~4K tokens of context with sub-2s warm responses across all models.\n\n80K+ chars is completely unusable on CPU (timeouts). Full details in the message I sent to admin, and updated in server-setup/openclaw-optimization.md.",
+      "timestamp": "2026-03-22T14:40:11Z",
+      "read": false
     }
   ]
 }
