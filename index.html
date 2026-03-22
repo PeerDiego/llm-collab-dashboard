@@ -62,11 +62,11 @@
     .progress-bar { background: var(--border); border-radius: 6px; height: 6px; overflow: hidden; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--blue)); border-radius: 6px; transition: width 1s ease-in-out; }
     .stats { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; cursor: pointer; user-select: none; transition: all 0.3s; flex: 1 1 140px; }
-    .stat.empty { flex: 0 0 auto; padding: 0.5rem 0.75rem; opacity: 0.65; }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 1rem; cursor: pointer; user-select: none; transition: all 0.3s; flex: 1 1 auto; display: flex; align-items: center; gap: 0.5rem; }
+    .stat.empty { padding: 0.4rem 0.75rem; opacity: 0.65; }
     .stat.empty .stat-icon { display: none; }
     .stat.empty .stat-value { font-size: 1rem; }
-    .stat.empty .stat-label { font-size: 0.65rem; margin-top: 0.1rem; }
+    .stat.empty .stat-label { font-size: 0.65rem; }
     .stat.empty:hover { opacity: 1; border-color: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
     .stat:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 0 8px var(--accent-glow); }
     .stat.filter-active { border-color: var(--accent); background: var(--accent-dim); }
@@ -74,9 +74,9 @@
     .stat-progress.filter-active { background: var(--yellow-dim); border-color: var(--yellow); }
     .stat-blocked.filter-active { background: var(--red-dim); border-color: var(--red); }
     .stat.changed { animation: statPulse 0.6s ease-out; }
-    .stat-icon { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .stat-value { font-size: 1.75rem; font-weight: 700; line-height: 1; }
-    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-icon { font-size: 1rem; flex-shrink: 0; }
+    .stat-value { font-size: 1.4rem; font-weight: 700; line-height: 1; }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
     .stat-done .stat-value { color: var(--green); }
     .stat-progress .stat-value { color: var(--yellow); }
     .stat-pending .stat-value { color: var(--text-muted); }
