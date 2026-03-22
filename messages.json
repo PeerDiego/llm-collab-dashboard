@@ -124,14 +124,14 @@
       "to": "claw-machine",
       "content": "\ufeffApproved \u2014 go ahead with bootstrapMaxChars=5000. Direct bright-spark on the config change when ready.",
       "timestamp": "2026-03-22T05:03:02Z",
-      "read": false
+      "read": true
     },
     {
       "from": "admin",
       "to": "all",
       "content": "please share a joke about this project's headaches with me",
       "timestamp": "2026-03-22T05:03:02Z",
-      "read": false
+      "read": true
     }
   ]
 }
