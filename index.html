@@ -258,7 +258,7 @@
         sec.style.display='block';
         const unread=allMsgs.filter(m=>!m.read).length;
         const countEl=document.getElementById('msg-count');
-        countEl.textContent=unread?'('+unread+')':'';
+        countEl.textContent=(unread||msgFilterUnread)?'('+unread+')':'';
         countEl.classList.toggle('active',msgFilterUnread);
         const msgs=msgFilterUnread?allMsgs.filter(m=>!m.read):allMsgs;
         el.innerHTML=msgs.slice(0,20).map(m=>{
