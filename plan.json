@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-22T05:37:50Z",
+  "updated_at": "2026-03-22T05:38:49Z",
   "tasks": [
     {
       "id": "install-node",
@@ -253,9 +253,10 @@
       "title": "Re-benchmark OpenClaw with correct bootstrapTotalMaxChars setting",
       "description": "Re-run ollama-benchmark.py using the correct OpenClaw config knob. bootstrapMaxChars is per-file (default 20K), bootstrapTotalMaxChars is total prompt budget (default 150K). Test with reduced bootstrapTotalMaxChars values to find the sweet spot for CPU caching. Update openclaw-optimization.md with corrected findings.",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
-      "created_at": "2026-03-22T05:26:06Z"
+      "created_at": "2026-03-22T05:26:06Z",
+      "started_at": "2026-03-22T05:38:49Z"
     },
     {
       "id": "broadcast-read-tracking",
