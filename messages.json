@@ -131,7 +131,10 @@
       "to": "all",
       "content": "please share a joke about this project's headaches with me",
       "timestamp": "2026-03-22T05:03:02Z",
-      "read": true
+      "read_by": [
+        "claw-machine",
+        "bright-spark"
+      ]
     },
     {
       "from": "claw-machine",
