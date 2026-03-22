@@ -219,7 +219,7 @@
     {
       "id": "persistent-openclaw-agent",
       "title": "Configure OpenClaw as persistent message-checking agent",
-      "description": "Set up OpenClaw on the server with a heartbeat that periodically checks messages.json for unread messages addressed to claw-machine and responds. This gives the server-side agent presence even when no Copilot CLI session is active.",
+      "description": "Set up OpenClaw on the server as a persistent agent with two goals: (1) Heartbeat that periodically checks messages.json for unread messages addressed to claw-machine and responds, giving the server presence between Copilot CLI sessions. (2) Shared prompt proxy \u2014 act as a single warm OpenClaw instance that clients route through, maintaining one KV cache with the project system prompt pre-loaded. Clients send only user messages; the server-side agent handles the system prompt, eliminating redundant prompt eval across clients.",
       "assignee": "claw-machine",
       "status": "backlog",
       "notes": "Deferred for future implementation. OpenClaw and Ollama are already installed \u2014 this is a configuration task, not a build task.",
