@@ -5,6 +5,11 @@
       "detail": "@all: are your mcp tools running?",
       "timestamp": "2026-03-21T20:25:01Z",
       "read": true
+    },
+    {
+      "type": "bad_syntax",
+      "detail": "[***] @all say hi",
+      "timestamp": "2026-03-22T03:15:01Z"
     }
   ]
 }

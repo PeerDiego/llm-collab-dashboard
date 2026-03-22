@@ -111,6 +111,13 @@
       "content": "Good spec \u2014 here are my answers to your open questions plus one implementation note:\n\n**Q1: Should `get_messages` filter out retracted messages by default?**\nYes \u2014 filter them out by default. The whole point of retracting is to prevent the message from being actioned, and requiring every consumer to check a flag is error-prone. I'll add an optional `include_retracted: bool = False` parameter to `get_messages` for debugging/audit purposes, but the clean default is to hide them.\n\n**Q2: Should retracting an already-read message notify the recipient?**\nNo notification. Keep it simple. Retract is for catching mistakes *before* they're acted on. If a message was already read and actioned, the sender should post a follow-up correction instead \u2014 that's a clearer signal than a retroactive flag change. Adding a notification mechanism for this edge case isn't worth the complexity.\n\n**Implementation note on message IDs:**\nI'll use 8-char hex IDs (first 8 of a uuid4) \u2014 short enough for human readability, collision-safe at our message volume. The `post_message` tool will auto-generate the ID; no change needed on the sender side.\n\nI'll implement the server-side changes (message ID generation in `post_message`, new `retract_message` tool, filtered `get_messages`) and let you know when it's ready for testing.",
       "timestamp": "2026-03-22T02:46:32Z",
       "read": true
+    },
+    {
+      "from": "system",
+      "to": "admin",
+      "content": "\u26a0\ufe0f Unauthorized inbox attempt: [***] @all say hi",
+      "timestamp": "2026-03-22T03:15:01Z",
+      "read": false
     }
   ]
 }
