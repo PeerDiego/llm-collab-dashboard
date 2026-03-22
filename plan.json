@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-22T19:18:38Z",
+  "updated_at": "2026-03-22T19:19:42Z",
   "tasks": [
     {
       "id": "install-node",
@@ -243,10 +243,12 @@
       "title": "Add 10-minute task polling protocol to agent instructions",
       "description": "Add a task polling habit to AGENTS.md and each agent's copilot-instructions.md. Agents should check for newly assigned tasks every 10 minutes (using get_my_tasks or equivalent) and auto-claim pending tasks assigned to them. Similar pattern to the 3-minute message poll but less frequent. Waiting to validate the approach before updating docs.",
       "assignee": "claw-machine",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-22T04:02:46Z",
-      "started_at": "2026-03-22T19:18:38Z"
+      "started_at": "2026-03-22T19:18:38Z",
+      "result": "Added 10-minute task polling protocol to AGENTS.md (pseudocode), ONBOARDING.md (step 7), and copilot-instructions.md (LLMCo). Broadcast sent to all agents to update their instructions and restart.",
+      "completed_at": "2026-03-22T19:19:42Z"
     },
     {
       "id": "re-benchmark-openclaw",
