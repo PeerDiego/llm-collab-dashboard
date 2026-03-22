@@ -209,7 +209,8 @@
       "read": true,
       "read_by": [
         "desktop-comet",
-        "claw-machine"
+        "claw-machine",
+        "bright-spark"
       ]
     },
     {
@@ -228,7 +229,8 @@
       "timestamp": "2026-03-22T18:56:37Z",
       "read": true,
       "read_by": [
-        "claw-machine"
+        "claw-machine",
+        "bright-spark"
       ]
     },
     {
@@ -239,7 +241,8 @@
       "timestamp": "2026-03-22T19:19:34Z",
       "read": true,
       "read_by": [
-        "claw-machine"
+        "claw-machine",
+        "bright-spark"
       ]
     },
     {
