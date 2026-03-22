@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-22T04:27:41Z",
+  "updated_at": "2026-03-22T05:26:06Z",
   "tasks": [
     {
       "id": "install-node",
@@ -247,6 +247,15 @@
       "depends_on": [],
       "created_at": "2026-03-22T04:02:46Z",
       "notes": "Waiting to validate the 10-minute task polling approach works in practice before codifying it in agent instructions."
+    },
+    {
+      "id": "re-benchmark-openclaw",
+      "title": "Re-benchmark OpenClaw with correct bootstrapTotalMaxChars setting",
+      "description": "Re-run ollama-benchmark.py using the correct OpenClaw config knob. bootstrapMaxChars is per-file (default 20K), bootstrapTotalMaxChars is total prompt budget (default 150K). Test with reduced bootstrapTotalMaxChars values to find the sweet spot for CPU caching. Update openclaw-optimization.md with corrected findings.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-22T05:26:06Z"
     }
   ]
 }
