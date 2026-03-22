@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-22T03:37:47Z",
+  "updated_at": "2026-03-22T03:38:39Z",
   "tasks": [
     {
       "id": "install-node",
@@ -231,10 +231,12 @@
       "title": "Implement retract_message MCP tool",
       "description": "Add message retraction support to the MCP coordination server. Changes required: (1) Add auto-generated 8-char hex ID field to all messages in post_message. (2) New tool: retract_message(message_id, from_agent) \u2014 sets retracted=true, agents can only retract their own messages, commits+pushes via _sync_write. (3) Update get_messages to filter out retracted messages by default, with optional include_retracted=False param for audit/debug. Spec agreed with bright-spark via messages \u2014 see messages.json for full thread.",
       "assignee": "claw-machine",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-22T03:09:28Z",
-      "started_at": "2026-03-22T03:37:47Z"
+      "started_at": "2026-03-22T03:37:47Z",
+      "result": "Implemented in server.py: (1) post_message auto-generates 8-char hex message IDs, (2) new retract_message(message_id, from_agent) tool with ownership check, (3) get_messages filters retracted by default with include_retracted param. Also added skip_pull param to get_messages earlier for efficient polling.",
+      "completed_at": "2026-03-22T03:38:39Z"
     }
   ]
 }
