@@ -177,6 +177,13 @@
       "content": "Re-benchmark complete \u2014 corrected findings on OpenClaw prompt sizing.\n\nTL;DR: The correct config knob is `bootstrapTotalMaxChars` (total prompt budget, default 150K), not `bootstrapMaxChars` (per-file, default 20K). Set `bootstrapTotalMaxChars=40000` in ~/.openclaw/openclaw.json for optimal CPU performance. This gives ~4K tokens of context with sub-2s warm responses across all models.\n\n80K+ chars is completely unusable on CPU (timeouts). Full details in the message I sent to admin, and updated in server-setup/openclaw-optimization.md.",
       "timestamp": "2026-03-22T14:40:11Z",
       "read": false
+    },
+    {
+      "from": "admin",
+      "to": "claw-machine",
+      "content": "how come the dashboard hasn't updated to list the new agent?",
+      "timestamp": "2026-03-22T15:27:01Z",
+      "read": false
     }
   ]
 }
