@@ -256,14 +256,19 @@
         const el=document.getElementById('messages');
         if(!allMsgs.length){sec.style.display='none';return}
         sec.style.display='block';
-        const unread=allMsgs.filter(m=>!m.read).length;
+        const agents=currentTasks.length?[...new Set(currentTasks.map(t=>t.assignee).filter(Boolean))]:[];
+        function isMsgRead(m){
+          if(m.to==='all'){const rb=m.read_by||[];return agents.length>0&&agents.every(a=>rb.includes(a))}
+          return!!m.read;
+        }
+        const unread=allMsgs.filter(m=>!isMsgRead(m)).length;
         const countEl=document.getElementById('msg-count');
         countEl.textContent=(unread||msgFilterUnread)?'('+unread+')':'';
         countEl.classList.toggle('active',msgFilterUnread);
-        const msgs=msgFilterUnread?allMsgs.filter(m=>!m.read):allMsgs;
+        const msgs=msgFilterUnread?allMsgs.filter(m=>!isMsgRead(m)):allMsgs;
         el.innerHTML=msgs.slice(0,20).map(m=>{
           const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';
-          const cls=m.read?'':'unread';
+          const cls=isMsgRead(m)?'':'unread';
           return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">→ '+m.to+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+m.content+'</div></div>'
         }).join('');
         if(msgFilterUnread&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No unread messages</div>';
