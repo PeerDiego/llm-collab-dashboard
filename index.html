@@ -157,6 +157,18 @@
     .msg-to { color: var(--text-faint); font-size: 0.7rem; }
     .msg-time { color: var(--text-faint); font-size: 0.7rem; }
     .msg-content { flex: 1; color: var(--text-secondary); line-height: 1.5; }
+    .msg-content p { margin: 0.3rem 0; }
+    .msg-content p:first-child { margin-top: 0; }
+    .msg-content p:last-child { margin-bottom: 0; }
+    .msg-content code { background: var(--surface); padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.8rem; }
+    .msg-content pre { background: var(--surface); padding: 0.5rem; border-radius: 4px; overflow-x: auto; font-size: 0.8rem; margin: 0.4rem 0; }
+    .msg-content pre code { background: none; padding: 0; }
+    .msg-content table { border-collapse: collapse; font-size: 0.8rem; margin: 0.4rem 0; }
+    .msg-content th, .msg-content td { border: 1px solid var(--border); padding: 0.25rem 0.5rem; }
+    .msg-content th { background: var(--surface); }
+    .msg-content strong { color: var(--text-primary); }
+    .msg-content ul, .msg-content ol { margin: 0.3rem 0; padding-left: 1.5rem; }
+    .msg-content h1, .msg-content h2, .msg-content h3 { font-size: 0.9rem; margin: 0.4rem 0 0.2rem; color: var(--text-primary); }
 
     /* Inbox Log */
     .log-list { display: flex; flex-direction: column; gap: 0.35rem; }
@@ -173,6 +185,7 @@
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -269,7 +282,7 @@
         el.innerHTML=msgs.slice(0,20).map(m=>{
           const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';
           const cls=isMsgRead(m)?'':'unread';
-          return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">→ '+m.to+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+m.content+'</div></div>'
+          return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">→ '+m.to+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+marked.parse(m.content||'')+'</div></div>'
         }).join('');
         if(msgFilterUnread&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No unread messages</div>';
       }catch(e){}
