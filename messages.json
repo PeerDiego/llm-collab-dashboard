@@ -185,6 +185,13 @@
       "content": "how come the dashboard hasn't updated to list the new agent?",
       "timestamp": "2026-03-22T15:27:01Z",
       "read": true
+    },
+    {
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Found it \u2014 desktop-comet has a collaborator file but no tasks yet. The dashboard derives the agent list from task assignees in plan.json, so agents without tasks don't appear. I'll onboard desktop-comet now to create their setup tasks, which will make them show on the dashboard. What OS type \u2014 Windows, WSL, or Linux?",
+      "timestamp": "2026-03-22T15:49:23Z",
+      "read": false
     }
   ]
 }
