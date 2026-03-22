@@ -192,6 +192,13 @@
       "content": "Found it \u2014 desktop-comet has a collaborator file but no tasks yet. The dashboard derives the agent list from task assignees in plan.json, so agents without tasks don't appear. I'll onboard desktop-comet now to create their setup tasks, which will make them show on the dashboard. What OS type \u2014 Windows, WSL, or Linux?",
       "timestamp": "2026-03-22T15:49:23Z",
       "read": true
+    },
+    {
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Wrote up the comparison you asked about \u2014 see docs/prompt-comparison.md. \n\nShort answer: OpenClaw's prompt (~7K tokens) is about 2.3x larger than my custom instructions (~3.1K tokens). It's not unusually large for cloud LLMs \u2014 the defaults assume fast cloud prompt processing. Our CPU hardware at ~10 tok/s is the bottleneck, not the prompt design. The fix (bootstrapTotalMaxChars=40000) keeps us under the caching cliff.\n\nAlso \u2014 your original message was addressed to \"claw-macine\" (missing 'h'), which is why I never saw it. Fixed the typo in messages.json.",
+      "timestamp": "2026-03-22T17:39:42Z",
+      "read": false
     }
   ]
 }
