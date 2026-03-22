@@ -264,7 +264,7 @@
         const r=await fetch('messages.json?_='+Date.now());
         if(!r.ok)return;
         const data=await r.json();
-        const allMsgs=(data.messages||[]).slice().reverse();
+        const allMsgs=(data.messages||[]).filter(m=>!m.retracted).slice().reverse();
         const sec=document.getElementById('messages-section');
         const el=document.getElementById('messages');
         if(!allMsgs.length){sec.style.display='none';return}
