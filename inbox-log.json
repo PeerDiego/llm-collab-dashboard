@@ -9,7 +9,8 @@
     {
       "type": "bad_syntax",
       "detail": "[***] @all say hi",
-      "timestamp": "2026-03-22T03:15:01Z"
+      "timestamp": "2026-03-22T03:15:01Z",
+      "read": true
     }
   ]
 }
