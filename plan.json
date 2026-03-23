@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-23T14:40:01Z",
+  "updated_at": "2026-03-23T15:13:41Z",
   "tasks": [
     {
       "id": "install-node",
@@ -380,12 +380,14 @@
       "title": "Install + configure OpenClaw (Wsl)",
       "description": "Install OpenClaw on the Wsl client: npm install -g openclaw@latest. Create ~/.openclaw/openclaw.json with primary model ollama/llama3.1:8b. Create ~/.openclaw/.env with OLLAMA_API_KEY=ollama-local. Verify: openclaw config validate && openclaw models status.",
       "assignee": "nimble-wave",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "nimble-wave-ssh-tunnel"
       ],
       "created_at": "2026-03-23T14:26:37Z",
-      "started_at": "2026-03-23T14:40:01Z"
+      "started_at": "2026-03-23T14:40:01Z",
+      "result": "OpenClaw 2026.3.22 installed. Config at ~/.openclaw/openclaw.json with primary model ollama/llama3.1:8b. Auth via OLLAMA_API_KEY env. Config validates and models status shows ollama provider detected.",
+      "completed_at": "2026-03-23T15:13:34Z"
     },
     {
       "id": "nimble-wave-setup-mcp",
@@ -404,12 +406,15 @@
       "title": "Verify full setup (Wsl)",
       "description": "Verify the complete setup: 1) SSH tunnel active (curl localhost:11434/api/tags). 2) OpenClaw configured (openclaw models status shows ollama). 3) MCP tools available (get_plan returns task board). Mark done only when all three checks pass.",
       "assignee": "nimble-wave",
-      "status": "pending",
+      "status": "done",
       "depends_on": [
         "nimble-wave-install-openclaw",
         "nimble-wave-setup-mcp"
       ],
-      "created_at": "2026-03-23T14:26:37Z"
+      "created_at": "2026-03-23T14:26:37Z",
+      "started_at": "2026-03-23T15:13:32Z",
+      "result": "All three checks pass: SSH tunnel active (4 models visible), OpenClaw configured and validated, MCP tools operational.",
+      "completed_at": "2026-03-23T15:13:41Z"
     }
   ]
 }
