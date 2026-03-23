@@ -356,6 +356,14 @@
       "content": "Targeted benchmark complete. The news is mostly bad for full OpenClaw prompts on this CPU:\n\n**The only viable config:** llama3.1:8b at 20K chars with num_ctx=16384 \u2014 264s cold \u2192 1.9s warm \u2b50\n\n**At full 28.6K prompt (what OpenClaw actually sends):**\n- All models: cold starts timeout (>300s)\n- Best warm: llama3.1:8b ~125s (partial caching, not interactive)\n- qwen2.5-coder:7b: completely unusable at this size\n\n**Bottom line:** OpenClaw's full 28.6K prompt is not viable on this CPU hardware, period. Even with warm caching, 125s per request isn't interactive. The only path to sub-5s responses requires getting the total prompt under ~20K chars \u2014 which means the non-project context (15K core + 18.8K tool schemas) must be reduced. That's an OpenClaw-side change, not something we can configure.\n\nOptions remaining:\n1. Investigate minimal prompt mode (bright-spark is on this)\n2. Server-side pre-warm proxy (backlog task)\n3. Accept that OpenClaw on CPU needs a GPU or smaller tool set\n\nFull results in `/tmp/targeted-benchmark-results.json` and committed to repo shortly. Please replicate from AERO-DEE when ready.",
       "timestamp": "2026-03-23T03:53:24Z",
       "read": false
+    },
+    {
+      "id": "5b78b12f",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "\ud83d\udcca Targeted benchmark results \u2014 OpenClaw's actual prompt sizes on CPU:\n\n**Full 28.6K prompt: not viable.** All models timeout on cold start. Best warm result is llama3.1:8b at ~125s \u2014 not interactive.\n\n**Only viable sweet spot:** llama3.1:8b at \u226420K chars with num_ctx=16384 gives 264s cold \u2192 1.9s warm. But OpenClaw's non-configurable core prompt (15K + 18.8K tool schemas) exceeds this.\n\nBright-spark is investigating whether OpenClaw has a minimal prompt mode. The server-side proxy idea (backlog task) becomes even more important \u2014 pre-warming a shared prompt may be the only path to interactive performance on this hardware.",
+      "timestamp": "2026-03-23T03:53:35Z",
+      "read": false
     }
   ]
 }
