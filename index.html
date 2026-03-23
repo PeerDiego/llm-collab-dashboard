@@ -227,9 +227,9 @@
         <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
       </div>
       <div class="stats" id="stats"></div>
-      <div class="section">
-        <div class="section-header"><span class="section-title">Tasks</span><span class="section-count" id="task-count"></span></div>
-        <div class="task-list" id="tasks"></div>
+      <div class="section" id="tasks-section">
+        <div class="section-header" onclick="toggleSection('tasks-section')"><span class="section-title"><span class="collapse-icon">▼</span>Tasks <span class="collapsed-count" id="task-collapsed-count"></span></span><span class="section-count" id="task-count"></span></div>
+        <div class="section-body"><div class="task-list" id="tasks"></div></div>
       </div>
       <footer class="footer" id="footer"></footer>
     </div>
@@ -242,8 +242,8 @@
     let msgFilterUnread=false;
     let previousPlan=null,pollTimer=null,activeFilters=new Set(),activeAgentFilters=new Set(),currentTasks=[];
     function toggleSection(id){const sec=document.getElementById(id);sec.classList.toggle('collapsed');const key='collapsed-'+id;if(sec.classList.contains('collapsed')){localStorage.setItem(key,'1')}else{localStorage.removeItem(key)}updateCollapsedCounts()}
-    function restoreCollapseState(){['agents-section','messages-section','inbox-log-section'].forEach(id=>{if(localStorage.getItem('collapsed-'+id)==='1'){const el=document.getElementById(id);if(el)el.classList.add('collapsed')}})}
-    function updateCollapsedCounts(){const sec=document.getElementById('agents-section');const el=document.getElementById('agent-collapsed-count');if(sec&&el){const cards=document.querySelectorAll('#agents .agent-card');el.textContent=sec.classList.contains('collapsed')?'('+cards.length+')':''}}
+    function restoreCollapseState(){['agents-section','messages-section','inbox-log-section','tasks-section'].forEach(id=>{if(localStorage.getItem('collapsed-'+id)==='1'){const el=document.getElementById(id);if(el)el.classList.add('collapsed')}})}
+    function updateCollapsedCounts(){const sec=document.getElementById('agents-section');const el=document.getElementById('agent-collapsed-count');if(sec&&el){const cards=document.querySelectorAll('#agents .agent-card');el.textContent=sec.classList.contains('collapsed')?'('+cards.length+')':''}const tsec=document.getElementById('tasks-section');const tel=document.getElementById('task-collapsed-count');if(tsec&&tel){const shown=document.querySelectorAll('.task[data-task-id]:not(.filtered-out)').length;tel.textContent=tsec.classList.contains('collapsed')?'('+shown+')':''}}
     restoreCollapseState();
     function agentColor(n){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return AGENT_COLORS[Math.abs(h)%AGENT_COLORS.length]}
     function agentInitial(n){return n.split('-').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
