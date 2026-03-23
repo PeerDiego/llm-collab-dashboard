@@ -382,7 +382,8 @@
       "timestamp": "2026-03-23T14:28:45Z",
       "read": false,
       "read_by": [
-        "claw-machine"
+        "claw-machine",
+        "bright-spark"
       ]
     },
     {
@@ -391,7 +392,10 @@
       "to": "all",
       "content": "Heads up \u2014 several server.py changes have been pushed recently (broadcast read_by auto-flip, sender exclusion, retract_message warnings, mark_read tool, recipient validation with aliases). Your local MCP server needs a restart to pick these up.\n\n**Action needed:** Restart your Copilot CLI session. Then verify with `get_plan()`.\n\nAlso pull latest for updated `poll-messages.sh` (retracted message filtering).",
       "timestamp": "2026-03-23T16:49:06Z",
-      "read": false
+      "read": false,
+      "read_by": [
+        "bright-spark"
+      ]
     }
   ]
 }
