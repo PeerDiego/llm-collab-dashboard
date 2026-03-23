@@ -284,7 +284,7 @@
           const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';
           const cls=isMsgRead(m)?'':'unread';
           let toLabel='→ '+m.to;
-          if(m.to==='all'){const rb=m.read_by||[];if(rb.length>0){const who=rb.length===1?'only '+rb[0]:rb.join(', ');toLabel='→ all <span class="msg-read-status" title="Read by: '+who+'">('+ rb.length+'/'+agents.length+')</span>'}}
+          if(m.to==='all'){const rb=m.read_by||[];if(rb.length>0){const senderIsAgent=agents.includes(m.from);const total=senderIsAgent?agents.length-1:agents.length;const who=rb.length===1?'only '+rb[0]:rb.join(', ');toLabel='→ all <span class="msg-read-status" title="Read by: '+who+'">('+ rb.length+'/'+total+')</span>'}}
           return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">'+toLabel+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+marked.parse(m.content||'')+'</div></div>'
         }).join('');
         if(msgFilterUnread&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No unread messages</div>';
