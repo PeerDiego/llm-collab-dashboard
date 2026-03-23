@@ -344,11 +344,10 @@
       "title": "Benchmark with OpenClaw's actual prompt sizes",
       "description": "Previous benchmarks used synthetic prompts that don't reflect OpenClaw's real prompt structure. Bright-spark confirmed tool schemas alone are 18.8K chars (~4.7K tokens), exceeding default context window. New benchmark plan: (1) Bump num_ctx to 8192 and 16384 via Modelfile. (2) Run synthetic prompt tests at exact OpenClaw sizes (15K, 20K, 25K, 28.6K). (3) Run ACTUAL OpenClaw requests (not synthetic) to measure real-world behavior. (4) bright-spark replicates from AERO-DEE to confirm client-side matches server-side. (5) Compare results and determine viable config. Update openclaw-optimization.md with corrected findings.",
       "assignee": "claw-machine",
-      "status": "blocked",
+      "status": "in_progress",
       "depends_on": [],
       "created_at": "2026-03-22T23:21:40Z",
-      "started_at": "2026-03-22T23:21:48Z",
-      "notes": "Benchmark script ready but waiting for bright-spark to finish using Ollama before running. Cannot run concurrent benchmarks against the same server."
+      "started_at": "2026-03-23T00:02:00Z"
     }
   ]
 }
