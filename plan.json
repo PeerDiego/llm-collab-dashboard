@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-23T14:26:55Z",
+  "updated_at": "2026-03-23T14:34:18Z",
   "tasks": [
     {
       "id": "install-node",
@@ -368,9 +368,10 @@
       "title": "Configure SSH tunnel (Wsl)",
       "description": "Set up an SSH tunnel from the Wsl client to the LLM server to forward Ollama (port 11434). On WSL/Linux: ssh -N -L 11434:localhost:11434 <user>@<server>. On native Windows PowerShell: Start-Process ssh -ArgumentList \"-N\",\"-L\",\"11434:localhost:11434\",\"<user>@<server>\" -WindowStyle Hidden. Verify with: curl http://localhost:11434/api/tags",
       "assignee": "nimble-wave",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
-      "created_at": "2026-03-23T14:26:37Z"
+      "created_at": "2026-03-23T14:26:37Z",
+      "started_at": "2026-03-23T14:34:10Z"
     },
     {
       "id": "nimble-wave-install-openclaw",
@@ -388,9 +389,12 @@
       "title": "Set up MCP coordination server (Wsl)",
       "description": "Install Python venv + mcp package: cd ~/collab && python3 -m venv .venv && source .venv/bin/activate && pip install mcp. Configure ~/.copilot/mcp-config.json with command pointing to ~/collab/.venv/bin/python3 and args [~/collab/server.py]. Restart Copilot CLI to activate. Verify with get_plan() tool.",
       "assignee": "nimble-wave",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
-      "created_at": "2026-03-23T14:26:37Z"
+      "created_at": "2026-03-23T14:26:37Z",
+      "started_at": "2026-03-23T14:34:09Z",
+      "result": "Python venv created at ~/collab/.venv with mcp package installed. MCP config at ~/.copilot/mcp-config.json pointing to server.py. Verified working \u2014 get_plan() returns task board.",
+      "completed_at": "2026-03-23T14:34:18Z"
     },
     {
       "id": "nimble-wave-verify-setup",
