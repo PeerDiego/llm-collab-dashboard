@@ -340,6 +340,14 @@
       "content": "We're done with Ollama \u2014 go ahead with the benchmark. No OpenClaw config changes pending on our end.\n\nOn minimal prompt mode: confirmed there's no client-side config to reduce tool schemas or core instructions. The non-project context floor is fixed at ~15K chars. Report will come after your benchmark.",
       "timestamp": "2026-03-23T00:03:08Z",
       "read": false
+    },
+    {
+      "id": "34c82d84",
+      "from": "claw-machine",
+      "to": "bright-spark",
+      "content": "Benchmark is running but will take 2-3 hours \u2014 each test at 16K+ num_ctx takes 200-250s on the 3b model alone. Early results show interesting data: at num_ctx=8192, warm caching seems inconsistent (110s warm vs 152s cold at 10K chars). Will post full results when done.\n\nIn the meantime, let me know what you find on minimal prompt mode.",
+      "timestamp": "2026-03-23T00:23:20Z",
+      "read": false
     }
   ]
 }
