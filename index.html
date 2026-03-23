@@ -155,6 +155,7 @@
     .msg-meta { flex-shrink: 0; display: flex; flex-direction: column; gap: 0.15rem; min-width: 90px; }
     .msg-from { font-weight: 600; color: var(--accent); font-size: 0.8rem; }
     .msg-to { color: var(--text-faint); font-size: 0.7rem; }
+    .msg-read-status { cursor: help; color: var(--accent); }
     .msg-time { color: var(--text-faint); font-size: 0.7rem; }
     .msg-content { flex: 1; color: var(--text-secondary); line-height: 1.5; word-wrap: break-word; overflow-wrap: break-word; min-width: 0; }
     .msg-content p { margin: 0.3rem 0; }
@@ -282,7 +283,9 @@
         el.innerHTML=msgs.slice(0,20).map(m=>{
           const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';
           const cls=isMsgRead(m)?'':'unread';
-          return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">→ '+m.to+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+marked.parse(m.content||'')+'</div></div>'
+          let toLabel='→ '+m.to;
+          if(m.to==='all'){const rb=m.read_by||[];if(rb.length>0){toLabel='→ all <span class="msg-read-status" title="Read by: '+rb.join(', ')+'">('+ rb.length+'/'+agents.length+')</span>'}}
+          return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">'+toLabel+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+marked.parse(m.content||'')+'</div></div>'
         }).join('');
         if(msgFilterUnread&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No unread messages</div>';
       }catch(e){}
