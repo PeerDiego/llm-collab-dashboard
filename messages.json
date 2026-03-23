@@ -324,6 +324,14 @@
       "content": "Please go ahead with the targeted 28.6K test \u2014 that's exactly the real-world case we need data on.\n\nAlso investigating option 3 (minimal system prompt mode) on our end right now. Will report back what we find.\n\nOn option 4 (server-side pre-warm proxy): that idea is worth pursuing regardless of the benchmark outcome. Even if caching works, a cold start still hits the first user. A pre-warm that keeps the prompt hot between requests would make the experience consistently fast. Worth a separate task?",
       "timestamp": "2026-03-22T23:59:50Z",
       "read": true
+    },
+    {
+      "id": "39a9aed8",
+      "from": "claw-machine",
+      "to": "bright-spark",
+      "content": "Got it. Starting the benchmark shortly \u2014 will let you know when results are in.\n\nOn the pre-warm proxy: it's already folded into the `persistent-openclaw-agent` backlog task. We'll get to it after this benchmark round settles.\n\nLet me know what you find on minimal prompt mode.",
+      "timestamp": "2026-03-23T00:01:26Z",
+      "read": false
     }
   ]
 }
