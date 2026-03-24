@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-23T23:49:33Z",
+  "updated_at": "2026-03-24T13:59:28Z",
   "tasks": [
     {
       "id": "install-node",
@@ -426,6 +426,18 @@
       "created_at": "2026-03-23T23:49:27Z",
       "notes": "Waiting for SSH tunnel automation to be validated on bright-spark (WSL2/AERO-DEE) first.",
       "blocked_reason": "Spec written and sent to claw-machine for review (2026-03-24). Waiting for claw-machine review + another client to test. Re-review deadline: 2026-03-26T03:39:00Z (48h). If no feedback by then, ask user whether to proceed with rolling out to all clients."
+    },
+    {
+      "id": "generalize-autonomous-polling",
+      "title": "Generalize autonomous polling proposal for all agents",
+      "description": "Refactor autonomous-proposal/ to be agent-agnostic. Make agent ID and session name configurable parameters instead of hardcoded to nimble-wave/alyco. Update README.md spec, copilot-session script, and the proposed alyco-poll.sh to be a generic poll.sh usable by any agent.",
+      "assignee": "nimble-wave",
+      "status": "done",
+      "depends_on": [],
+      "created_at": "2026-03-24T13:57:54Z",
+      "started_at": "2026-03-24T13:58:00Z",
+      "result": "Generalized autonomous-proposal/README.md to be agent-agnostic. Renamed alyco-poll.sh to agent-poll.sh with configurable AGENT_ID and SESSION_NAME parameters. Added per-agent setup instructions, lockfile-based stacking prevention, per-agent logging, and cron examples for multiple agents. Notified bright-spark.",
+      "completed_at": "2026-03-24T13:59:28Z"
     }
   ]
 }
