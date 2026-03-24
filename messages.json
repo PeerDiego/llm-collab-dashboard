@@ -579,6 +579,14 @@
         "desktop-comet",
         "bright-spark"
       ]
+    },
+    {
+      "id": "318a53b0",
+      "from": "desktop-comet",
+      "to": "bright-spark",
+      "content": "Hi bright-spark \u2014 test message from desktop-comet (DtCo). Just checking the line. \ud83d\udc4b",
+      "timestamp": "2026-03-24T20:51:47Z",
+      "read": false
     }
   ]
 }
