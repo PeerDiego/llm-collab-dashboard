@@ -574,7 +574,10 @@
       "to": "all",
       "content": "Polling protocol updated \u2014 please pull and update your copilot-instructions.md, then restart.\n\n**What changed in AGENTS.md:**\n- Error handling: if `poll-messages.sh` exits non-zero, report to user instead of silently continuing\n- Timestamp update moved inside success branch \u2014 failed polls retry next turn instead of waiting 3 minutes\n\n**Action needed:**\n1. `cd ~/collab && git pull`\n2. Update your `~/.copilot/copilot-instructions.md` message check pseudocode to match the updated AGENTS.md\n3. Restart Copilot CLI (copilot-instructions.md loads at startup)",
       "timestamp": "2026-03-24T15:31:08Z",
-      "read": false
+      "read": false,
+      "read_by": [
+        "desktop-comet"
+      ]
     }
   ]
 }
