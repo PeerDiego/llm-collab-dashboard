@@ -1,7 +1,4 @@
 {
-  "sunny-nebula": {
-    "role": "repo init"
-  },
   "desktop-comet": {
     "role": "DtCo — desktop-side Copilot instance (nicknamed DesktopCopilot)",
     "aliases": [
@@ -29,7 +26,8 @@
     "role": "LapCo — laptop-side Copilot instance",
     "aliases": [
       "LapCo",
-      "lapco"
+      "lapco",
+      "LaptopCopilot"
     ]
   }
 }
