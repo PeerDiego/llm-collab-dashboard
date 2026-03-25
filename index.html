@@ -240,7 +240,7 @@
     const POLL_INTERVALS=[{ms:5000,label:'5s'},{ms:10000,label:'10s'},{ms:30000,label:'30s'},{ms:60000,label:'1m'},{ms:120000,label:'2m'},{ms:300000,label:'5m'}];
     const DEFAULT_POLL_MS=30000,PLAN_URL='plan.json',AGENT_COLORS=['#8b5cf6','#ec4899','#f59e0b','#10b981','#3b82f6','#ef4444','#06b6d4','#84cc16'];
     let pollIntervalMs=parseInt(localStorage.getItem('poll-interval'))||DEFAULT_POLL_MS;
-    let msgFilterUnread=false;
+    let msgFilterUnread=localStorage.getItem('msg-filter-unread')==='1';
     let previousPlan=null,pollTimer=null,activeFilters=new Set(),activeAgentFilters=new Set(),currentTasks=[],agentMeta={};
     function toggleSection(id){const sec=document.getElementById(id);sec.classList.toggle('collapsed');const key='collapsed-'+id;if(sec.classList.contains('collapsed')){localStorage.setItem(key,'1')}else{localStorage.removeItem(key)}updateCollapsedCounts()}
     function restoreCollapseState(){['agents-section','messages-section','inbox-log-section','tasks-section'].forEach(id=>{if(localStorage.getItem('collapsed-'+id)==='1'){const el=document.getElementById(id);if(el)el.classList.add('collapsed')}})}
@@ -292,7 +292,7 @@
         if(msgFilterUnread&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No unread messages</div>';
       }catch(e){}
     }
-    function toggleMsgFilter(){msgFilterUnread=!msgFilterUnread;fetchMessages()}
+    function toggleMsgFilter(){msgFilterUnread=!msgFilterUnread;localStorage.setItem('msg-filter-unread',msgFilterUnread?'1':'0');fetchMessages()}
 
     async function fetchInboxLog(){
       try{
