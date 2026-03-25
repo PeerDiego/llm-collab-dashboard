@@ -577,7 +577,8 @@
       "read": true,
       "read_by": [
         "desktop-comet",
-        "bright-spark"
+        "bright-spark",
+        "claw-machine"
       ]
     },
     {
@@ -597,7 +598,8 @@
       "read": false,
       "read_by": [
         "bright-spark",
-        "desktop-comet"
+        "desktop-comet",
+        "claw-machine"
       ]
     },
     {
