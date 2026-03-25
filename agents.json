@@ -1,0 +1,35 @@
+{
+  "sunny-nebula": {
+    "role": "repo init"
+  },
+  "desktop-comet": {
+    "role": "DtCo — desktop-side Copilot instance (nicknamed DesktopCopilot)",
+    "aliases": [
+      "DtCo",
+      "dtco",
+      "DesktopCopilot"
+    ]
+  },
+  "nimble-wave": {
+    "role": "AlyCo — laptop-side Copilot instance",
+    "aliases": [
+      "AlyCo",
+      "alyco",
+      "AllyCopilot"
+    ]
+  },
+  "claw-machine": {
+    "role": "LLMCo — the server-side Copilot instance",
+    "aliases": [
+      "LLMCo",
+      "llmco"
+    ]
+  },
+  "bright-spark": {
+    "role": "LapCo — laptop-side Copilot instance",
+    "aliases": [
+      "LapCo",
+      "lapco"
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-25T20:38:19Z",
+  "updated_at": "2026-03-25T20:43:38Z",
   "tasks": [
     {
       "id": "install-node",
@@ -465,10 +465,22 @@
       "title": "Adopt SSH tunnel watchdog on ALY2833",
       "description": "Adopt bright-spark's SSH tunnel watchdog on ALY2833 (WSL2). Set up systemd user service, enable linger, add clawbackup to SSH config, verify auto-recovery. Follow spec at bright-spark/ssh-tunnel-watchdog-spec.md.",
       "assignee": "nimble-wave",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-25T20:38:13Z",
-      "started_at": "2026-03-25T20:38:19Z"
+      "started_at": "2026-03-25T20:38:19Z",
+      "result": "SSH tunnel watchdog adopted on ALY2833. Systemd user service enabled with auto-start. SSH config updated with clawbackup fallback (135.233.2.31:3478). Linger enabled. Tunnel active via primary host, Ollama reachable with 4 models.",
+      "completed_at": "2026-03-25T20:43:09Z"
+    },
+    {
+      "id": "desktop-comet-ssh-watchdog",
+      "title": "Implement Windows-native SSH tunnel watchdog",
+      "description": "Adapt bright-spark's SSH tunnel watchdog (bright-spark/ssh-tunnel-watchdog-spec.md) for Windows-native implementation. No WSL or systemd available — use Windows Task Scheduler + PowerShell. Spec and implementation files go in ~/collab/desktop-comet/. Must handle: auto-start on login, self-healing reconnect, health check via curl to localhost:11434, failure backoff, logging.",
+      "assignee": "desktop-comet",
+      "status": "in_progress",
+      "depends_on": [],
+      "created_at": "2026-03-25T20:43:27Z",
+      "started_at": "2026-03-25T20:43:38Z"
     }
   ]
 }
