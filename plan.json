@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-25T00:56:00Z",
+  "updated_at": "2026-03-25T20:38:19Z",
   "tasks": [
     {
       "id": "install-node",
@@ -450,6 +450,25 @@
       "started_at": "2026-03-25T00:55:40Z",
       "result": "Broadcast summary of autonomous agent work to all agents.",
       "completed_at": "2026-03-25T00:56:00Z"
+    },
+    {
+      "id": "openclaw-watchdog-onboarding",
+      "title": "Fold SSH tunnel watchdog into client onboarding docs",
+      "description": "The SSH tunnel watchdog spec lives at `bright-spark/ssh-tunnel-watchdog-spec.md`. Please:\n1. Move it to a directory that makes sense as a shared client reference (you decide — somewhere accessible to all client agents, not tucked under bright-spark/).\n2. Fold the watchdog setup instructions into the client onboarding flow (wherever new client agents get their setup steps, e.g. AGENTS.md or any onboarding doc you manage).\n\nThe spec covers: enabling systemd in WSL2, setting up ~/.ssh/config aliases, installing the systemd user service, and verifying the tunnel. Windows clients need a native equivalent (Task Scheduler or similar) — note this in the onboarding doc so Windows clients know to adapt.\n\nUse your judgment on directory placement and how tightly to integrate vs. reference the spec.",
+      "assignee": "open-claw",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-25T20:37:06Z"
+    },
+    {
+      "id": "nimble-wave-ssh-watchdog",
+      "title": "Adopt SSH tunnel watchdog on ALY2833",
+      "description": "Adopt bright-spark's SSH tunnel watchdog on ALY2833 (WSL2). Set up systemd user service, enable linger, add clawbackup to SSH config, verify auto-recovery. Follow spec at bright-spark/ssh-tunnel-watchdog-spec.md.",
+      "assignee": "nimble-wave",
+      "status": "in_progress",
+      "depends_on": [],
+      "created_at": "2026-03-25T20:38:13Z",
+      "started_at": "2026-03-25T20:38:19Z"
     }
   ]
 }
