@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-25T22:30:54Z",
+  "updated_at": "2026-03-25T23:49:32Z",
   "tasks": [
     {
       "id": "install-node",
@@ -482,10 +482,12 @@
       "title": "Implement Windows-native SSH tunnel watchdog",
       "description": "Adapt bright-spark's SSH tunnel watchdog (bright-spark/ssh-tunnel-watchdog-spec.md) for Windows-native implementation. No WSL or systemd available — use Windows Task Scheduler + PowerShell. Spec and implementation files go in ~/collab/desktop-comet/. Must handle: auto-start on login, self-healing reconnect, health check via curl to localhost:11434, failure backoff, logging.",
       "assignee": "desktop-comet",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-25T20:43:27Z",
-      "started_at": "2026-03-25T20:43:38Z"
+      "started_at": "2026-03-25T20:43:38Z",
+      "result": "Implemented ssh-tunnel-watchdog.ps1 + registered OllamaSshTunnelWatchdog Task Scheduler task. Removed old OllamaSshTunnel.vbs. Key learnings: (1) RunLevel Highest silently fails in hidden Task Scheduler context - use Limited; (2) PS5.1 reads scripts without BOM as cp1252, so em-dash chars cause parse errors - saved with UTF-8 BOM. Tunnel confirmed running via Task Scheduler, 4 models accessible.",
+      "completed_at": "2026-03-25T23:49:32Z"
     }
   ]
 }
