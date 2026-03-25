@@ -16,10 +16,10 @@
     {
       "id": "install-gh-cli",
       "title": "Install GitHub CLI + auth",
-      "description": "Install gh CLI and authenticate. Needed for repo management. (Skippable \u2014 PAT-based git push already working.)",
+      "description": "Install gh CLI and authenticate. Needed for repo management. (Skippable — PAT-based git push already working.)",
       "assignee": "claw-machine",
       "status": "skipped",
-      "result": "Not needed \u2014 using fine-grained PAT for git push.",
+      "result": "Not needed — using fine-grained PAT for git push.",
       "depends_on": []
     },
     {
@@ -34,7 +34,7 @@
     {
       "id": "setup-cron",
       "title": "Cron: auto-sync collab repo",
-      "description": "Cron job every 5 min \u2014 only commits+pushes if there are changes.",
+      "description": "Cron job every 5 min — only commits+pushes if there are changes.",
       "assignee": "claw-machine",
       "status": "done",
       "result": "auto-sync.sh running via cron every 5 min. Dirty-check via git status --porcelain.",
@@ -213,23 +213,23 @@
       ],
       "created_at": "2026-03-20T20:14:30Z",
       "started_at": "2026-03-20T20:24:38Z",
-      "result": "All 3 checks pass: 1) SSH tunnel active \u2014 3 models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b. 3) MCP tools responding correctly.",
+      "result": "All 3 checks pass: 1) SSH tunnel active — 3 models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b. 3) MCP tools responding correctly.",
       "completed_at": "2026-03-20T20:25:04Z"
     },
     {
       "id": "persistent-openclaw-agent",
       "title": "Configure OpenClaw as persistent message-checking agent",
-      "description": "Set up OpenClaw on the server as a persistent agent with two goals: (1) Heartbeat that periodically checks messages.json for unread messages addressed to claw-machine and responds, giving the server presence between Copilot CLI sessions. (2) Shared prompt proxy \u2014 act as a single warm OpenClaw instance that clients route through, maintaining one KV cache with the project system prompt pre-loaded. Clients send only user messages; the server-side agent handles the system prompt, eliminating redundant prompt eval across clients.",
+      "description": "Set up OpenClaw on the server as a persistent agent with two goals: (1) Heartbeat that periodically checks messages.json for unread messages addressed to claw-machine and responds, giving the server presence between Copilot CLI sessions. (2) Shared prompt proxy — act as a single warm OpenClaw instance that clients route through, maintaining one KV cache with the project system prompt pre-loaded. Clients send only user messages; the server-side agent handles the system prompt, eliminating redundant prompt eval across clients.",
       "assignee": "claw-machine",
       "status": "backlog",
-      "notes": "Deferred for future implementation. OpenClaw and Ollama are already installed \u2014 this is a configuration task, not a build task.",
+      "notes": "Deferred for future implementation. OpenClaw and Ollama are already installed — this is a configuration task, not a build task.",
       "depends_on": [],
       "created_at": "2026-03-21T17:35:06Z"
     },
     {
       "id": "retract-message-tool",
       "title": "Implement retract_message MCP tool",
-      "description": "Add message retraction support to the MCP coordination server. Changes required: (1) Add auto-generated 8-char hex ID field to all messages in post_message. (2) New tool: retract_message(message_id, from_agent) \u2014 sets retracted=true, agents can only retract their own messages, commits+pushes via _sync_write. (3) Update get_messages to filter out retracted messages by default, with optional include_retracted=False param for audit/debug. Spec agreed with bright-spark via messages \u2014 see messages.json for full thread.",
+      "description": "Add message retraction support to the MCP coordination server. Changes required: (1) Add auto-generated 8-char hex ID field to all messages in post_message. (2) New tool: retract_message(message_id, from_agent) — sets retracted=true, agents can only retract their own messages, commits+pushes via _sync_write. (3) Update get_messages to filter out retracted messages by default, with optional include_retracted=False param for audit/debug. Spec agreed with bright-spark via messages — see messages.json for full thread.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [],
@@ -323,7 +323,7 @@
         "desktop-comet-setup-mcp"
       ],
       "created_at": "2026-03-22T15:52:22Z",
-      "result": "All 3 checks pass: 1) SSH tunnel active \u2014 4 models (llama3.1:8b, llama3.2:3b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b, auth from env. 3) MCP collab-coordinator tools available in Copilot CLI.",
+      "result": "All 3 checks pass: 1) SSH tunnel active — 4 models (llama3.1:8b, llama3.2:3b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b, auth from env. 3) MCP collab-coordinator tools available in Copilot CLI.",
       "started_at": "2026-03-22T17:25:00Z",
       "completed_at": "2026-03-22T17:25:00Z"
     },
@@ -348,13 +348,13 @@
       "depends_on": [],
       "created_at": "2026-03-22T23:21:40Z",
       "started_at": "2026-03-23T00:02:00Z",
-      "result": "Benchmarked at OpenClaw's actual prompt sizes (10K-28.6K chars) across 3 models with num_ctx 8192/16384/32768. Full 28.6K prompt is not viable on CPU \u2014 all cold starts timeout, best warm is ~125s (llama3.1:8b). Only sub-5s result: llama3.1:8b at \u226420K chars with num_ctx=16384 (1.9s warm). OpenClaw's non-configurable core context exceeds this threshold. Awaiting bright-spark's minimal prompt mode investigation.",
+      "result": "Benchmarked at OpenClaw's actual prompt sizes (10K-28.6K chars) across 3 models with num_ctx 8192/16384/32768. Full 28.6K prompt is not viable on CPU — all cold starts timeout, best warm is ~125s (llama3.1:8b). Only sub-5s result: llama3.1:8b at ≤20K chars with num_ctx=16384 (1.9s warm). OpenClaw's non-configurable core context exceeds this threshold. Awaiting bright-spark's minimal prompt mode investigation.",
       "completed_at": "2026-03-23T03:53:45Z"
     },
     {
       "id": "nimble-wave-announce",
       "title": "Announce yourself (Wsl)",
-      "description": "Send a message introducing yourself to all agents via post_message(from_agent=your-id, to_agent='all', content='...'). Include your hostname, OS, and role. Claim this task immediately on first session \u2014 it makes you visible on the dashboard.",
+      "description": "Send a message introducing yourself to all agents via post_message(from_agent=your-id, to_agent='all', content='...'). Include your hostname, OS, and role. Claim this task immediately on first session — it makes you visible on the dashboard.",
       "assignee": "nimble-wave",
       "status": "done",
       "depends_on": [],
@@ -372,7 +372,7 @@
       "depends_on": [],
       "created_at": "2026-03-23T14:26:37Z",
       "started_at": "2026-03-23T14:34:10Z",
-      "result": "SSH tunnel active on port 11434 via claw@mw-016.myworkspace.microsoft.com:45554. Verified \u2014 4 Ollama models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium, llama3.2:3b).",
+      "result": "SSH tunnel active on port 11434 via claw@mw-016.myworkspace.microsoft.com:45554. Verified — 4 Ollama models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium, llama3.2:3b).",
       "completed_at": "2026-03-23T14:39:59Z"
     },
     {
@@ -398,7 +398,7 @@
       "depends_on": [],
       "created_at": "2026-03-23T14:26:37Z",
       "started_at": "2026-03-23T14:34:09Z",
-      "result": "Python venv created at ~/collab/.venv with mcp package installed. MCP config at ~/.copilot/mcp-config.json pointing to server.py. Verified working \u2014 get_plan() returns task board.",
+      "result": "Python venv created at ~/collab/.venv with mcp package installed. MCP config at ~/.copilot/mcp-config.json pointing to server.py. Verified working — get_plan() returns task board.",
       "completed_at": "2026-03-23T14:34:18Z"
     },
     {
@@ -421,7 +421,7 @@
       "title": "Replicate SSH tunnel watchdog to all clients",
       "description": "Roll out SSH tunnel watchdog to all clients once validated.\n\n== STATUS ==\n- Implemented and tested on bright-spark (AERO-DEE, WSL2) 2026-03-24\n- Spec written: bright-spark/ssh-tunnel-watchdog-spec.md\n- Sent to claw-machine for review and to request another client test\n\n== WHEN UNBLOCKED ==\nUpdate laptop-setup.md and ONBOARDING.md with the full setup steps from the spec. Key steps: enable systemd in /etc/wsl.conf, loginctl enable-linger, create ~/.ssh/config with clawmachine/clawbackup aliases, create ~/.config/systemd/user/ssh-tunnel.service, run: systemctl --user enable --now ssh-tunnel\n\n== DEADLINE ==\nRe-review by 2026-03-26T03:39:00Z. If no feedback, ask user whether to proceed.",
       "assignee": "bright-spark",
-      "status": "blocked",
+      "status": "in_progress",
       "depends_on": [],
       "created_at": "2026-03-23T23:49:27Z",
       "notes": "Waiting for SSH tunnel watchdog to be validated on bright-spark (WSL2/AERO-DEE) first.",
@@ -442,7 +442,7 @@
     {
       "id": "bright-spark-autonomous-update",
       "title": "Share update on autonomous agent work",
-      "description": "Post a summary of your autonomous agent work to the team \u2014 what you've built, current status, and next steps. Broadcast via post_message to all, or add a summary doc to the repo.",
+      "description": "Post a summary of your autonomous agent work to the team — what you've built, current status, and next steps. Broadcast via post_message to all, or add a summary doc to the repo.",
       "assignee": "bright-spark",
       "status": "done",
       "depends_on": [],
