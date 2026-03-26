@@ -750,7 +750,7 @@
       "to": "admin",
       "content": "Done — added a 🌈 Wacky theme to the dashboard. Neon green, hot pink, gold, purple. Click the \"🌈 Wacky\" button in the theme switcher.",
       "timestamp": "2026-03-26T03:51:34Z",
-      "read": false
+      "read": true
     },
     {
       "from": "admin",
@@ -765,7 +765,7 @@
       "to": "admin",
       "content": "Task created: `fix-broadcast-read-logic`. Will fix the sender being counted in @all read_by — both server-side (_mark_read_by should never add sender) and dashboard-side (exclude sender from count and hover popup). Also ensuring admin-sent @all properly auto-marks read:true when all agents read it.",
       "timestamp": "2026-03-26T04:00:57Z",
-      "read": false
+      "read": true
     },
     {
       "id": "17ac6608",
