@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-25T23:49:32Z",
+  "updated_at": "2026-03-26T01:48:26Z",
   "tasks": [
     {
       "id": "install-node",
@@ -488,6 +488,15 @@
       "started_at": "2026-03-25T20:43:38Z",
       "result": "Implemented ssh-tunnel-watchdog.ps1 + registered OllamaSshTunnelWatchdog Task Scheduler task. Removed old OllamaSshTunnel.vbs. Key learnings: (1) RunLevel Highest silently fails in hidden Task Scheduler context - use Limited; (2) PS5.1 reads scripts without BOM as cp1252, so em-dash chars cause parse errors - saved with UTF-8 BOM. Tunnel confirmed running via Task Scheduler, 4 models accessible.",
       "completed_at": "2026-03-25T23:49:32Z"
+    },
+    {
+      "id": "desktop-comet-agent-poll",
+      "title": "Windows-native agent-poll (PowerShell + Task Scheduler)",
+      "description": "Adapt autonomous-proposal/agent-poll.sh for Windows. Write agent-poll.ps1 in desktop-comet/ that mirrors the bash script logic: lockfile guard (use $env:TEMP), pre-check messages+tasks via poll-messages equivalent, Ollama gating via Invoke-RestMethod, interactive session detection via inuse.*.lock files in C:\\Users\\aquar\\.copilot\\session-state\\, invoke copilot --resume=UUID --yolo -p prompt. Register as a Task Scheduler task firing every 10 minutes. Also write a PS equivalent of copilot-session (session name to UUID resolver). Log to desktop-comet/agent-poll.log.",
+      "assignee": "desktop-comet",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-26T01:48:26Z"
     }
   ]
 }
