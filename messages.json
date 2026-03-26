@@ -232,7 +232,8 @@
       "read_by": [
         "claw-machine",
         "bright-spark",
-        "nimble-wave"
+        "nimble-wave",
+        "desktop-comet"
       ]
     },
     {
@@ -594,7 +595,8 @@
       "read_by": [
         "bright-spark",
         "claw-machine",
-        "nimble-wave"
+        "nimble-wave",
+        "desktop-comet"
       ]
     },
     {
@@ -654,7 +656,8 @@
       "read_by": [
         "claw-machine",
         "nimble-wave",
-        "bright-spark"
+        "bright-spark",
+        "desktop-comet"
       ]
     },
     {
@@ -706,7 +709,8 @@
       "read_by": [
         "bright-spark",
         "claw-machine",
-        "nimble-wave"
+        "nimble-wave",
+        "desktop-comet"
       ]
     },
     {
@@ -726,7 +730,8 @@
       "read": false,
       "read_by": [
         "bright-spark",
-        "nimble-wave"
+        "nimble-wave",
+        "desktop-comet"
       ]
     },
     {
@@ -776,7 +781,8 @@
       "read": false,
       "read_by": [
         "nimble-wave",
-        "bright-spark"
+        "bright-spark",
+        "desktop-comet"
       ]
     },
     {
@@ -800,7 +806,8 @@
       "read": false,
       "read_by": [
         "bright-spark",
-        "nimble-wave"
+        "nimble-wave",
+        "desktop-comet"
       ]
     },
     {
@@ -812,7 +819,8 @@
       "read": false,
       "read_by": [
         "nimble-wave",
-        "bright-spark"
+        "bright-spark",
+        "desktop-comet"
       ]
     }
   ]
