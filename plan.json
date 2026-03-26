@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-26T18:33:12Z",
+  "updated_at": "2026-03-26T18:33:23Z",
   "tasks": [
     {
       "id": "install-node",
@@ -554,9 +554,10 @@
       "title": "Adopt autonomous-polling rename",
       "description": "autonomous-proposal/ renamed to autonomous-polling/, agent-poll.sh renamed to cron-wake-dispatch.sh. Cron already updated. Verify agent-poll.log path still works and rename if appropriate.",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
-      "created_at": "2026-03-26T18:33:12Z"
+      "created_at": "2026-03-26T18:33:12Z",
+      "started_at": "2026-03-26T18:33:23Z"
     }
   ]
 }
