@@ -157,7 +157,8 @@
     .msg-meta { flex-shrink: 0; display: flex; flex-direction: column; gap: 0.15rem; min-width: 90px; }
     .msg-from { font-weight: 600; color: var(--accent); font-size: 0.8rem; }
     .msg-to { color: var(--text-faint); font-size: 0.7rem; }
-    .msg-read-status { color: var(--text-faint); }
+    .msg-read-status { color: var(--text-faint); position: relative; }
+    .msg-read-status:hover::after { content: attr(data-tip); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: var(--card-bg); color: var(--text-secondary); border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.6rem; font-size: 0.75rem; white-space: nowrap; z-index: 10; pointer-events: none; }
     .msg-time { color: var(--text-faint); font-size: 0.7rem; }
     .msg-content { flex: 1; color: var(--text-secondary); line-height: 1.5; word-wrap: break-word; overflow-wrap: break-word; min-width: 0; }
     .msg-content p { margin: 0.3rem 0; }
@@ -286,7 +287,7 @@
           const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';
           const cls=isMsgRead(m)?'':'unread';
           let toLabel='→ '+m.to;
-          if(m.to==='all'){const rb=m.read_by||[];if(rb.length>0){const senderIsAgent=agents.includes(m.from);const total=senderIsAgent?agents.length-1:agents.length;const who=rb.length===1?'only '+rb[0]:rb.join(', ');toLabel='→ all <span class="msg-read-status" title="Read by: '+who+'">('+ rb.length+'/'+total+')</span>'}}
+          if(m.to==='all'){const rb=m.read_by||[];if(rb.length>0){const senderIsAgent=agents.includes(m.from);const total=senderIsAgent?agents.length-1:agents.length;const who=rb.length===1?'only '+rb[0]:rb.join(', ');toLabel='→ all <span class="msg-read-status" data-tip="Read by: '+who+'">('+ rb.length+'/'+total+')</span>'}}
           return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">'+toLabel+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+marked.parse(m.content||'')+'</div></div>'
         }).join('');
         if(msgFilterUnread&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No unread messages</div>';
