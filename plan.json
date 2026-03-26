@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-26T18:32:31Z",
+  "updated_at": "2026-03-26T18:32:32Z",
   "tasks": [
     {
       "id": "install-node",
@@ -539,6 +539,15 @@
       "status": "pending",
       "depends_on": [],
       "created_at": "2026-03-26T18:32:31Z"
+    },
+    {
+      "id": "desktop-comet-adopt-rename",
+      "title": "Adopt autonomous-polling rename",
+      "description": "autonomous-proposal/ renamed to autonomous-polling/, agent-poll.sh renamed to cron-wake-dispatch.sh. Please: (1) pull latest, (2) update your crontab/scheduler to point to autonomous-polling/cron-wake-dispatch.sh, (3) update any local references in copilot-instructions.md if applicable.",
+      "assignee": "desktop-comet",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-26T18:32:32Z"
     }
   ]
 }
