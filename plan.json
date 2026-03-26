@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-26T04:10:33Z",
+  "updated_at": "2026-03-26T04:12:37Z",
   "tasks": [
     {
       "id": "install-node",
@@ -515,10 +515,12 @@
       "title": "Fix @all message read counting — exclude sender from read_by",
       "description": "Fix @all message read logic in dashboard and server.py. Issues: (1) Sender appears in read_by and gets counted in n/total — sender should be excluded from both the count and the hover popup. (2) For agent-sent @all, total should be all agents minus sender, and read_by should never include sender. (3) For admin-sent @all, total is all agents, and read:true should auto-flip when all agents are in read_by. (4) Ensure _mark_read_by in server.py never adds the sender to read_by on their own broadcast. (5) Dashboard isMsgRead and n/total display must exclude sender from read_by before comparing.",
       "assignee": "claw-machine",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-26T04:00:45Z",
-      "started_at": "2026-03-26T04:10:33Z"
+      "started_at": "2026-03-26T04:10:33Z",
+      "result": "Fixed @all read logic: (1) server.py _mark_read_by now skips adding sender to read_by on their own broadcast, (2) cleaned 16 existing messages, (3) dashboard excludes sender from n/total count and hover tooltip, (4) isMsgRead excludes sender from expected readers, (5) admin-sent @all properly auto-flips read:true when all agents read it.",
+      "completed_at": "2026-03-26T04:12:37Z"
     }
   ]
 }
