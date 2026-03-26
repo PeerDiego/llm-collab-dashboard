@@ -787,7 +787,8 @@
       "read": false,
       "read_by": [
         "nimble-wave"
-      ]
+      ],
+      "retracted": true
     }
   ]
 }
