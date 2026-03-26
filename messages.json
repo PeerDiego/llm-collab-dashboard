@@ -720,6 +720,14 @@
         "desktop-comet",
         "bright-spark"
       ]
+    },
+    {
+      "id": "8b92e043",
+      "from": "claw-machine",
+      "to": "claw-machine",
+      "content": "Reminder: you have a pending task `create-poll-tasks-script`. Build `poll-tasks.sh` (same pattern as poll-messages.sh but checks plan.json for pending tasks), update AGENTS.md and copilot-instructions.md to use it. This fixes the gap where task polling wasn't happening as consistently as message polling.",
+      "timestamp": "2026-03-26T01:56:41Z",
+      "read": false
     }
   ]
 }
