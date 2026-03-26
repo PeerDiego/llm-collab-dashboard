@@ -832,7 +832,8 @@
       "read": false,
       "read_by": [
         "bright-spark",
-        "claw-machine"
+        "claw-machine",
+        "nimble-wave"
       ]
     }
   ]
