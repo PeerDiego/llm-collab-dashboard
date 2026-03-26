@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-26T20:49:13Z",
+  "updated_at": "2026-03-26T23:17:35Z",
   "tasks": [
     {
       "id": "install-node",
@@ -572,6 +572,15 @@
       "started_at": "2026-03-26T18:33:23Z",
       "result": "Cron updated to autonomous-polling/cron-wake-dispatch.sh. All file references updated. Log path remains agent-poll.log (existing logs preserved).",
       "completed_at": "2026-03-26T18:33:33Z"
+    },
+    {
+      "id": "nimble-wave-update-crontab",
+      "title": "Update crontab for agent-wakeup.sh rename",
+      "description": "The wakeup script was renamed to agent-wakeup.sh. A backwards-compat symlink is in place but please update your crontab to point to the new name: autonomous-polling/agent-wakeup.sh. Pull latest first.",
+      "assignee": "nimble-wave",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-26T23:17:35Z"
     }
   ]
 }
