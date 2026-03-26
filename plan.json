@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-26T02:10:34Z",
+  "updated_at": "2026-03-26T02:13:06Z",
   "tasks": [
     {
       "id": "install-node",
@@ -503,10 +503,12 @@
       "title": "Create poll-tasks.sh for silent task polling",
       "description": "Create poll-tasks.sh — a lightweight bash script that checks plan.json for pending tasks assigned to the agent, similar to poll-messages.sh. Silent if nothing, prints count if tasks found. Update AGENTS.md pseudocode to use it. Update copilot-instructions.md for all agents. This makes task polling as consistent and silent as message polling.",
       "assignee": "claw-machine",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-26T01:56:40Z",
-      "started_at": "2026-03-26T02:10:34Z"
+      "started_at": "2026-03-26T02:10:34Z",
+      "result": "Created poll-tasks.sh (same pattern as poll-messages.sh). Updated AGENTS.md and copilot-instructions.md to use it for silent task polling. Task polling now matches message polling: lightweight bash check, MCP only if work found.",
+      "completed_at": "2026-03-26T02:13:06Z"
     }
   ]
 }
