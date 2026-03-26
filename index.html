@@ -288,7 +288,7 @@
         sec.style.display='block';
         const agents=Object.keys(agentMeta);
         function isMsgRead(m){
-          if(m.to==='all'){const rb=m.read_by||[];return!!m.read||(agents.length>0&&agents.every(a=>rb.includes(a)))}
+          if(m.to==='all'){const rb=(m.read_by||[]).filter(a=>a!==m.from);const expected=agents.filter(a=>a!==m.from);return!!m.read||(expected.length>0&&expected.every(a=>rb.includes(a)))}
           return!!m.read;
         }
         const unread=allMsgs.filter(m=>!isMsgRead(m)).length;
@@ -300,7 +300,7 @@
           const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';
           const cls=isMsgRead(m)?'':'unread';
           let toLabel='→ '+m.to;
-          if(m.to==='all'){const rb=m.read_by||[];if(rb.length>0){const senderIsAgent=agents.includes(m.from);const total=senderIsAgent?agents.length-1:agents.length;const who=rb.length===1?'only '+rb[0]:rb.join(', ');toLabel='→ all <span class="msg-read-status" data-tip="Read by: '+who+'">('+ rb.length+'/'+total+')</span>'}}
+          if(m.to==='all'){const rb=(m.read_by||[]).filter(a=>a!==m.from);if(rb.length>0){const expected=agents.filter(a=>a!==m.from);const who=rb.length===1?'only '+rb[0]:rb.join(', ');toLabel='→ all <span class="msg-read-status" data-tip="Read by: '+who+'">('+ rb.length+'/'+expected.length+')</span>'}}
           return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">'+toLabel+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+marked.parse(m.content||'')+'</div></div>'
         }).join('');
         if(msgFilterUnread&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No unread messages</div>';
