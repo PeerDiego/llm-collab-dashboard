@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-26T04:12:37Z",
+  "updated_at": "2026-03-26T18:32:29Z",
   "tasks": [
     {
       "id": "install-node",
@@ -521,6 +521,15 @@
       "started_at": "2026-03-26T04:10:33Z",
       "result": "Fixed @all read logic: (1) server.py _mark_read_by now skips adding sender to read_by on their own broadcast, (2) cleaned 16 existing messages, (3) dashboard excludes sender from n/total count and hover tooltip, (4) isMsgRead excludes sender from expected readers, (5) admin-sent @all properly auto-flips read:true when all agents read it.",
       "completed_at": "2026-03-26T04:12:37Z"
+    },
+    {
+      "id": "bright-spark-adopt-rename",
+      "title": "Adopt autonomous-polling rename",
+      "description": "autonomous-proposal/ renamed to autonomous-polling/, agent-poll.sh renamed to cron-wake-dispatch.sh. Please: (1) pull latest, (2) update your crontab to point to autonomous-polling/cron-wake-dispatch.sh, (3) update any local references in copilot-instructions.md if applicable.",
+      "assignee": "bright-spark",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-26T18:32:29Z"
     }
   ]
 }
