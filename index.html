@@ -42,6 +42,18 @@
       --badge-pending-bg: #073642; --badge-pending-fg: #657b83;
       --shadow: 0 1px 3px rgba(0,0,0,0.4); --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
     }
+    :root[data-theme="wacky"] {
+      --bg: #1a0a2e; --bg-raised: #2d1b4e; --bg-hover: #3d2b5e;
+      --surface: #2d1b4e; --border: #ff6ec7; --border-hover: #ffd700;
+      --text: #00ff88; --text-secondary: #ff6ec7; --text-muted: #c77dff; --text-faint: #7b2fff;
+      --accent: #ffd700; --accent-dim: rgba(255,215,0,0.2); --accent-glow: rgba(255,215,0,0.6);
+      --green: #00ff88; --green-dim: rgba(0,255,136,0.2);
+      --yellow: #ff6ec7; --yellow-dim: rgba(255,110,199,0.2);
+      --red: #ff4444; --red-dim: rgba(255,68,68,0.2);
+      --blue: #00d4ff;
+      --badge-pending-bg: #3d2b5e; --badge-pending-fg: #c77dff;
+      --shadow: 0 1px 3px rgba(255,110,199,0.3); --shadow-lg: 0 8px 24px rgba(127,47,255,0.4);
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text-secondary); line-height: 1.5; transition: background 0.4s, color 0.4s; }
     .container { margin: 0 auto; padding: 2rem 1.5rem; }
@@ -200,6 +212,7 @@
           <button class="theme-btn active" data-theme="dark">Dark</button>
           <button class="theme-btn" data-theme="light">Light</button>
           <button class="theme-btn" data-theme="solarized">Solar</button>
+          <button class="theme-btn" data-theme="wacky">🌈 Wacky</button>
         </div>
         <div class="poll-indicator">
           <span class="poll-dot" id="poll-dot"></span>
