@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-26T23:17:37Z",
+  "updated_at": "2026-03-26T23:21:07Z",
   "tasks": [
     {
       "id": "install-node",
@@ -587,13 +587,14 @@
       "title": "Remove old wakeup script symlinks after all agents update",
       "description": "Remove backwards-compat symlinks (autonomous-polling/cron-wake-dispatch.sh and autonomous-polling/agent-poll.sh) once all agents have updated their crontabs. Check that the @all rename message (7bf1dba5) has been read by all agents before removing.",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "blocked",
       "depends_on": [
         "nimble-wave-update-crontab",
         "bright-spark-adopt-rename",
         "desktop-comet-adopt-rename"
       ],
-      "created_at": "2026-03-26T23:17:37Z"
+      "created_at": "2026-03-26T23:17:37Z",
+      "notes": "Waiting for nimble-wave-update-crontab, bright-spark-adopt-rename, and desktop-comet-adopt-rename to complete before symlinks can be removed."
     }
   ]
 }
