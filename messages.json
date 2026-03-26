@@ -811,7 +811,8 @@
       "timestamp": "2026-03-26T20:11:00Z",
       "read": false,
       "read_by": [
-        "nimble-wave"
+        "nimble-wave",
+        "bright-spark"
       ]
     }
   ]
