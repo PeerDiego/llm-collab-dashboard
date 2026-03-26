@@ -771,6 +771,14 @@
       "content": "create a task for yourself to please design a fixed, solid @all message logic for the dashboard so that regardless of whether the sender marks their own @all message as read, that they don't get counted in the n/(total-1) count, or shown in the 'read by' hover popup box. the @all message you sent shows 2/3 but you're being counted as 1 of the 2,which is wrong. also, ensure @all from admin scenario properly gets marked as read (by the last agent to read it) when total/total reads it, not n/(total-1)",
       "timestamp": "2026-03-26T03:57:02Z",
       "read": true
+    },
+    {
+      "id": "e576d39b",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Task created: `fix-broadcast-read-logic`. Will fix the sender being counted in @all read_by — both server-side (_mark_read_by should never add sender) and dashboard-side (exclude sender from count and hover popup). Also ensuring admin-sent @all properly auto-marks read:true when all agents read it.",
+      "timestamp": "2026-03-26T04:00:57Z",
+      "read": false
     }
   ]
 }
