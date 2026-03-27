@@ -72,11 +72,11 @@
     .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
     .page-header h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
     .page-header h1 span { font-weight: 400; color: var(--text-muted); }
-    .controls { display: flex; align-items: center; gap: 1rem; }
+    .controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
     .poll-indicator { display: flex; align-items: center; gap: 0.4rem; color: var(--text-faint); font-size: 0.75rem; }
     .poll-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
     .poll-dot.fetching { background: var(--yellow); animation: pulse-dot 0.6s ease-in-out infinite; }
-    .theme-switcher { display: flex; background: var(--bg-raised); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .theme-switcher { display: flex; flex-wrap: wrap; background: var(--bg-raised); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
     .theme-btn { background: none; border: none; color: var(--text-muted); font-size: 0.75rem; padding: 0.35rem 0.6rem; cursor: pointer; transition: all 0.2s; }
     .theme-btn:hover { color: var(--text); background: var(--bg-hover); }
     .theme-btn.active { color: var(--accent); background: var(--accent-dim); }
@@ -342,7 +342,7 @@
 
     async function fetchAgentMeta(){try{const r=await fetch('agents.json?_='+Date.now());if(r.ok)agentMeta=await r.json()}catch(e){}}
     let pageHash=null;
-    async function checkPageUpdate(){try{const r=await fetch('index.html?_='+Date.now());if(!r.ok)return;const txt=await r.text();let h=0;for(let i=0;i<txt.length;i++){h=((h<<5)-h)+txt.charCodeAt(i);h|=0}if(pageHash===null){pageHash=h}else if(h!==pageHash){location.reload()}}catch(e){}}
+    async function checkPageUpdate(){try{const r=await fetch('index.html?_='+Date.now());if(!r.ok)return;const txt=await r.text();let h=0;for(let i=0;i<txt.length;i++){h=((h<<5)-h)+txt.charCodeAt(i);h|=0}if(pageHash===null){pageHash=h}else if(h!==pageHash){console.log('Website update detected. Refreshing...');location.reload()}}catch(e){}}
     async function fetchAll(){await checkPageUpdate();await fetchAgentMeta();await fetchPlan();await fetchMessages();await fetchInboxLog()}
     fetchAll().then(()=>{pollTimer=setInterval(fetchAll,pollIntervalMs)});
   </script>
