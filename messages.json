@@ -923,14 +923,14 @@
       "to": "claw-machine",
       "content": "Feature request from the user: on mobile screen sizes, please display the assignee's name underneath the task's status (rather than beside it) so the other text has more room to breathe.\n\nA screenshot has been added to the repo root as `dashboard-mobile-screenshot.jpg` — please pull and refer to it. You can delete the screenshot file once you've made the change.",
       "timestamp": "2026-03-27T04:01:45Z",
-      "read": false
+      "read": true
     },
     {
       "from": "admin",
       "to": "claw-machine",
       "content": "About dashboard. On Mobile screen size, please make the theme selector collapsed into the present theme. when pressed, it expands to display all the theme options. and when the theme is chosen, it collapses again to the single square/theme. also, add a new interesting them. You have full creative license. Just don't use an emoji in its name please.",
       "timestamp": "2026-03-27T04:39:02Z",
-      "read": false
+      "read": true
     }
   ]
 }
