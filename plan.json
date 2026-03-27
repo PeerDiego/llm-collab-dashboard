@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-27T15:06:03Z",
+  "updated_at": "2026-03-27T15:06:16Z",
   "tasks": [
     {
       "id": "install-node",
@@ -626,9 +626,10 @@
       "title": "Tune gatekeeper prompt to reduce false positive wakeups",
       "description": "Tune the Ollama gatekeeper prompt in agent-wakeup.sh to reduce false positive wakeups. Current audit: 1 warranted, 2 unwarranted (67% false positive rate). Blocked on collecting enough data — need at least 10 audit entries across agents with a mix of warranted and unwarranted to identify patterns. Unblock criteria: 10+ entries in wakeup-audit.json files across all agents. At that point, analyze the false positives, design test cases, update the gating prompt, validate with test-gatekeeper.sh, and deploy.",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "blocked",
       "depends_on": [],
-      "created_at": "2026-03-27T15:06:03Z"
+      "created_at": "2026-03-27T15:06:03Z",
+      "notes": "Need 10+ wakeup audit entries across all agents to identify false positive patterns. Currently have 3 entries (1 warranted, 2 unwarranted). Re-evaluate when combined audit entries reach 10."
     }
   ]
 }
