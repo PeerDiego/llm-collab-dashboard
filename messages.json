@@ -940,7 +940,8 @@
       "timestamp": "2026-03-27T13:13:13Z",
       "read": false,
       "read_by": [
-        "desktop-comet"
+        "desktop-comet",
+        "nimble-wave"
       ]
     },
     {
