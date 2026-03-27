@@ -54,6 +54,18 @@
       --badge-pending-bg: #3d2b5e; --badge-pending-fg: #c77dff;
       --shadow: 0 1px 3px rgba(255,110,199,0.3); --shadow-lg: 0 8px 24px rgba(127,47,255,0.4);
     }
+    :root[data-theme="midnight"] {
+      --bg: #0b1021; --bg-raised: #131a2e; --bg-hover: #1a2340;
+      --surface: #131a2e; --border: #2a3a5c; --border-hover: #3d5a8a;
+      --text: #c8d6e5; --text-secondary: #8395a7; --text-muted: #576574; --text-faint: #3d4f6a;
+      --accent: #54a0ff; --accent-dim: rgba(84,160,255,0.15); --accent-glow: rgba(84,160,255,0.4);
+      --green: #1dd1a1; --green-dim: rgba(29,209,161,0.15);
+      --yellow: #feca57; --yellow-dim: rgba(254,202,87,0.15);
+      --red: #ff6b6b; --red-dim: rgba(255,107,107,0.15);
+      --blue: #48dbfb;
+      --badge-pending-bg: #1a2340; --badge-pending-fg: #576574;
+      --shadow: 0 1px 3px rgba(0,0,0,0.5); --shadow-lg: 0 8px 24px rgba(0,0,0,0.7);
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text-secondary); line-height: 1.5; transition: background 0.4s, color 0.4s; }
     .container { margin: 0 auto; padding: 2rem 1.5rem; }
@@ -157,7 +169,7 @@
     @keyframes glowText { 0% { color: #fff; text-shadow: 0 0 8px var(--accent-glow); } 100% { color: var(--accent); text-shadow: none; } }
     @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     @keyframes countUp { 0% { transform: translateY(100%); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-    @media (max-width: 600px) { .container { padding: 1rem; } .page-header { flex-direction: column; } .page-header h1 { font-size: 1.25rem; } .stats { grid-template-columns: repeat(2, 1fr); } .stat-value { font-size: 1.4rem; } .progress-pct { font-size: 1.5rem; } .agents { grid-template-columns: 1fr; } .msg-item { flex-direction: column; gap: 0.35rem; } .msg-meta { flex-direction: row; gap: 0.5rem; min-width: unset; flex-wrap: wrap; } }
+    @media (max-width: 600px) { .container { padding: 1rem; } .page-header { flex-direction: column; } .page-header h1 { font-size: 1.25rem; } .stats { grid-template-columns: repeat(2, 1fr); } .stat-value { font-size: 1.4rem; } .progress-pct { font-size: 1.5rem; } .agents { grid-template-columns: 1fr; } .msg-item { flex-direction: column; gap: 0.35rem; } .msg-meta { flex-direction: row; gap: 0.5rem; min-width: unset; flex-wrap: wrap; } .task-row { flex-wrap: wrap; } .task-assignee { width: 100%; order: 3; padding-left: 0.25rem; } .theme-switcher { position: relative; } .theme-switcher .theme-btn:not(.active) { display: none; } .theme-switcher.expanded .theme-btn { display: inline-block; } }
 
     /* Messages */
     .msg-list { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -212,7 +224,8 @@
           <button class="theme-btn active" data-theme="dark">Dark</button>
           <button class="theme-btn" data-theme="light">Light</button>
           <button class="theme-btn" data-theme="solarized">Solar</button>
-          <button class="theme-btn" data-theme="wacky">🌈 Wacky</button>
+          <button class="theme-btn" data-theme="wacky">Wacky</button>
+          <button class="theme-btn" data-theme="midnight">Midnight</button>
         </div>
         <div class="poll-indicator">
           <span class="poll-dot" id="poll-dot"></span>
@@ -262,8 +275,8 @@
     restoreCollapseState();
     function agentColor(n){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return AGENT_COLORS[Math.abs(h)%AGENT_COLORS.length]}
     function agentInitial(n){return n.split('-').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
-    function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t))}
-    document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',()=>setTheme(b.dataset.theme)));
+    function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));document.querySelector('.theme-switcher')?.classList.remove('expanded')}
+    document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',function(e){const sw=document.querySelector('.theme-switcher');if(window.innerWidth<=600&&this.classList.contains('active')){e.stopPropagation();sw.classList.toggle('expanded')}else{setTheme(this.dataset.theme)}}));
     const saved=localStorage.getItem('dashboard-theme');if(saved)setTheme(saved);
     function diffTasks(o,n){const m=new Map(o.map(t=>[t.id,t])),a=[],c=[];for(const t of n){if(!m.has(t.id)){a.push(t.id)}else{const p=m.get(t.id);if(p.status!==t.status||p.assignee!==t.assignee||p.result!==t.result)c.push({id:t.id,statusChanged:p.status!==t.status,assigneeChanged:p.assignee!==t.assignee})}}return{added:a,changed:c}}
     function diffCounts(o,n){const c=(t,s)=>t.filter(x=>x.status===s).length,r={};for(const s of['done','in_progress','pending','blocked'])if(c(o,s)!==c(n,s))r[s]=true;return r}
