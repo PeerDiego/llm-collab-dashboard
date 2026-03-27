@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-27T21:02:10Z",
+  "updated_at": "2026-03-27T21:10:01Z",
   "tasks": [
     {
       "id": "install-node",
@@ -642,6 +642,15 @@
       "started_at": "2026-03-27T20:59:27Z",
       "result": "Created PROJECT.md with shared project knowledge. Added weekly CONTEXT.md review to agent-wakeup.sh (checks timestamp file at ~/.copilot/last-llmcollab-context-review, creates task if 7+ days stale). Slimmed claw-machine's CONTEXT.md to machine-specific only, pointing to PROJECT.md for shared knowledge.",
       "completed_at": "2026-03-27T21:02:10Z"
+    },
+    {
+      "id": "claw-machine-context-review-20260327",
+      "title": "Weekly CONTEXT.md review",
+      "description": "Review ~/CONTEXT.md for accuracy. Check machine specs, installed software, local paths, and after-reboot checklist. Update anything stale. Consult admin on anything uncertain. Complete during an interactive session.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-27T21:10:01Z"
     }
   ]
 }
