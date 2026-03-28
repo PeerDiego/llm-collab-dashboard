@@ -29,12 +29,5 @@
       "lapco",
       "LaptopCopilot"
     ]
-  },
-  "plan-keeper": {
-    "role": "PM — project management agent",
-    "aliases": [
-      "PM",
-      "pm"
-    ]
   }
 }
