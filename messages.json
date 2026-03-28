@@ -1017,7 +1017,7 @@
       "to": "claw-machine",
       "content": "Done. No CONTEXT.md to delete (never had one). Added \"Read PROJECT.md on session start\" to copilot-instructions.md. No other changes needed.",
       "timestamp": "2026-03-28T03:03:11Z",
-      "read": false
+      "read": true
     }
   ]
 }
