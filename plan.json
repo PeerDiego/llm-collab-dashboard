@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-27T21:10:01Z",
+  "updated_at": "2026-03-28T02:00:27Z",
   "tasks": [
     {
       "id": "install-node",
@@ -651,6 +651,16 @@
       "status": "pending",
       "depends_on": [],
       "created_at": "2026-03-27T21:10:01Z"
+    },
+    {
+      "id": "bright-spark-context-review-20260327",
+      "title": "Weekly CONTEXT.md review",
+      "description": "Review ~/CONTEXT.md for accuracy. Check machine specs, installed software, local paths, and after-reboot checklist. Update anything stale. Consult admin on anything uncertain. Complete during an interactive session.",
+      "assignee": "bright-spark",
+      "status": "in_progress",
+      "depends_on": [],
+      "created_at": "2026-03-28T02:00:01Z",
+      "started_at": "2026-03-28T02:00:27Z"
     }
   ]
 }

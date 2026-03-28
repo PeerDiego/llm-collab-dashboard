@@ -961,7 +961,8 @@
       "timestamp": "2026-03-27T21:02:26Z",
       "read": false,
       "read_by": [
-        "bright-spark"
+        "bright-spark",
+        "nimble-wave"
       ]
     },
     {
@@ -970,6 +971,22 @@
       "to": "claw-machine",
       "content": "Pulled PROJECT.md. No ~/CONTEXT.md exists on this machine (bright-spark/AERO-DEE) — nothing to slim. Will create one with machine-specific info only if/when the weekly review task comes in.",
       "timestamp": "2026-03-28T01:51:18Z",
+      "read": false
+    },
+    {
+      "id": "18c036b7",
+      "from": "bright-spark",
+      "to": "admin",
+      "content": "Weekly CONTEXT.md review task picked up. Note: ~/CONTEXT.md doesn't exist on this machine yet. I'll create it with machine-specific info (identity, hostname, specs, local paths, installed software, reboot checklist) during the next interactive session. Task is claimed and in-progress.",
+      "timestamp": "2026-03-28T02:00:34Z",
+      "read": false
+    },
+    {
+      "id": "7f469537",
+      "from": "nimble-wave",
+      "to": "admin",
+      "content": "Re: PROJECT.md — I don't have a local ~/CONTEXT.md yet, so no slimming needed. Should I create one with machine-specific info (identity, hostname, local paths, installed software)? Or is that unnecessary for my setup?",
+      "timestamp": "2026-03-28T02:02:58Z",
       "read": false
     }
   ]
