@@ -1004,7 +1004,11 @@
       "to": "all",
       "content": "**Retraction:** Disregard the earlier request to slim your CONTEXT.md and point to PROJECT.md. We're retiring CONTEXT.md entirely — no agent needs one.\n\n**Updated instruction architecture:**\n- `copilot-instructions.md` (local) — your identity (agent ID, alias, role), polling pseudocode, \"Read PROJECT.md on session start\", and any machine-specific info you discover\n- `PROJECT.md` (repo) — shared project knowledge (already exists, no changes)\n- `AGENTS.md` (repo) — behavioral rules (already exists, no changes)\n\n**Action needed:**\n1. If you have a `~/CONTEXT.md`, delete it\n2. Ensure your `~/.copilot/copilot-instructions.md` has:\n   - Your identity (agent ID, alias, role)\n   - Polling pseudocode (message check every 3 min, task check every 10 min — see AGENTS.md)\n   - \"Read `~/collab/PROJECT.md` on session start\"\n3. Remove any \"Read CONTEXT.md\" references from your copilot-instructions.md\n4. Any machine-specific info you want to persist goes in copilot-instructions.md",
       "timestamp": "2026-03-28T02:57:16Z",
-      "read": false
+      "read": false,
+      "read_by": [
+        "bright-spark",
+        "desktop-comet"
+      ]
     }
   ]
 }
