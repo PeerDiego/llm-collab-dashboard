@@ -165,6 +165,10 @@
     .footer select { background: var(--card-bg); color: var(--text-faint); border: 1px solid var(--border); border-radius: 4px; font-size: 0.75rem; padding: 1px 2px; cursor: pointer; }
     #loading { text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-size: 0.9rem; }
     .error { color: var(--red); text-align: center; padding: 2rem; }
+    .reload-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; }
+    .reload-overlay.visible { display: flex; }
+    .reload-box { background: var(--bg-raised); border: 1px solid var(--accent); border-radius: 10px; padding: 2rem 3rem; text-align: center; color: var(--text); font-size: 0.95rem; box-shadow: 0 0 20px var(--accent-glow); }
+    .reload-box .reload-spinner { margin-top: 0.75rem; color: var(--text-muted); font-size: 0.8rem; }
     @keyframes slideIn { 0% { opacity: 0; max-height: 0; transform: translateY(-8px); } 100% { opacity: 1; max-height: 200px; transform: translateY(0); } }
     @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
     @keyframes flashBorder { 0% { border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); } 100% { border-color: var(--border); box-shadow: none; } }
@@ -353,10 +357,11 @@
 
     async function fetchAgentMeta(){try{const r=await fetch('agents.json?_='+Date.now());if(r.ok)agentMeta=await r.json()}catch(e){}}
     let pageHash=null;
-    async function checkPageUpdate(){try{const r=await fetch('index.html?_='+Date.now());if(!r.ok)return;const txt=await r.text();let h=0;for(let i=0;i<txt.length;i++){h=((h<<5)-h)+txt.charCodeAt(i);h|=0}if(pageHash===null){pageHash=h}else if(h!==pageHash){sessionStorage.setItem('page-reload-reason','update');location.reload()}}catch(e){}}
+    async function checkPageUpdate(){try{const r=await fetch('index.html?_='+Date.now());if(!r.ok)return;const txt=await r.text();let h=0;for(let i=0;i<txt.length;i++){h=((h<<5)-h)+txt.charCodeAt(i);h|=0}if(pageHash===null){pageHash=h}else if(h!==pageHash){document.getElementById('reload-overlay').classList.add('visible');sessionStorage.setItem('page-reload-reason','update');setTimeout(()=>location.reload(),3000)}}catch(e){}}
     if(sessionStorage.getItem('page-reload-reason')==='update'){sessionStorage.removeItem('page-reload-reason');console.log('['+new Date().toLocaleString()+'] Webpage was refreshed to load update')}
     async function fetchAll(){await checkPageUpdate();await fetchAgentMeta();await fetchPlan();await fetchMessages();await fetchInboxLog()}
     fetchAll().then(()=>{pollTimer=setInterval(fetchAll,pollIntervalMs)});
   </script>
+  <div class="reload-overlay" id="reload-overlay"><div class="reload-box">Webpage update detected. Please hold while we refresh…<div class="reload-spinner">⟳</div></div></div>
 </body>
 </html>
