@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-29T18:15:50Z",
+  "updated_at": "2026-03-29T18:17:09Z",
   "tasks": [
     {
       "id": "install-node",
@@ -616,10 +616,12 @@
       "title": "Realize two Copilot personas on one machine (LLMCo + plan-keeper)",
       "description": "Figure out how to run two Copilot personas (claw-machine/LLMCo and plan-keeper/PM) on the same machine. copilot-instructions.md is shared per-machine, not per-session. Need to test: (1) whether instructions load at process start or per-resume, (2) whether conditional branching in instructions works, (3) whether separate context files per session can differentiate identity. Requires admin collaboration to test interactively. See pm-agent-spec.md addendum for options.",
       "assignee": "claw-machine",
-      "status": "blocked",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-27T03:41:59Z",
-      "notes": "Requires admin collaboration to test interactively — need to launch sessions, check instruction loading behavior, and verify persona isolation."
+      "notes": "Requires admin collaboration to test interactively — need to launch sessions, check instruction loading behavior, and verify persona isolation.",
+      "result": "Dual persona fully operational. copilot-instructions.md routes by session name. plan-keeper has own instructions, collaborator file, autonomous wakeup (Tier 1 cron + Tier 2 on-demand), and audit logging. All 4 tests passed.",
+      "completed_at": "2026-03-29T18:17:09Z"
     },
     {
       "id": "tune-gatekeeper-prompt",
