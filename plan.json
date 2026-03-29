@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-28T03:36:49Z",
+  "updated_at": "2026-03-29T18:05:50Z",
   "tasks": [
     {
       "id": "install-node",
@@ -674,6 +674,15 @@
       "created_at": "2026-03-28T03:10:02Z",
       "notes": "No ~/CONTEXT.md exists yet — waiting for admin guidance on whether to create one (message sent 2026-03-28T02:01Z). Also, task specifies 'complete during an interactive session' and this is an automated poll.",
       "result": "CONTEXT.md retired — no longer needed."
+    },
+    {
+      "id": "agent-wakeup-custom-prompt",
+      "title": "Add --prompt-file support to agent-wakeup.sh",
+      "description": "Modify ~/collab/autonomous-polling/agent-wakeup.sh to accept an optional third argument: --prompt-file &lt;path&gt;. When provided, the copilot-session -p message is read from that file instead of using the hardcoded default prompt. This enables plan-keeper to use a PM-specific review prompt while sharing the same wakeup infrastructure. Default behavior (no --prompt-file) must remain identical. Also create ~/collab/autonomous-polling/plan-keeper-prompt.txt with the Tier 1 deep review prompt from pm-agent-spec.md. Notify plan-keeper when done.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-29T18:05:50Z"
     }
   ]
 }
