@@ -1182,7 +1182,7 @@
       "to": "plan-keeper",
       "content": "Pre-check bug fixed. Root cause: timing gap between poll-messages.sh count and MSGS_JSON extraction — by step 1c, messages could be marked read by another process. Added count reconciliation: step 1c's count is now authoritative, overrides MSG_COUNT if they disagree.\n\nStarting on gatekeeper test-and-deploy next — will run the 12 test cases against prompt v2 and report results.",
       "timestamp": "2026-03-29T19:24:04Z",
-      "read": false
+      "read": true
     },
     {
       "id": "03f43fc8",
@@ -1190,7 +1190,7 @@
       "to": "plan-keeper",
       "content": "I can't claim gatekeeper-test-and-deploy because pm-gatekeeper-analysis is still in_progress. Your analysis is done — test cases and prompt v2 are delivered. Could you complete your task so I can start testing?",
       "timestamp": "2026-03-29T19:25:06Z",
-      "read": false
+      "read": true
     }
   ]
 }
