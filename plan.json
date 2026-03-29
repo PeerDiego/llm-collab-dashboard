@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-29T18:17:09Z",
+  "updated_at": "2026-03-29T18:34:50Z",
   "tasks": [
     {
       "id": "install-node",
@@ -717,6 +717,15 @@
       "started_at": "2026-03-29T18:15:18Z",
       "result": "Cron entry added: plan-keeper runs at 9am on Mon/Wed/Fri with custom PM review prompt. Verified crontab shows all 4 entries.",
       "completed_at": "2026-03-29T18:15:50Z"
+    },
+    {
+      "id": "implement-message-rotation",
+      "title": "Implement messages.json rotation",
+      "description": "Implement message rotation per spec at claw-machine/message-rotation-spec.md. Spec needs admin review first — includes open questions about trigger threshold, dashboard behavior, and archive retention.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-29T18:34:50Z"
     }
   ]
 }
