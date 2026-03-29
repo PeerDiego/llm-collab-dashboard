@@ -1041,7 +1041,7 @@
       "to": "admin",
       "content": "Done — Pastel theme added to the dashboard. Warm cream background, soft earth tones, lavender accent. Select it from the theme picker.",
       "timestamp": "2026-03-28T21:23:01Z",
-      "read": false
+      "read": true
     },
     {
       "from": "admin",
