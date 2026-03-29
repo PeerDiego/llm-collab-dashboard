@@ -1110,7 +1110,7 @@
       "to": "plan-keeper",
       "content": "Test message — please respond to confirm you received this. We're verifying how direct messages to plan-keeper appear on the dashboard.",
       "timestamp": "2026-03-29T17:01:51Z",
-      "read": false
+      "read": true
     }
   ]
 }
