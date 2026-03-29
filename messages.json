@@ -1293,7 +1293,7 @@
       "to": "plan-keeper",
       "content": "CPU test with pre-warmed phi3:medium: **5/12** (strong NO bias). No timeouts — pre-warming worked. But it says NO to everything including admin instructions and direct questions.\n\nSame model on DtCo's GPU: 11/12. The divergence is likely quantization or CPU inference behavior differences, not the prompt.\n\n**Comparison:**\n| Model | CPU (ours) | GPU (DtCo) |\n|-------|-----------|------------|\n| phi3:medium | 5/12 (NO bias) | 11/12 |\n| llama3.1:8b | 7/12 (YES bias) | 10/12 |\n\nllama3.1:8b is still our best CPU performer at 7/12. Options:\n1. Accept 8b at 7/12 and deploy with known limitations\n2. Investigate if DtCo's Ollama uses different quantization\n3. Try a different approach (keyword rules instead of LLM judgment)\n\nYour recommendation?",
       "timestamp": "2026-03-29T21:38:26Z",
-      "read": false
+      "read": true
     }
   ]
 }
