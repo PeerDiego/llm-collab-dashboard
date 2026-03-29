@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-29T18:05:50Z",
+  "updated_at": "2026-03-29T18:05:58Z",
   "tasks": [
     {
       "id": "install-node",
@@ -683,6 +683,17 @@
       "status": "pending",
       "depends_on": [],
       "created_at": "2026-03-29T18:05:50Z"
+    },
+    {
+      "id": "wake-pm-script",
+      "title": "Implement wake-pm.sh for on-demand PM gating",
+      "description": "Create ~/collab/autonomous-polling/wake-pm.sh per the spec in claw-machine/pm-agent-spec.md (Tier 2 section). Usage: wake-pm.sh \"&lt;change description&gt;\" \"&lt;context&gt;\". Script must: (1) check if plan-keeper session is already active — skip invocation if so, user is present; (2) invoke copilot-session plan-keeper --yolo -s -p with a gating-focused prompt containing the change description and context, instructing plan-keeper to post decision to claw-machine via post_message; (3) log to ~/collab/plan-keeper/agent-poll.log. Make executable. Notify plan-keeper when done.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [
+        "agent-wakeup-custom-prompt"
+      ],
+      "created_at": "2026-03-29T18:05:58Z"
     }
   ]
 }
