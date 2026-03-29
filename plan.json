@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-29T18:37:27Z",
+  "updated_at": "2026-03-29T19:06:52Z",
   "tasks": [
     {
       "id": "install-node",
@@ -733,9 +733,10 @@
       "title": "Analyze wakeup audit entries and define updated gatekeeper prompt",
       "description": "plan-keeper owns this. Review all wakeup-audit.json files across agents (bright-spark: 7, nimble-wave: 7, desktop-comet: 2, claw-machine: 1). Identify false positive patterns. Design test cases (prompt + expected YES/NO). Define updated gatekeeper prompt. Then task claw-machine to run test-gatekeeper.sh and report results before deployment. Log findings to pm-audit.json.",
       "assignee": "plan-keeper",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
-      "created_at": "2026-03-29T18:37:13Z"
+      "created_at": "2026-03-29T18:37:13Z",
+      "started_at": "2026-03-29T19:06:52Z"
     },
     {
       "id": "gatekeeper-test-and-deploy",
