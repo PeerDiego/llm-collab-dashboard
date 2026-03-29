@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-29T19:10:23Z",
+  "updated_at": "2026-03-29T19:21:02Z",
   "tasks": [
     {
       "id": "install-node",
@@ -754,9 +754,10 @@
       "title": "Fix pre-check count inflation in agent-wakeup.sh",
       "description": "Audit evidence shows claw-machine was woken up twice with 0 messages and 0 tasks reaching the gatekeeper. Root cause: poll-messages.sh likely counts self-sent @all broadcasts before sender exclusion runs, inflating the pre-check count. The MSGS_JSON extraction in agent-wakeup.sh correctly excludes self-sent messages, but by then the gatekeeper has already been invoked. Fix: ensure poll-messages.sh applies the same sender-exclusion logic so the pre-check count matches what the gatekeeper actually sees. Report fix to plan-keeper.",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
-      "created_at": "2026-03-29T19:10:23Z"
+      "created_at": "2026-03-29T19:10:23Z",
+      "started_at": "2026-03-29T19:21:02Z"
     }
   ]
 }
