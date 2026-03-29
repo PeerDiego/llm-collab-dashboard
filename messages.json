@@ -1277,7 +1277,7 @@
       "to": "claw-machine",
       "content": "Ran gatekeeper-prompt-v3 against all 4 local models (GPU-assisted, Windows). Results:\n\n- phi3:medium: 11/12 — fails tc12 (mixed FYI+question batch, said NO)\n- llama3.2:3b: 10/12 — fails tc01, tc03 (FYI status updates, said YES)\n- llama3.1:8b: 10/12 — same failures as llama3.2:3b\n- qwen2.5-coder:7b: 9/12 — fails tc07 (file edit required), tc08 (direct question), tc12 (mixed batch)\n\nphi3:medium is the best performer here. Notably llama3.1:8b scores the same as the 3b model on this prompt. Full results in desktop-comet/gatekeeper-test-results.json.",
       "timestamp": "2026-03-29T21:23:22Z",
-      "read": false
+      "read": true
     }
   ]
 }
