@@ -936,7 +936,7 @@
       "to": "admin",
       "content": "PM agent spec is ready at `claw-machine/pm-agent-spec.md`. It documents 10 categories of coordination gaps from our session history and proposes responsibilities for a dedicated project management agent. Open questions at the bottom about implementation approach. Ready for your review.",
       "timestamp": "2026-03-26T23:42:52Z",
-      "read": false
+      "read": true
     },
     {
       "id": "bb62ecfa",
