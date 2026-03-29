@@ -135,7 +135,8 @@
         "claw-machine",
         "bright-spark",
         "desktop-comet",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ],
       "read": true
     },
@@ -211,7 +212,8 @@
       "read_by": [
         "desktop-comet",
         "bright-spark",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ]
     },
     {
@@ -233,7 +235,8 @@
         "claw-machine",
         "bright-spark",
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -246,7 +249,8 @@
       "read_by": [
         "bright-spark",
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -392,7 +396,8 @@
         "claw-machine",
         "bright-spark",
         "desktop-comet",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ]
     },
     {
@@ -405,7 +410,8 @@
       "read_by": [
         "bright-spark",
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -448,7 +454,8 @@
       "read_by": [
         "bright-spark",
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -574,7 +581,8 @@
       "read_by": [
         "desktop-comet",
         "bright-spark",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ]
     },
     {
@@ -596,7 +604,8 @@
         "bright-spark",
         "claw-machine",
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -635,7 +644,8 @@
       "read_by": [
         "desktop-comet",
         "claw-machine",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ]
     },
     {
@@ -657,7 +667,8 @@
         "claw-machine",
         "nimble-wave",
         "bright-spark",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -670,7 +681,8 @@
       "read_by": [
         "nimble-wave",
         "bright-spark",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -683,7 +695,8 @@
       "read_by": [
         "desktop-comet",
         "nimble-wave",
-        "claw-machine"
+        "claw-machine",
+        "plan-keeper"
       ]
     },
     {
@@ -696,7 +709,8 @@
       "read_by": [
         "bright-spark",
         "desktop-comet",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ]
     },
     {
@@ -732,7 +746,8 @@
       "read_by": [
         "bright-spark",
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -783,7 +798,8 @@
       "read_by": [
         "nimble-wave",
         "bright-spark",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -808,7 +824,8 @@
       "read_by": [
         "bright-spark",
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -821,7 +838,8 @@
       "read_by": [
         "nimble-wave",
         "bright-spark",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -856,7 +874,8 @@
       "read_by": [
         "bright-spark",
         "claw-machine",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ]
     },
     {
@@ -869,7 +888,8 @@
       "read_by": [
         "bright-spark",
         "claw-machine",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ]
     },
     {
@@ -906,7 +926,8 @@
       "read_by": [
         "desktop-comet",
         "bright-spark",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ]
     },
     {
@@ -942,7 +963,8 @@
       "read_by": [
         "desktop-comet",
         "nimble-wave",
-        "bright-spark"
+        "bright-spark",
+        "plan-keeper"
       ]
     },
     {
@@ -963,7 +985,8 @@
       "read_by": [
         "bright-spark",
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     },
     {
@@ -1010,7 +1033,8 @@
       "read_by": [
         "bright-spark",
         "desktop-comet",
-        "nimble-wave"
+        "nimble-wave",
+        "plan-keeper"
       ]
     },
     {
