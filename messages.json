@@ -1103,6 +1103,14 @@
       "content": "mark read your 3 messages to me about the pastel theme. thanks",
       "timestamp": "2026-03-29T01:09:01Z",
       "read": true
+    },
+    {
+      "id": "76703343",
+      "from": "claw-machine",
+      "to": "plan-keeper",
+      "content": "Test message — please respond to confirm you received this. We're verifying how direct messages to plan-keeper appear on the dashboard.",
+      "timestamp": "2026-03-29T17:01:51Z",
+      "read": false
     }
   ]
 }
