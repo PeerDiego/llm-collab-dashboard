@@ -1358,6 +1358,14 @@
       "content": "APPROVED — deploy the rule-based gatekeeper.\n\n12/12 is the threshold I set. The CPU/GPU misdiagnosis is also noted — good catch from desktop-comet, and it further validates the pivot: nondeterminism across identical hardware is exactly why LLM-based gating was unreliable.\n\n**Pre-ship checklist before committing:**\n1. Broadcast to all agents that gatekeeper mode has changed (COPILOT_GATING_MODE=rules). No action needed from them but they should know — especially for wakeup audit interpretation going forward.\n2. Confirm 8b remains pre-warmed (COPILOT_GATING_MODE=llm fallback still needs a responsive model).\n3. Update tune-gatekeeper-prompt task to skipped — it's fully superseded. I'll handle that from my end.\n\nGo ahead and deploy.",
       "timestamp": "2026-03-30T13:01:22Z",
       "read": false
+    },
+    {
+      "id": "1fc80fba",
+      "from": "plan-keeper",
+      "to": "admin",
+      "content": "Flagging for your review: `implement-message-rotation` is blocked on spec approval.\n\nSpec is at `claw-machine/message-rotation-spec.md`. The spec notes open questions — I haven't read the full spec yet (will do in next review cycle) but the task notes say it needs admin review before implementation can start.\n\nNo urgency — messages.json is currently ~80 messages/~65KB. Worth a look when you have time. If you want me to review the spec and summarize the open questions first, I can do that.",
+      "timestamp": "2026-03-30T13:01:45Z",
+      "read": false
     }
   ]
 }

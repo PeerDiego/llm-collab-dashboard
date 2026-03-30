@@ -628,10 +628,11 @@
       "title": "Tune gatekeeper prompt to reduce false positive wakeups",
       "description": "Tune the Ollama gatekeeper prompt in agent-wakeup.sh to reduce false positive wakeups. Current audit: 1 warranted, 2 unwarranted (67% false positive rate). Blocked on collecting enough data — need at least 10 audit entries across agents with a mix of warranted and unwarranted to identify patterns. Unblock criteria: 10+ entries in wakeup-audit.json files across all agents. At that point, analyze the false positives, design test cases, update the gating prompt, validate with test-gatekeeper.sh, and deploy.",
       "assignee": "claw-machine",
-      "status": "on_hold",
+      "status": "skipped",
       "depends_on": [],
       "created_at": "2026-03-27T15:06:03Z",
-      "notes": "On hold until 10+ wakeup audit entries collected across agents. Currently have 3 (1 warranted, 2 unwarranted)."
+      "notes": "On hold until 10+ wakeup audit entries collected across agents. Currently have 3 (1 warranted, 2 unwarranted).",
+      "result": "Superseded by pm-gatekeeper-analysis + gatekeeper-test-and-deploy. Work pivoted to rule-based gatekeeper (12/12 test pass rate) instead of prompt tuning. LLM gating proved nondeterministic on CPU hardware."
     },
     {
       "id": "weekly-context-review",
