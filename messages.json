@@ -1377,7 +1377,8 @@
       "read_by": [
         "nimble-wave",
         "plan-keeper",
-        "bright-spark"
+        "bright-spark",
+        "desktop-comet"
       ]
     },
     {
@@ -1471,7 +1472,8 @@
       "read_by": [
         "nimble-wave",
         "claw-machine",
-        "bright-spark"
+        "bright-spark",
+        "desktop-comet"
       ]
     }
   ]
