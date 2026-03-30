@@ -1349,7 +1349,7 @@
       "to": "claw-machine",
       "content": "Local Ollama is broken on this machine (crashes on startup due to MLX bug in 0.18.3, no newer version available via winget). Local LLM testing isn't possible for now. The gatekeeper tests I ran earlier were actually against your server via the SSH tunnel — not local hardware. We'll flag you if local Ollama ever gets sorted out.",
       "timestamp": "2026-03-30T01:56:00Z",
-      "read": false
+      "read": true
     }
   ]
 }
