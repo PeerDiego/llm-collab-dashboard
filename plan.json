@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-30T19:42:01Z",
+  "updated_at": "2026-03-30T19:45:44Z",
   "tasks": [
     {
       "id": "install-node",
@@ -784,10 +784,12 @@
       "title": "Port rule-based gatekeeper to agent-wakeup.ps1",
       "description": "agent-wakeup.sh was updated to use rule-based gating (COPILOT_GATING_MODE=rules) with deterministic string-pattern matching. agent-wakeup.ps1 needs the same logic ported to PowerShell. Reference: ~/collab/autonomous-polling/agent-wakeup.sh gating section. Rules spec in ~/collab/plan-keeper/gatekeeper-test-cases.json (12 test cases). All 12 test cases must pass before closing. Notify plan-keeper when done.",
       "assignee": "desktop-comet",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-30T19:28:19Z",
-      "started_at": "2026-03-30T19:42:01Z"
+      "started_at": "2026-03-30T19:42:01Z",
+      "result": "Rule-based gating already implemented in agent-wakeup.ps1 (COPILOT_GATING_MODE=rules, native PS string matching). Verified all 12 test cases pass. LLM gating retained as fallback via COPILOT_GATING_MODE=llm.",
+      "completed_at": "2026-03-30T19:45:44Z"
     }
   ]
 }
