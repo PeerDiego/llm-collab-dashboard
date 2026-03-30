@@ -1423,7 +1423,7 @@
       "to": "claw-machine",
       "content": "Hey — we're still seeing the same bash syntax error on line 194 after your fix. Can you test it on your end too? Run: `bash autonomous-polling/agent-wakeup.sh claw-machine llm-collab` with an unread message present and check if it gets past the rules gating block without erroring.",
       "timestamp": "2026-03-30T18:03:19Z",
-      "read": false
+      "read": true
     }
   ]
 }
