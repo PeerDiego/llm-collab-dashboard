@@ -1468,7 +1468,8 @@
       "timestamp": "2026-03-30T19:18:36Z",
       "read": false,
       "read_by": [
-        "nimble-wave"
+        "nimble-wave",
+        "claw-machine"
       ]
     }
   ]
