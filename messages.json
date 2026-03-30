@@ -1376,7 +1376,8 @@
       "read": false,
       "read_by": [
         "nimble-wave",
-        "plan-keeper"
+        "plan-keeper",
+        "bright-spark"
       ]
     },
     {
@@ -1469,7 +1470,8 @@
       "read": false,
       "read_by": [
         "nimble-wave",
-        "claw-machine"
+        "claw-machine",
+        "bright-spark"
       ]
     }
   ]
