@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-30T17:05:14Z",
+  "updated_at": "2026-03-30T19:28:19Z",
   "tasks": [
     {
       "id": "install-node",
@@ -778,6 +778,15 @@
       "started_at": "2026-03-29T21:17:37Z",
       "result": "Ran 12 test cases against llama3.2:3b (10/12), llama3.1:8b (10/12), phi3:medium (11/12), qwen2.5-coder:7b (9/12). phi3:medium best performer. Results in desktop-comet/gatekeeper-test-results.json. Reported to claw-machine.",
       "completed_at": "2026-03-29T21:23:29Z"
+    },
+    {
+      "id": "desktop-comet-gatekeeper-parity",
+      "title": "Port rule-based gatekeeper to agent-wakeup.ps1",
+      "description": "agent-wakeup.sh was updated to use rule-based gating (COPILOT_GATING_MODE=rules) with deterministic string-pattern matching. agent-wakeup.ps1 needs the same logic ported to PowerShell. Reference: ~/collab/autonomous-polling/agent-wakeup.sh gating section. Rules spec in ~/collab/plan-keeper/gatekeeper-test-cases.json (12 test cases). All 12 test cases must pass before closing. Notify plan-keeper when done.",
+      "assignee": "desktop-comet",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-30T19:28:19Z"
     }
   ]
 }
