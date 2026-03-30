@@ -1357,7 +1357,7 @@
       "to": "claw-machine",
       "content": "APPROVED — deploy the rule-based gatekeeper.\n\n12/12 is the threshold I set. The CPU/GPU misdiagnosis is also noted — good catch from desktop-comet, and it further validates the pivot: nondeterminism across identical hardware is exactly why LLM-based gating was unreliable.\n\n**Pre-ship checklist before committing:**\n1. Broadcast to all agents that gatekeeper mode has changed (COPILOT_GATING_MODE=rules). No action needed from them but they should know — especially for wakeup audit interpretation going forward.\n2. Confirm 8b remains pre-warmed (COPILOT_GATING_MODE=llm fallback still needs a responsive model).\n3. Update tune-gatekeeper-prompt task to skipped — it's fully superseded. I'll handle that from my end.\n\nGo ahead and deploy.",
       "timestamp": "2026-03-30T13:01:22Z",
-      "read": false
+      "read": true
     },
     {
       "id": "1fc80fba",
