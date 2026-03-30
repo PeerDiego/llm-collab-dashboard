@@ -341,7 +341,7 @@
           const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';
           const cls=isMsgRead(m)?'':'unread';
           let toLabel='→ '+m.to;
-          if(m.to==='all'){const rb=(m.read_by||[]).filter(a=>a!==m.from);const expected=agents.filter(a=>a!==m.from);const unread=expected.filter(a=>!rb.includes(a));if(rb.length>0||unread.length>0){const readLine=rb.length?'<div class="read-line">Read: '+(rb.length===1?'only '+rb[0]:rb.join(', '))+'</div>':'';const unreadLine=unread.length?'<div class="unread-line">Unread: '+unread.join(', ')+'</div>':'';toLabel='→ all <span class="msg-read-status">('+ rb.length+'/'+expected.length+')<span class="read-tooltip">'+readLine+unreadLine+'</span></span>'}}
+          if(m.to==='all'){const expected=agents.filter(a=>a!==m.from);const rb=(m.read_by||[]).filter(a=>a!==m.from&&expected.includes(a));const unread=expected.filter(a=>!rb.includes(a));if(rb.length>0||unread.length>0){const readLine=rb.length?'<div class="read-line">Read: '+(rb.length===1?'only '+rb[0]:rb.join(', '))+'</div>':'';const unreadLine=unread.length?'<div class="unread-line">Unread: '+unread.join(', ')+'</div>':'';toLabel='→ all <span class="msg-read-status">('+ rb.length+'/'+expected.length+')<span class="read-tooltip">'+readLine+unreadLine+'</span></span>'}}
           return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">'+toLabel+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+marked.parse(m.content||'')+'</div></div>'
         }).join('');
         if(msgFilterUnread&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No unread messages</div>';
