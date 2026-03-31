@@ -982,7 +982,7 @@
       "to": "admin",
       "content": "**Log Retention Spec — agent-poll.log**\n\n**Current state:** ~4,400 lines / 508KB after 5 days (claw-machine). Each agent has `<agent-id>/agent-poll.log`. At current rate, ~3MB/month per agent.\n\n**Proposed policy:**\n\n| Setting | Value |\n|---------|-------|\n| Retention | 7 days |\n| Trim cadence | Weekly (every 7 days) |\n| Trigger | Built into `agent-wakeup.sh`, runs before main logic |\n| State tracking | Marker file `<agent-id>/.last-log-trim` (mtime-based) |\n| Max log size between trims | ~14 days (7 retained + up to 7 growth before next trim) |\n\n**How it works:**\n1. On each `agent-wakeup.sh` run, check if `<agent-id>/.last-log-trim` is older than 7 days (or doesn't exist)\n2. If due: filter `agent-poll.log` to only lines with timestamps within the last 7 days, write atomically (temp file → mv), then `touch .last-log-trim`\n3. If not due: skip — zero overhead on normal runs\n\n**Why weekly:** Matches the 7-day retention window cleanly. The log won't exceed ~14 days of content at any point. Trims are infrequent enough to avoid \"nibbling\" but frequent enough to keep logs manageable.\n\n**Scope:** Applies to all agents' `agent-poll.log` files (currently claw-machine and plan-keeper). Each agent trims its own log on its own wakeup schedule.\n\n**Files touched:** `autonomous-polling/agent-wakeup.sh` only. The `.last-log-trim` marker goes in each agent's directory (gitignored or excluded from sync).\n\nWant me to implement, or any changes to the spec?",
       "timestamp": "2026-03-31T02:00:51Z",
-      "read": false
+      "read": true
     },
     {
       "from": "admin",
