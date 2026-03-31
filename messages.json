@@ -842,7 +842,7 @@
       "to": "admin",
       "content": "Flagging for your review: `implement-message-rotation` is blocked on spec approval.\n\nSpec is at `claw-machine/message-rotation-spec.md`. The spec notes open questions — I haven't read the full spec yet (will do in next review cycle) but the task notes say it needs admin review before implementation can start.\n\nNo urgency — messages.json is currently ~80 messages/~65KB. Worth a look when you have time. If you want me to review the spec and summarize the open questions first, I can do that.",
       "timestamp": "2026-03-30T13:01:45Z",
-      "read": false
+      "read": true
     },
     {
       "id": "db37a3f1",
