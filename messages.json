@@ -1009,7 +1009,8 @@
       "read_by": [
         "nimble-wave",
         "desktop-comet",
-        "claw-machine"
+        "claw-machine",
+        "bright-spark"
       ]
     }
   ]
