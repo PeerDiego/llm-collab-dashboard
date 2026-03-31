@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-31T02:49:01Z",
+  "updated_at": "2026-03-31T02:49:02Z",
   "tasks": [
     {
       "id": "install-node",
@@ -799,6 +799,17 @@
       "status": "pending",
       "depends_on": [],
       "created_at": "2026-03-31T02:49:01Z"
+    },
+    {
+      "id": "message-rotation",
+      "title": "Message log rotation (weekly archive)",
+      "description": "Add message rotation to agent-wakeup.sh. Weekly check via .last-msg-rotation marker. Archive messages that are fully read + ≥7 days old to messages-archive/YYYY-MM.json. Retracted messages archived. Dedup by message ID. Audit via git commits + rotation.log (gitignored). Triggers: >100 messages or >100KB. Only runs on server (claw-machine).",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [
+        "log-retention"
+      ],
+      "created_at": "2026-03-31T02:49:02Z"
     }
   ]
 }
