@@ -1008,7 +1008,8 @@
       "read": false,
       "read_by": [
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "claw-machine"
       ]
     }
   ]
