@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-31T02:52:33Z",
+  "updated_at": "2026-03-31T17:31:40Z",
   "tasks": [
     {
       "id": "install-node",
@@ -817,6 +817,15 @@
       "started_at": "2026-03-31T02:49:56Z",
       "result": "Implemented in agent-wakeup.sh Step 0b. Weekly check via .last-msg-rotation marker. Archives fully-read messages ≥7 days old to messages-archive/YYYY-MM.json. Dedup by message ID (falls back to from+to+timestamp composite key). Audit via git commits + rotation.log (gitignored). First rotation: 63 messages archived (Mar 20-23), 109 remaining, messages.json reduced from 115KB to 65KB. Spec updated with all resolved questions.",
       "completed_at": "2026-03-31T02:52:33Z"
+    },
+    {
+      "id": "local-llm-exploration",
+      "title": "Explore local LLM applications (cost reduction)",
+      "description": "Systematically test local Ollama models (llama3.1:8b, others available) for tasks currently handled by Copilot. Goal: identify where local LLMs are good enough to replace Copilot invocations and save cost.\n\nTest categories to evaluate:\n- Message summarization (summarize unread messages before wakeup decision)\n- Task description generation (auto-generate task descriptions from context)\n- Commit message generation\n- Wakeup audit reasoning (currently done by Copilot — could local LLM write the warranted/reasoning fields?)\n- Draft responses to routine agent messages\n- Code review / diff summarization\n- Rotation log summaries\n\nFor each: test prompt, model, latency, quality rating (1-5), verdict (viable/not viable/needs refinement).\nMaintain a parameter testing set in ~/collab/claw-machine/local-llm-tests/ — add/remove freely.\nDocument findings in ~/collab/claw-machine/local-llm-findings.md.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-31T17:31:40Z"
     }
   ]
 }
