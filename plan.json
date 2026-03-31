@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-31T17:31:40Z",
+  "updated_at": "2026-03-31T17:40:26Z",
   "tasks": [
     {
       "id": "install-node",
@@ -823,9 +823,10 @@
       "title": "Explore local LLM applications (cost reduction)",
       "description": "Systematically test local Ollama models (llama3.1:8b, others available) for tasks currently handled by Copilot. Goal: identify where local LLMs are good enough to replace Copilot invocations and save cost.\n\nTest categories to evaluate:\n- Message summarization (summarize unread messages before wakeup decision)\n- Task description generation (auto-generate task descriptions from context)\n- Commit message generation\n- Wakeup audit reasoning (currently done by Copilot — could local LLM write the warranted/reasoning fields?)\n- Draft responses to routine agent messages\n- Code review / diff summarization\n- Rotation log summaries\n\nFor each: test prompt, model, latency, quality rating (1-5), verdict (viable/not viable/needs refinement).\nMaintain a parameter testing set in ~/collab/claw-machine/local-llm-tests/ — add/remove freely.\nDocument findings in ~/collab/claw-machine/local-llm-findings.md.",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
-      "created_at": "2026-03-31T17:31:40Z"
+      "created_at": "2026-03-31T17:31:40Z",
+      "started_at": "2026-03-31T17:40:26Z"
     }
   ]
 }
