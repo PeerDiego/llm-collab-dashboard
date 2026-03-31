@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-31T02:49:12Z",
+  "updated_at": "2026-03-31T02:49:51Z",
   "tasks": [
     {
       "id": "install-node",
@@ -796,10 +796,12 @@
       "title": "Agent-poll log retention (7-day trim)",
       "description": "Add log retention to agent-wakeup.sh Step 0. Weekly check via .last-log-trim marker file. Trim agent-poll.log to last 7 days. Gitignore .last-log-trim files. Already coded, needs testing.",
       "assignee": "claw-machine",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-31T02:49:01Z",
-      "started_at": "2026-03-31T02:49:12Z"
+      "started_at": "2026-03-31T02:49:12Z",
+      "result": "Implemented in agent-wakeup.sh Step 0. Weekly trim via .last-log-trim marker. Retains 7 days. Tested: awk filter correctly trims older entries. .last-log-trim gitignored. Syntax validated.",
+      "completed_at": "2026-03-31T02:49:51Z"
     },
     {
       "id": "message-rotation",
