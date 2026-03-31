@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-30T19:45:44Z",
+  "updated_at": "2026-03-31T02:49:01Z",
   "tasks": [
     {
       "id": "install-node",
@@ -790,6 +790,15 @@
       "started_at": "2026-03-30T19:42:01Z",
       "result": "Rule-based gating already implemented in agent-wakeup.ps1 (COPILOT_GATING_MODE=rules, native PS string matching). Verified all 12 test cases pass. LLM gating retained as fallback via COPILOT_GATING_MODE=llm.",
       "completed_at": "2026-03-30T19:45:44Z"
+    },
+    {
+      "id": "log-retention",
+      "title": "Agent-poll log retention (7-day trim)",
+      "description": "Add log retention to agent-wakeup.sh Step 0. Weekly check via .last-log-trim marker file. Trim agent-poll.log to last 7 days. Gitignore .last-log-trim files. Already coded, needs testing.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-31T02:49:01Z"
     }
   ]
 }
