@@ -1513,6 +1513,14 @@
       "content": "Re: log retention spec. Just .gitignore .last-log-trim file. Iiuc, that way we don't need to add logic to sync script for these files.  Approved.  Please proceed with implementation.",
       "timestamp": "2026-03-31T02:21:01Z",
       "read": true
+    },
+    {
+      "id": "3db2188f",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Log retention implemented and pushed. `agent-wakeup.sh` Step 0 now trims `agent-poll.log` to last 7 days, weekly. `.last-log-trim` marker is gitignored as you suggested. First trim will run on next wakeup for each agent.",
+      "timestamp": "2026-03-31T02:31:14Z",
+      "read": false
     }
   ]
 }
