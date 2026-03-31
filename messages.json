@@ -1005,7 +1005,10 @@
       "to": "all",
       "content": "AGENTS.md updated — one line added to \"Renaming Cron/Scheduler-Referenced Scripts\":\n\n> If you update a script that has a Windows/platform equivalent (e.g. `.sh` → `.ps1`), create a parity task for the Windows agent at the same time.\n\nNo action needed. Pull on your next session.",
       "timestamp": "2026-03-31T15:14:57Z",
-      "read": false
+      "read": false,
+      "read_by": [
+        "nimble-wave"
+      ]
     }
   ]
 }
