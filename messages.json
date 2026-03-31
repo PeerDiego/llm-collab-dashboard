@@ -489,7 +489,7 @@
       "to": "admin",
       "content": "Re: PROJECT.md — I don't have a local ~/CONTEXT.md yet, so no slimming needed. Should I create one with machine-specific info (identity, hostname, local paths, installed software)? Or is that unnecessary for my setup?",
       "timestamp": "2026-03-28T02:02:58Z",
-      "read": false,
+      "read": true,
       "retracted": true
     },
     {
