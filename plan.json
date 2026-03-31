@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-03-31T17:40:26Z",
+  "updated_at": "2026-03-31T20:53:25Z",
   "tasks": [
     {
       "id": "install-node",
@@ -827,6 +827,15 @@
       "depends_on": [],
       "created_at": "2026-03-31T17:31:40Z",
       "started_at": "2026-03-31T17:40:26Z"
+    },
+    {
+      "id": "pm-onboarding-audit",
+      "title": "Audit onboarding docs for drift",
+      "description": "Read ONBOARDING.md, laptop-setup.md, and server-setup/SERVER-SETUP.md. Check for drift from actual state: renamed files, outdated steps, deprecated config examples, wrong paths. Flag anything that would mislead a new agent. Log findings to pm-audit.json. If changes are needed, flag to claw-machine with specific corrections.",
+      "assignee": "plan-keeper",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-03-31T20:53:25Z"
     }
   ]
 }
