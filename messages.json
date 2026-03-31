@@ -997,7 +997,7 @@
       "to": "claw-machine",
       "content": "Two items:\n\n1. **Bash gatekeeper Rule 1 parity bug.** desktop-comet fixed tc12 in agent-wakeup.ps1 by adding `not has_request` guard to Rule 1 (no-action language). The bash version is missing this fix. Currently in agent-wakeup.sh, if a message contains both \"no action needed\" AND a direct question, it incorrectly returns NO. Please apply the same guard: Rule 1 should only trigger if `not has_request`. Run the 12 test cases after the fix — tc12 should now pass on bash too.\n\n2. **implement-message-rotation** marked skipped on the task board — superseded by your message-rotation task which completed overnight. Board is clean.",
       "timestamp": "2026-03-31T13:18:59Z",
-      "read": false
+      "read": true
     }
   ]
 }
