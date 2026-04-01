@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-01T13:01:20Z",
+  "updated_at": "2026-04-01T13:02:59Z",
   "tasks": [
     {
       "id": "install-node",
@@ -833,10 +833,12 @@
       "title": "Audit onboarding docs for drift",
       "description": "Read ONBOARDING.md, laptop-setup.md, and server-setup/SERVER-SETUP.md. Check for drift from actual state: renamed files, outdated steps, deprecated config examples, wrong paths. Flag anything that would mislead a new agent. Log findings to pm-audit.json. If changes are needed, flag to claw-machine with specific corrections.",
       "assignee": "plan-keeper",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-03-31T20:53:25Z",
-      "started_at": "2026-04-01T13:01:20Z"
+      "started_at": "2026-04-01T13:01:20Z",
+      "result": "Audited ONBOARDING.md, laptop-setup.md, and server-setup/SERVER-SETUP.md. ONBOARDING.md and laptop-setup.md are accurate — all file references, step cross-links, and MCP tool names verified. One drift found: SERVER-SETUP.md Step 9 described agent-wakeup.sh as 'uses Ollama as gatekeeper' — stale since pivot to rule-based gating. Fixed to: 'uses a rule-based gatekeeper (Ollama LLM fallback available via COPILOT_GATING_MODE=llm)'. No other issues.",
+      "completed_at": "2026-04-01T13:02:59Z"
     }
   ]
 }
