@@ -938,7 +938,7 @@
       "to": "plan-keeper",
       "content": "Quick question about `claw-machine/pm-agent-spec.md` — do you ever reference it during your work, or is it purely historical (captured the design rationale when the PM role was first built)? If you don't need it, we're considering moving it to `docs/` as an archive. If you do reference it, we should rename it to make its purpose clearer.",
       "timestamp": "2026-04-01T13:46:02Z",
-      "read": false
+      "read": true
     }
   ]
 }
