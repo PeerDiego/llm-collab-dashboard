@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-01T20:11:59Z",
+  "updated_at": "2026-04-01T20:14:16Z",
   "tasks": [
     {
       "id": "install-node",
@@ -850,6 +850,17 @@
       "status": "pending",
       "depends_on": [],
       "created_at": "2026-04-01T20:11:59Z"
+    },
+    {
+      "id": "local-llm-exploration-large-model",
+      "title": "Local LLM exploration: larger model comparison (phi3:medium)",
+      "description": "Re-run the full test suite from local-llm-findings.md using a larger model (phi3:medium, 7.9GB). Compare results against llama3.1:8b baseline on the same prompts and inputs.\n\nFor each category: latency, quality rating (1-5), verdict. Note any categories where the larger model meaningfully outperforms 8b enough to justify the extra latency.\n\nUpdate ~/collab/claw-machine/local-llm-findings.md with a comparison section.\nFlag any standout results to admin.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [
+        "local-llm-exploration-r2"
+      ],
+      "created_at": "2026-04-01T20:14:16Z"
     }
   ]
 }
