@@ -952,60 +952,50 @@
       "title": "Local LLM test: code review / diff summarization",
       "description": "Run code review test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Use same diff input as claw (Rule 1 has_request guard change from recent commit). Rate quality 1-5, measure latency. Claw got 4/5 with llama3.1:8b at 30s and 4/5 with qwen-coder:7b at 19s. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "blocked",
-      "depends_on": [
-        "dtco-llm-test-draft-response"
-      ],
+      "status": "pending",
+      "depends_on": [],
       "created_at": "2026-04-02T18:14:38Z",
-      "notes": "Paused at admin request - session restart pending. Resume after restart."
+      "notes": ""
     },
     {
       "id": "dtco-llm-test-rotation-log",
       "title": "Local LLM test: rotation log digest",
       "description": "Run rotation log digest test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Generate a sample log (or use a realistic mock) and ask for an admin-facing weekly digest. Rate quality 1-5, measure latency. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "blocked",
-      "depends_on": [
-        "dtco-llm-test-code-review"
-      ],
+      "status": "pending",
+      "depends_on": [],
       "created_at": "2026-04-02T18:14:40Z",
-      "notes": "Paused at admin request - session restart pending. Resume after restart."
+      "notes": ""
     },
     {
       "id": "dtco-llm-test-json-validation",
       "title": "Local LLM test: JSON schema validation",
       "description": "Run JSON schema validation test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Input: a plan.json snippet with 2 deliberate errors (invalid status field, empty assignee). Rate quality 1-5. Claw got 5/5 with all models. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "blocked",
-      "depends_on": [
-        "dtco-llm-test-rotation-log"
-      ],
+      "status": "pending",
+      "depends_on": [],
       "created_at": "2026-04-02T18:14:42Z",
-      "notes": "Paused at admin request - session restart pending. Resume after restart."
+      "notes": ""
     },
     {
       "id": "dtco-llm-findings-doc",
       "title": "Write desktop-comet/local-llm-findings.md",
       "description": "Compile all test results from desktop-comet/local-llm-tests/test-results.json into a findings doc at desktop-comet/local-llm-findings.md. Follow same format as claw-machine/local-llm-findings.md. Include: hardware specs (DDEEHPZ440 Windows, no GPU, CPU inference), model inventory (9 models), per-test tables, summary table, model rankings, recommended next steps. Highlight notable differences from claw-machine's results (especially deepseek-r1:14b reasoning model).",
       "assignee": "desktop-comet",
-      "status": "blocked",
-      "depends_on": [
-        "dtco-llm-test-json-validation"
-      ],
+      "status": "pending",
+      "depends_on": [],
       "created_at": "2026-04-02T18:14:44Z",
-      "notes": "Paused at admin request - session restart pending. Resume after restart."
+      "notes": ""
     },
     {
       "id": "dtco-llm-tunnel-restore",
       "title": "Restore SSH tunnel to claw-machine after LLM tests",
       "description": "After all local LLM tests and findings doc are complete, re-enable and verify the SSH tunnel watchdog. Steps: (1) Start-ScheduledTask OllamaSshTunnelWatchdog if not running, (2) verify tunnel on port 11435, (3) verify Ollama models accessible at localhost:11435, (4) notify claw-machine tunnel is back. Note: watchdog may have self-restarted between test wakeups (logon trigger) — check state first and kill+restart cleanly if needed.",
       "assignee": "desktop-comet",
-      "status": "blocked",
-      "depends_on": [
-        "dtco-llm-findings-doc"
-      ],
+      "status": "pending",
+      "depends_on": [],
       "created_at": "2026-04-02T18:14:46Z",
-      "notes": "Paused at admin request - session restart pending. Resume after restart."
+      "notes": ""
     }
   ]
 }
