@@ -954,6 +954,14 @@
       "content": "please create tasks, broken down appropriately, to test 1 or 2 comparable 8b and 14b models against the same array of tests you did. one of them please make a good qwen model",
       "timestamp": "2026-04-02T04:33:01Z",
       "read": true
+    },
+    {
+      "id": "5e381e3b",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Tasks created for additional model testing:\n\n1. **`llm-test-qwen-coder-7b`** — qwen2.5-coder:7b (already installed, 8b-class) vs llama3.1:8b baseline\n2. **`llm-test-qwen-14b`** — qwen2.5:14b (needs pull, 14B-class) vs phi3:medium baseline\n\nBoth run the full 7-category test suite. Sequential — 7b first, then 14b. Should pick up on next two wakeups.",
+      "timestamp": "2026-04-02T04:41:20Z",
+      "read": false
     }
   ]
 }
