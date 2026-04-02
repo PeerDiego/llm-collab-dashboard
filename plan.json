@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-02T20:55:32Z",
+  "updated_at": "2026-04-02T21:01:02Z",
   "tasks": [
     {
       "id": "install-node",
@@ -1000,6 +1000,17 @@
       "depends_on": [],
       "created_at": "2026-04-02T18:14:46Z",
       "notes": ""
+    },
+    {
+      "id": "dtco-wakeup-session-health",
+      "title": "Fix agent-wakeup: add session health check before invoking Copilot",
+      "description": "Root cause identified: the llm-collab session grew to ~158K tokens, causing 400 Bad Request on every wakeup invocation (seen in agent-poll.log at 19:31 and 20:21 on 2026-04-02). The troubleshooter session (4dd9b607) diagnosed and compacted it manually. Now need a durable fix.\n\nTasks:\n1. Before invoking `copilot --resume`, check the session's events.jsonl size (or token count proxy). If over a threshold (e.g., 100K tokens / 50MB), run `copilot --resume --session-id UUID /compact` or start a fresh session.\n2. On 400 Bad Request error, don't just retry with audit-only prompt — detect token-limit specifically (HTTP 400 with 'Request ID' in output) and attempt compact, then retry.\n3. Optionally: add a periodic /compact to the scheduled task (e.g., weekly or when events.jsonl > 50MB).\n4. Test by verifying the session stays healthy across multiple wakeup cycles.\n\nContext: agent-wakeup.ps1 at C:\\Users\\aquar\\collab\\desktop-comet\\agent-wakeup.ps1. Session events at C:\\Users\\aquar\\.copilot\\session-state\\f170b187-6139-4baf-b284-9f8976f34f9a\\events.jsonl. Troubleshooter session notes: llm-collab-troubleshooter (session 4dd9b607).",
+      "assignee": "desktop-comet",
+      "status": "pending",
+      "depends_on": [
+        "dtco-llm-tunnel-restore"
+      ],
+      "created_at": "2026-04-02T21:01:02Z"
     }
   ]
 }
