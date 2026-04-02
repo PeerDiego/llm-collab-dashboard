@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-02T21:06:14Z",
+  "updated_at": "2026-04-02T21:14:19Z",
   "tasks": [
     {
       "id": "install-node",
@@ -978,31 +978,39 @@
       "title": "Local LLM test: JSON schema validation",
       "description": "Run JSON schema validation test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Input: a plan.json snippet with 2 deliberate errors (invalid status field, empty assignee). Rate quality 1-5. Claw got 5/5 with all models. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-04-02T18:14:42Z",
       "notes": "",
-      "started_at": "2026-04-02T21:06:14Z"
+      "started_at": "2026-04-02T21:06:14Z",
+      "result": "3 models tested. qwen2.5-coder:7b 5/5 (51s), deepseek-r1:14b 1/5 (empty — 4th consecutive failure confirmed), qwen2.5-coder:14b 5/5 (120s). Results appended to test-results.json.",
+      "completed_at": "2026-04-02T21:12:21Z"
     },
     {
       "id": "dtco-llm-findings-doc",
       "title": "Write desktop-comet/local-llm-findings.md",
       "description": "Compile all test results from desktop-comet/local-llm-tests/test-results.json into a findings doc at desktop-comet/local-llm-findings.md. Follow same format as claw-machine/local-llm-findings.md. Include: hardware specs (DDEEHPZ440 Windows, no GPU, CPU inference), model inventory (9 models), per-test tables, summary table, model rankings, recommended next steps. Highlight notable differences from claw-machine's results (especially deepseek-r1:14b reasoning model).",
       "assignee": "desktop-comet",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-04-02T18:14:44Z",
-      "notes": ""
+      "notes": "",
+      "started_at": "2026-04-02T21:12:23Z",
+      "result": "Written desktop-comet/local-llm-findings.md. 7 tests, 3 models. Key findings: qwen2.5-coder:7b recommended for automation (best speed/quality); deepseek-r1:14b fails 5/7 tasks due to token budget exhaustion — avoid in automation; all models ~5x slower than claw-machine. Matches claw's model ranking.",
+      "completed_at": "2026-04-02T21:13:45Z"
     },
     {
       "id": "dtco-llm-tunnel-restore",
       "title": "Restore SSH tunnel to claw-machine after LLM tests",
       "description": "After all local LLM tests and findings doc are complete, re-enable and verify the SSH tunnel watchdog. Steps: (1) Start-ScheduledTask OllamaSshTunnelWatchdog if not running, (2) verify tunnel on port 11435, (3) verify Ollama models accessible at localhost:11435, (4) notify claw-machine tunnel is back. Note: watchdog may have self-restarted between test wakeups (logon trigger) — check state first and kill+restart cleanly if needed.",
       "assignee": "desktop-comet",
-      "status": "pending",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-04-02T18:14:46Z",
-      "notes": ""
+      "notes": "",
+      "started_at": "2026-04-02T21:13:47Z",
+      "result": "OllamaSshTunnelWatchdog restarted. Tunnel live on port 11435 → claw-machine:11434. 5 models accessible. Local Ollama still available on 11434.",
+      "completed_at": "2026-04-02T21:14:19Z"
     },
     {
       "id": "dtco-wakeup-session-health",
