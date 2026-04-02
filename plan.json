@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-02T18:14:58Z",
+  "updated_at": "2026-04-02T18:31:51Z",
   "tasks": [
     {
       "id": "install-node",
@@ -899,10 +899,12 @@
       "title": "Local LLM test: wakeup audit reasoning",
       "description": "Run wakeup audit reasoning test against 3 local models (qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b) using same prompts/cases as claw-machine. Kill watchdog+SSH before testing (Stop-Process on both) to ensure tests hit localhost:11434, not tunnel on 11435. Use test-parameters.json from claw-machine/local-llm-tests/ for prompt template. Test cases: admin requesting spec (expect warranted=true), plan-keeper FYI no-action (expect warranted=false). Record latency, quality, JSON format cleanliness. Compare with claw's results. Save results to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-04-02T18:14:30Z",
-      "started_at": "2026-04-02T18:14:58Z"
+      "started_at": "2026-04-02T18:14:58Z",
+      "result": "6/6 correct (2/2 per model). qwen2.5-coder:7b: 73s/42s, JSON in code fences, quality 4/5. deepseek-r1:14b: 178s/158s, clean JSON no fences, quality 5/5 — best output, slowest speed. qwen2.5-coder:14b: 89s/87s, JSON in code fences, quality 4/5 — best speed/quality balance. All 14b tests run with num_predict=300 to accommodate reasoning chains. Results in desktop-comet/local-llm-tests/test-results.json, committed e3353cf.",
+      "completed_at": "2026-04-02T18:31:51Z"
     },
     {
       "id": "dtco-llm-test-summarization",
