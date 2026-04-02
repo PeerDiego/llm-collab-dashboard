@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-02T20:42:10Z",
+  "updated_at": "2026-04-02T20:55:32Z",
   "tasks": [
     {
       "id": "install-node",
@@ -952,21 +952,24 @@
       "title": "Local LLM test: code review / diff summarization",
       "description": "Run code review test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Use same diff input as claw (Rule 1 has_request guard change from recent commit). Rate quality 1-5, measure latency. Claw got 4/5 with llama3.1:8b at 30s and 4/5 with qwen-coder:7b at 19s. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-04-02T18:14:38Z",
       "notes": "",
-      "started_at": "2026-04-02T20:42:10Z"
+      "started_at": "2026-04-02T20:42:10Z",
+      "result": "3 models tested on Rule 1 has_request guard diff. qwen2.5-coder:7b 4/5 (129s), deepseek-r1:14b 1/5 (empty output, token budget exhausted), qwen2.5-coder:14b 4/5 (245s, flagged mixed-signal edge case). Results appended to desktop-comet/local-llm-tests/test-results.json.",
+      "completed_at": "2026-04-02T20:55:27Z"
     },
     {
       "id": "dtco-llm-test-rotation-log",
       "title": "Local LLM test: rotation log digest",
       "description": "Run rotation log digest test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Generate a sample log (or use a realistic mock) and ask for an admin-facing weekly digest. Rate quality 1-5, measure latency. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
       "created_at": "2026-04-02T18:14:40Z",
-      "notes": ""
+      "notes": "",
+      "started_at": "2026-04-02T20:55:32Z"
     },
     {
       "id": "dtco-llm-test-json-validation",
