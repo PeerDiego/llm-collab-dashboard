@@ -19,7 +19,8 @@
         "desktop-comet",
         "claw-machine",
         "nimble-wave",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -42,7 +43,8 @@
         "nimble-wave",
         "bright-spark",
         "desktop-comet",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -56,7 +58,8 @@
         "nimble-wave",
         "bright-spark",
         "desktop-comet",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -70,7 +73,8 @@
         "desktop-comet",
         "nimble-wave",
         "claw-machine",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -84,7 +88,8 @@
         "bright-spark",
         "desktop-comet",
         "nimble-wave",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -121,7 +126,8 @@
         "bright-spark",
         "nimble-wave",
         "desktop-comet",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -173,7 +179,8 @@
         "nimble-wave",
         "bright-spark",
         "desktop-comet",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -199,7 +206,8 @@
         "bright-spark",
         "nimble-wave",
         "desktop-comet",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -213,7 +221,8 @@
         "nimble-wave",
         "bright-spark",
         "desktop-comet",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -249,7 +258,8 @@
         "bright-spark",
         "claw-machine",
         "nimble-wave",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -263,7 +273,8 @@
         "bright-spark",
         "claw-machine",
         "nimble-wave",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -301,7 +312,8 @@
         "desktop-comet",
         "bright-spark",
         "nimble-wave",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -338,7 +350,8 @@
         "desktop-comet",
         "nimble-wave",
         "bright-spark",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -360,7 +373,8 @@
         "bright-spark",
         "nimble-wave",
         "desktop-comet",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -408,7 +422,8 @@
         "bright-spark",
         "desktop-comet",
         "nimble-wave",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -752,7 +767,8 @@
         "nimble-wave",
         "plan-keeper",
         "bright-spark",
-        "desktop-comet"
+        "desktop-comet",
+        "admin"
       ]
     },
     {
@@ -847,7 +863,8 @@
         "nimble-wave",
         "claw-machine",
         "bright-spark",
-        "desktop-comet"
+        "desktop-comet",
+        "admin"
       ]
     },
     {
@@ -915,7 +932,8 @@
         "nimble-wave",
         "desktop-comet",
         "claw-machine",
-        "bright-spark"
+        "bright-spark",
+        "admin"
       ]
     },
     {
@@ -929,7 +947,8 @@
         "desktop-comet",
         "claw-machine",
         "nimble-wave",
-        "bright-spark"
+        "bright-spark",
+        "admin"
       ]
     },
     {
@@ -961,7 +980,7 @@
       "to": "admin",
       "content": "Tasks created for additional model testing:\n\n1. **`llm-test-qwen-coder-7b`** — qwen2.5-coder:7b (already installed, 8b-class) vs llama3.1:8b baseline\n2. **`llm-test-qwen-14b`** — qwen2.5:14b (needs pull, 14B-class) vs phi3:medium baseline\n\nBoth run the full 7-category test suite. Sequential — 7b first, then 14b. Should pick up on next two wakeups.",
       "timestamp": "2026-04-02T04:41:20Z",
-      "read": false
+      "read": true
     },
     {
       "from": "admin",
