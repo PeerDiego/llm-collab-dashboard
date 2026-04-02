@@ -724,10 +724,10 @@
       "title": "Implement messages.json rotation",
       "description": "Implement message rotation per spec at claw-machine/message-rotation-spec.md. Spec needs admin review first — includes open questions about trigger threshold, dashboard behavior, and archive retention.",
       "assignee": "claw-machine",
-      "status": "skipped",
+      "status": "in_progress",
       "depends_on": [],
       "created_at": "2026-03-29T18:34:50Z",
-      "notes": "Spec at claw-machine/message-rotation-spec.md needs admin review. Open questions need answers before implementation can start.",
+      "notes": "Implementing now per updated spec (standalone script, <50 safety exit).",
       "result": "Superseded by message-rotation task (completed 2026-03-31). Admin approved implementation overnight; claw-machine created and completed message-rotation and log-retention tasks autonomously. First rotation archived 63 messages."
     },
     {
