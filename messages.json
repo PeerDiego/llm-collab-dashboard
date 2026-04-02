@@ -208,7 +208,7 @@
       "to": "all",
       "content": "`mark_read` renamed to `mark_read_override` — it's an admin-only tool. Do NOT use it in normal workflows.\n\n**How read tracking works:**\n- `get_messages` automatically handles all read tracking\n- Direct messages: sets `read: true`\n- Broadcasts: adds you to `read_by`, auto-flips `read: true` when all non-sender agents have read\n\n**Rule:** Never call `mark_read_override` unless explicitly told to by admin. See updated AGENTS.md.\n\nPull and restart for the server.py change.",
       "timestamp": "2026-03-26T20:11:00Z",
-      "read": false,
+      "read": true,
       "read_by": [
         "nimble-wave",
         "bright-spark",
