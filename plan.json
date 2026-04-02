@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-02T21:22:48Z",
+  "updated_at": "2026-04-02T21:24:18Z",
   "tasks": [
     {
       "id": "install-node",
@@ -1017,12 +1017,14 @@
       "title": "Fix agent-wakeup: add session health check before invoking Copilot",
       "description": "Root cause identified: the llm-collab session grew to ~158K tokens over many wakeup cycles, causing 400 Bad Request on every invocation (seen in agent-poll.log at 19:31 and 20:21 on 2026-04-02). The troubleshooter session (4dd9b607) diagnosed and manually compacted it. This will recur without structural changes.\n\nINVESTIGATION:\n1. Confirm root cause: check events.jsonl size/token count now vs at failure time. Understand growth rate (how many turns/wakeups per day, how fast does it fill up).\n2. Review what agent-wakeup.ps1 does on 400 — currently retries with audit-only prompt, which also fails. Improve error detection (400 + 'CAPIError' pattern = token limit vs other errors).\n\nPREVENTION (the main goal):\n3. Pre-flight check: before invoking copilot --resume, measure events.jsonl size as a token-count proxy. If above threshold (~80MB or configurable), run /compact first in a lightweight invocation, THEN resume normally. Log the compaction.\n4. Session rotation strategy: decide whether to compact-in-place (preserves history as checkpoint) or start a fresh session (simpler, loses thread). Compact-in-place is preferred — it mirrors what the troubleshooter did manually. Document the chosen strategy in agent-wakeup.ps1 comments.\n5. Periodic proactive compact: even if under threshold, compact on a schedule (e.g., once per week via a flag file, similar to how wakeup-audit.json tracks recency).\n\nRECOVERY (if it hits the wall anyway):\n6. On 400 CAPIError, try one compact attempt before giving up. If compact also fails (session already too large for even that), start a new session and log a WARNING that manual intervention may be needed.\n\nVERIFICATION:\n7. After implementing, confirm events.jsonl shrinks after compact, and that subsequent wakeup invocations succeed. Add a log line showing session size on each poll.\n\nContext files:\n- agent-wakeup.ps1: C:\\Users\\aquar\\collab\\desktop-comet\\agent-wakeup.ps1\n- events.jsonl: C:\\Users\\aquar\\.copilot\\session-state\\f170b187-6139-4baf-b284-9f8976f34f9a\\events.jsonl\n- agent-poll.log: C:\\Users\\aquar\\collab\\desktop-comet\\agent-poll.log\n- Troubleshooter session: llm-collab-troubleshooter (id: 4dd9b607), turned 1-7 cover full diagnosis",
       "assignee": "desktop-comet",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "dtco-llm-tunnel-restore"
       ],
       "created_at": "2026-04-02T21:01:02Z",
-      "started_at": "2026-04-02T21:22:48Z"
+      "started_at": "2026-04-02T21:22:48Z",
+      "result": "Implemented in agent-wakeup.ps1: (1) pre-flight events.jsonl size logged every poll; (2) threshold compact at 20 MB before invocation (configurable via SESSION_COMPACT_THRESHOLD_MB); (3) proactive weekly compact via last-compact.txt flag file; (4) 400 CAPIError detection post-invocation triggers compact+retry before giving up. Session currently healthy at 0.69 MB post-compact.",
+      "completed_at": "2026-04-02T21:24:18Z"
     }
   ]
 }
