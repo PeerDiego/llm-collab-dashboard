@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-02T21:01:02Z",
+  "updated_at": "2026-04-02T21:06:14Z",
   "tasks": [
     {
       "id": "install-node",
@@ -965,21 +965,24 @@
       "title": "Local LLM test: rotation log digest",
       "description": "Run rotation log digest test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Generate a sample log (or use a realistic mock) and ask for an admin-facing weekly digest. Rate quality 1-5, measure latency. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-04-02T18:14:40Z",
       "notes": "",
-      "started_at": "2026-04-02T20:55:32Z"
+      "started_at": "2026-04-02T20:55:32Z",
+      "result": "3 models tested on synthetic 5-day rotation log. qwen2.5-coder:7b 4/5 (97s), deepseek-r1:14b 1/5 (empty — pattern confirmed across 3 tests), qwen2.5-coder:14b 4/5 (205s). Results appended to test-results.json.",
+      "completed_at": "2026-04-02T21:06:09Z"
     },
     {
       "id": "dtco-llm-test-json-validation",
       "title": "Local LLM test: JSON schema validation",
       "description": "Run JSON schema validation test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Input: a plan.json snippet with 2 deliberate errors (invalid status field, empty assignee). Rate quality 1-5. Claw got 5/5 with all models. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
       "created_at": "2026-04-02T18:14:42Z",
-      "notes": ""
+      "notes": "",
+      "started_at": "2026-04-02T21:06:14Z"
     },
     {
       "id": "dtco-llm-findings-doc",
