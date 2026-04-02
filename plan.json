@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-02T18:31:51Z",
+  "updated_at": "2026-04-02T18:42:07Z",
   "tasks": [
     {
       "id": "install-node",
@@ -911,11 +911,12 @@
       "title": "Local LLM test: message summarization",
       "description": "Run message summarization test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Use same prompt template as claw (claw-machine/local-llm-tests/test-parameters.json). Input: 2 representative messages. Rate quality 1-5, measure latency. Kill watchdog+SSH before tests. Append results to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "dtco-llm-test-wakeup-audit"
       ],
-      "created_at": "2026-04-02T18:14:32Z"
+      "created_at": "2026-04-02T18:14:32Z",
+      "started_at": "2026-04-02T18:42:07Z"
     },
     {
       "id": "dtco-llm-test-commit-msg",
