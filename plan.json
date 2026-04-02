@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-02T04:50:18Z",
+  "updated_at": "2026-04-02T04:53:19Z",
   "tasks": [
     {
       "id": "install-node",
@@ -873,10 +873,12 @@
       "title": "LLM test: qwen2.5-coder:7b (8b-class comparison)",
       "description": "Pull and test qwen2.5-coder:7b (already installed) against the full test suite from local-llm-findings.md. Same 7 categories: wakeup audit (admin + FYI), message summarization, code review, rotation log digest, JSON validation, commit message generation.\n\nCompare against llama3.1:8b baseline. For each: latency, quality (1-5), verdict.\nUpdate local-llm-findings.md with results.\n\nThis is the 8b-class qwen model.",
       "assignee": "claw-machine",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-04-02T04:41:03Z",
-      "started_at": "2026-04-02T04:50:18Z"
+      "started_at": "2026-04-02T04:50:18Z",
+      "result": "qwen2.5-coder:7b tested on all 7 categories. Strong contender — faster than llama3.1:8b on 4/7 tests (code review 19s vs 30s, JSON validation 8s vs 15s, commit messages 8s vs 15s) with equal or better quality. Best 8b-class model for code/infra tasks. Main issue: wraps JSON in markdown fences. Results in local-llm-findings.md.",
+      "completed_at": "2026-04-02T04:53:19Z"
     },
     {
       "id": "llm-test-qwen-14b",
