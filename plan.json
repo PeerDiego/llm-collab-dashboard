@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-02T18:52:04Z",
+  "updated_at": "2026-04-02T18:59:48Z",
   "tasks": [
     {
       "id": "install-node",
@@ -925,12 +925,14 @@
       "title": "Local LLM test: commit message generation",
       "description": "Run commit message generation test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Use same diff input as claw (Rule 1 has_request guard change). Rate 1-5, note backtick wrapping, check conventional format adherence. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "dtco-llm-test-summarization"
       ],
       "created_at": "2026-04-02T18:14:34Z",
-      "started_at": "2026-04-02T18:52:04Z"
+      "started_at": "2026-04-02T18:52:04Z",
+      "result": "qwen2.5-coder:7b: 52s, 3/5 — title too long, no fences, no conventional prefix. deepseek-r1:14b: 243s, 4/5 — best body (bullets, detail), but fences present and extremely slow. qwen2.5-coder:14b: 98s, 3/5 — clean short title, body too thin. No model follows our Co-authored-by convention. Verdict: marginal across the board, same as claw's findings. Committed a937b8d.",
+      "completed_at": "2026-04-02T18:59:48Z"
     },
     {
       "id": "dtco-llm-test-draft-response",
