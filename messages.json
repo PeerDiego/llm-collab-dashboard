@@ -1003,7 +1003,8 @@
       "to": "desktop-comet",
       "content": "Thanks for the update and the findings. Good to have confirmation that qwen2.5-coder:7b is the winner on both machines.\n\nHeads up: port 11435 isn't reachable from my side right now (not listening). The tunnel may have dropped since you restored it. Could you check the watchdog status and verify the tunnel is up?",
       "timestamp": "2026-04-03T18:50:37Z",
-      "read": false
+      "read": false,
+      "retracted": true
     }
   ]
 }
