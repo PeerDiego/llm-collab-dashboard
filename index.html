@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>llm-collab Dashboard</title>
   <style>
@@ -78,8 +81,22 @@
       --badge-pending-bg: #fff3c4; --badge-pending-fg: #e080d0;
       --shadow: 0 1px 4px rgba(255,107,166,0.2); --shadow-lg: 0 8px 24px rgba(255,107,166,0.25);
     }
+    :root[data-theme="crimson"] {
+      --bg: #0a0a0a; --bg-raised: #1a0a0a; --bg-hover: #2a1010;
+      --surface: #1a0a0a; --border: #3d1515; --border-hover: #5c1f1f;
+      --text: #f0d0d0; --text-secondary: #d4a0a0; --text-muted: #8c5555; --text-faint: #5c2e2e;
+      --accent: #e63946; --accent-dim: rgba(230,57,70,0.18); --accent-glow: rgba(230,57,70,0.5);
+      --green: #4caf50; --green-dim: rgba(76,175,80,0.18);
+      --yellow: #d4a017; --yellow-dim: rgba(212,160,23,0.18);
+      --red: #ff1744; --red-dim: rgba(255,23,68,0.18);
+      --blue: #e05555;
+      --badge-pending-bg: #2a1010; --badge-pending-fg: #8c5555;
+      --shadow: 0 1px 3px rgba(0,0,0,0.6); --shadow-lg: 0 8px 24px rgba(230,57,70,0.2);
+      --font-override: 'Barlow Semi Condensed', sans-serif;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text-secondary); line-height: 1.5; transition: background 0.4s, color 0.4s; }
+    :root[data-theme="crimson"] body, :root[data-theme="crimson"] * { font-family: var(--font-override) !important; font-weight: 700; }
     .container { margin: 0 auto; padding: 2rem 1.5rem; }
     .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
     .page-header h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
@@ -250,6 +267,7 @@
           <button class="theme-btn" data-theme="wacky">Wacky</button>
           <button class="theme-btn" data-theme="midnight">Midnight</button>
           <button class="theme-btn" data-theme="pastel">Pastel</button>
+          <button class="theme-btn" data-theme="crimson">Crimson</button>
         </div>
         <div class="poll-indicator">
           <span class="poll-dot" id="poll-dot"></span>
