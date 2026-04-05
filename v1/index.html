@@ -307,7 +307,7 @@
   </div>
   <script>
     const POLL_INTERVALS=[{ms:5000,label:'5s'},{ms:10000,label:'10s'},{ms:30000,label:'30s'},{ms:60000,label:'1m'},{ms:120000,label:'2m'},{ms:300000,label:'5m'}];
-    const DEFAULT_POLL_MS=30000,PLAN_URL='plan.json',AGENT_COLORS=['#8b5cf6','#ec4899','#f59e0b','#10b981','#3b82f6','#ef4444','#06b6d4','#84cc16'];
+    const DEFAULT_POLL_MS=30000,PLAN_URL='../plan.json',AGENT_COLORS=['#8b5cf6','#ec4899','#f59e0b','#10b981','#3b82f6','#ef4444','#06b6d4','#84cc16'];
     let pollIntervalMs=parseInt(localStorage.getItem('poll-interval'))||DEFAULT_POLL_MS;
     let msgFilterUnread=localStorage.getItem('msg-filter-unread')==='1';
     let previousPlan=null,pollTimer=null,activeFilters=new Set(),activeAgentFilters=new Set(),currentTasks=[],agentMeta={};
@@ -337,7 +337,7 @@
 
     async function fetchMessages(){
       try{
-        const r=await fetch('messages.json?_='+Date.now());
+        const r=await fetch('../messages.json?_='+Date.now());
         if(!r.ok)return;
         const data=await r.json();
         const allMsgs=(data.messages||[]).filter(m=>!m.retracted).slice().reverse();
@@ -369,7 +369,7 @@
 
     async function fetchInboxLog(){
       try{
-        const r=await fetch('inbox-log.json?_='+Date.now());
+        const r=await fetch('../inbox-log.json?_='+Date.now());
         if(!r.ok)return;
         const data=await r.json();
         const entries=(data.entries||[]).filter(e=>e.type!=='delivered'&&!e.read).slice().reverse();
@@ -386,7 +386,7 @@
       }catch(e){}
     }
 
-    async function fetchAgentMeta(){try{const r=await fetch('agents.json?_='+Date.now());if(r.ok)agentMeta=await r.json()}catch(e){}}
+    async function fetchAgentMeta(){try{const r=await fetch('../agents.json?_='+Date.now());if(r.ok)agentMeta=await r.json()}catch(e){}}
     let pageHash=null;
     async function checkPageUpdate(){try{const r=await fetch('index.html?_='+Date.now());if(!r.ok)return;const txt=await r.text();let h=0;for(let i=0;i<txt.length;i++){h=((h<<5)-h)+txt.charCodeAt(i);h|=0}if(pageHash===null){pageHash=h}else if(h!==pageHash){document.getElementById('reload-overlay').classList.add('visible');sessionStorage.setItem('page-reload-reason','update');setTimeout(()=>location.reload(),3000)}}catch(e){}}
     if(sessionStorage.getItem('page-reload-reason')==='update'){sessionStorage.removeItem('page-reload-reason');console.log('['+new Date().toLocaleString()+'] Webpage was refreshed to load update')}
