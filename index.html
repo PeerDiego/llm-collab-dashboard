@@ -28,7 +28,8 @@
     .header h1{font-size:1.3rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
     .header h1 span{font-weight:400;color:var(--text-muted)}
     .header-right{display:flex;align-items:center;gap:1rem}
-    .theme-switcher{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:6px;position:relative;flex-wrap:nowrap;cursor:pointer}
+    .theme-switcher{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:6px;position:relative;flex-wrap:nowrap;cursor:pointer;opacity:.35;transition:opacity .3s ease}
+    .theme-switcher:hover,.theme-switcher.expanded{opacity:1}
     .theme-switcher:not(.expanded) .theme-btn:not(.active){max-width:0;padding-left:0;padding-right:0;overflow:hidden;opacity:0;pointer-events:none}
     .theme-btn{background:none;border:none;color:var(--text-muted);font-size:.7rem;padding:.25rem .5rem;cursor:pointer;transition:max-width .4s cubic-bezier(.34,1.56,.64,1),padding .4s cubic-bezier(.34,1.56,.64,1),opacity .2s ease,color .2s,background .2s;max-width:80px;opacity:1;overflow:hidden;white-space:nowrap}
     .theme-btn:hover{color:var(--text);background:var(--bg-hover)}
@@ -135,6 +136,13 @@
     @keyframes glowText{0%{color:#fff;text-shadow:0 0 8px var(--accent-glow)}100%{color:var(--accent);text-shadow:none}}
     @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
+    /* Background-first theme transition: backgrounds move immediately, foreground follows */
+    :root.theme-transition body{transition:background-color .35s ease 0s,color .35s ease .15s!important}
+    :root.theme-transition .header,:root.theme-transition .sidebar,:root.theme-transition .panel-header,:root.theme-transition .footer,:root.theme-transition .layout{transition:background-color .35s ease 0s!important}
+    :root.theme-transition .agent-card,:root.theme-transition .task,:root.theme-transition .show-more-btn{transition:background-color .35s ease 0s,color .35s ease .15s,border-color .35s ease .15s,box-shadow .35s ease .15s!important}
+    :root.theme-transition .badge,:root.theme-transition .filter-chip,:root.theme-transition .theme-btn{transition:background-color .35s ease 0s,color .35s ease .15s,border-color .35s ease .15s!important}
+    :root.theme-transition .msg-item,:root.theme-transition .msg-from,:root.theme-transition .msg-to,:root.theme-transition .msg-body{transition:background-color .35s ease 0s,color .35s ease .15s,border-color .35s ease .15s!important}
+
     @media(max-width:700px){
       .app{height:100dvh;height:100vh;max-height:100dvh}
       .main{flex-direction:column;overflow:hidden;flex:1;min-height:0}
@@ -229,7 +237,7 @@
     function agentColor(n){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return AGENT_COLORS[Math.abs(h)%AGENT_COLORS.length]}
     function agentInitial(n){return n.split('-').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
 
-    function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t))}
+    function setTheme(t){const r=document.documentElement;r.classList.add('theme-transition');r.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));setTimeout(()=>r.classList.remove('theme-transition'),600)}
     document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',function(e){const sw=document.querySelector('.theme-switcher');if(this.classList.contains('active')){e.stopPropagation();sw.classList.toggle('expanded')}else{setTheme(this.dataset.theme);sw.classList.remove('expanded')}}));
     const saved=localStorage.getItem('dashboard-theme');if(saved)setTheme(saved);
 
