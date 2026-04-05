@@ -125,6 +125,8 @@
     .show-more-btn.all-loaded{cursor:default;font-style:italic;color:var(--text-faint);border-style:dashed}
 
     .footer{text-align:center;padding:.35rem;color:var(--text-faint);font-size:.68rem;border-top:1px solid var(--border);background:var(--bg-raised);flex-shrink:0}
+    .footer select{background:var(--bg-raised);color:var(--text-muted);border:1px solid var(--border);border-radius:4px;padding:.1rem .25rem;font-size:.68rem;cursor:pointer;outline:none;font-family:inherit}
+    .footer select:hover{border-color:var(--border-hover);color:var(--text)}
     .reload-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
     .reload-overlay.visible{opacity:1;pointer-events:auto}
     .reload-box{background:var(--bg-raised);border:1px solid var(--border);border-radius:12px;padding:2rem;text-align:center;color:var(--text);font-size:1rem;box-shadow:var(--shadow-lg);max-width:320px}
@@ -137,11 +139,12 @@
     @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
     /* Background-first theme transition: backgrounds move immediately, foreground follows */
-    :root.theme-transition body{transition:background-color .35s ease 0s,color .35s ease .15s!important}
+    :root{--theme-fg-delay:150ms}
+    :root.theme-transition body{transition:background-color .35s ease 0s,color .35s ease var(--theme-fg-delay)!important}
     :root.theme-transition .header,:root.theme-transition .sidebar,:root.theme-transition .panel-header,:root.theme-transition .footer,:root.theme-transition .layout{transition:background-color .35s ease 0s!important}
-    :root.theme-transition .agent-card,:root.theme-transition .task,:root.theme-transition .show-more-btn{transition:background-color .35s ease 0s,color .35s ease .15s,border-color .35s ease .15s,box-shadow .35s ease .15s!important}
-    :root.theme-transition .badge,:root.theme-transition .filter-chip,:root.theme-transition .theme-btn{transition:background-color .35s ease 0s,color .35s ease .15s,border-color .35s ease .15s!important}
-    :root.theme-transition .msg-item,:root.theme-transition .msg-from,:root.theme-transition .msg-to,:root.theme-transition .msg-body{transition:background-color .35s ease 0s,color .35s ease .15s,border-color .35s ease .15s!important}
+    :root.theme-transition .agent-card,:root.theme-transition .task,:root.theme-transition .show-more-btn{transition:background-color .35s ease 0s,color .35s ease var(--theme-fg-delay),border-color .35s ease var(--theme-fg-delay),box-shadow .35s ease var(--theme-fg-delay)!important}
+    :root.theme-transition .badge,:root.theme-transition .filter-chip,:root.theme-transition .theme-btn{transition:background-color .35s ease 0s,color .35s ease var(--theme-fg-delay),border-color .35s ease var(--theme-fg-delay)!important}
+    :root.theme-transition .msg-item,:root.theme-transition .msg-from,:root.theme-transition .msg-to,:root.theme-transition .msg-body{transition:background-color .35s ease 0s,color .35s ease var(--theme-fg-delay),border-color .35s ease var(--theme-fg-delay)!important}
 
     @media(max-width:700px){
       .app{height:100dvh;height:100vh;max-height:100dvh}
@@ -237,7 +240,12 @@
     function agentColor(n){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return AGENT_COLORS[Math.abs(h)%AGENT_COLORS.length]}
     function agentInitial(n){return n.split('-').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
 
-    function setTheme(t){const r=document.documentElement;r.classList.add('theme-transition');r.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));setTimeout(()=>r.classList.remove('theme-transition'),600)}
+    let _themeDelay=parseInt(localStorage.getItem('theme-fg-delay'))||150;
+    function _applyThemeDelay(ms){document.documentElement.style.setProperty('--theme-fg-delay',ms+'ms')}
+    _applyThemeDelay(_themeDelay);
+    Object.defineProperty(window,'themeDelay',{get:()=>_themeDelay,set:(v)=>{_themeDelay=v;_applyThemeDelay(v);localStorage.setItem('theme-fg-delay',v);console.log('%cthemeDelay → '+v+'ms','color:#8b5cf6;font-weight:bold')}});
+
+    function setTheme(t){const r=document.documentElement;r.classList.add('theme-transition');r.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));setTimeout(()=>r.classList.remove('theme-transition'),400+_themeDelay)}
     document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',function(e){const sw=document.querySelector('.theme-switcher');if(this.classList.contains('active')){e.stopPropagation();sw.classList.toggle('expanded')}else{setTheme(this.dataset.theme);sw.classList.remove('expanded')}}));
     const saved=localStorage.getItem('dashboard-theme');if(saved)setTheme(saved);
 
