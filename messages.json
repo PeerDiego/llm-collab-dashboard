@@ -1072,6 +1072,14 @@
       "content": "Dashboard v2 modifications, only for mobile screens (as in narrow screens): 1. make each section collapsible when the heading (Agents, Messages, Tasks) is clicked. 2. similar to v1, make the theme options expand and collapse to show all options when pressed/clicked. 3. Make agent filter apply to messages, too, so any msgs from OR to the filtered agent is shown.",
       "timestamp": "2026-04-05T17:45:01Z",
       "read": true
+    },
+    {
+      "id": "81fb726d",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Dashboard v2 mobile updates pushed:\n1. Sections collapse/expand when heading is tapped (Agents, Messages, Tasks — mobile only)\n2. Theme switcher: tap active theme to expand/collapse options (mobile only)\n3. Agent filter now applies to messages too — shows msgs from OR to the selected agent(s)",
+      "timestamp": "2026-04-05T17:51:48Z",
+      "read": false
     }
   ]
 }
