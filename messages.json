@@ -1087,6 +1087,14 @@
       "content": "First, Mark ur msg to me as read. Next, I'm still talking about mobile screen sized v2 dashboard. 1. Please make the agent squares smaller and limit the vertical space to 1.3 the height of one agent square so I need to scroll to see any that don't fit on the first row of agents. 2. Thanks for making the sections collapsible. Unfortunately, now the entire page doesn't fit on the screen like it used to before your last change. Please restore the section heights so I can scroll messages and tasks within their scrollable section. If any of my instructions were unclear, ask Qs.",
       "timestamp": "2026-04-05T19:00:02Z",
       "read": true
+    },
+    {
+      "id": "d8d1930a",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Fixed mobile dashboard:\n1. Agent cards smaller (26px avatars, tighter padding), grid capped at ~80px height with scroll\n2. Restored scrollable sections — messages and tasks each scroll within their own panels again, full viewport layout preserved\n3. Sections still collapsible on tap\n\nAlso marked your previous message as read.",
+      "timestamp": "2026-04-05T19:01:18Z",
+      "read": false
     }
   ]
 }
