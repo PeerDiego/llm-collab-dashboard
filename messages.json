@@ -1057,6 +1057,14 @@
       "content": "looks like when you moved the dashboard to v1/, when I go to the page it's stuck at \"Loading project data…\" Did you perhaps have relative references to the json files that make it look for the files in the wrong place?",
       "timestamp": "2026-04-05T04:06:02Z",
       "read": true
+    },
+    {
+      "id": "bbf81df9",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Fixed — v1 and v0 both had relative paths to the JSON data files. Updated all references to use `../` since they're in subdirectories. Both should load now.",
+      "timestamp": "2026-04-05T04:11:04Z",
+      "read": false
     }
   ]
 }
