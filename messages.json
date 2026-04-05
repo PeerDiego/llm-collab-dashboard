@@ -1109,7 +1109,7 @@
       "to": "admin",
       "content": "Mobile fixes pushed:\n1. Agents (n) count shown when collapsed\n2. Viewport fixed — using 100dvh, footer pinned, no overflow past screen\n3. Task layout on mobile: agent + date on first line, status + title on second line (desktop unchanged)",
       "timestamp": "2026-04-05T19:31:57Z",
-      "read": false
+      "read": true
     }
   ]
 }
