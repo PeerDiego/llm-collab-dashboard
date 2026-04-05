@@ -116,6 +116,7 @@
     .task-blocked-reason{font-size:.72rem;color:var(--red);margin-top:.2rem;padding-left:.2rem}
     .task-chevron{color:var(--text-faint);font-size:.6rem;transition:transform .2s}
     .task.expanded .task-chevron{transform:rotate(90deg)}
+    .task-meta-line{display:none}
     .show-more-btn{background:var(--bg-raised);border:1px solid var(--border);border-radius:8px;padding:.45rem;text-align:center;color:var(--text-muted);font-size:.72rem;cursor:pointer;transition:all .2s}
     .show-more-btn:hover{border-color:var(--border-hover);color:var(--text-secondary)}
     .show-more-btn.all-loaded{cursor:default;font-style:italic;color:var(--text-faint);border-style:dashed}
@@ -133,12 +134,15 @@
     @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
     @media(max-width:700px){
-      .main{flex-direction:column;overflow:hidden}
+      .app{height:100dvh;height:100vh;max-height:100dvh}
+      .main{flex-direction:column;overflow:hidden;flex:1;min-height:0}
       .sidebar{width:100%;border-right:none;border-bottom:1px solid var(--border);flex-shrink:0;overflow:hidden}
       .sidebar-title{cursor:pointer;user-select:none}
       .sidebar-title::before{content:'\25BC ';font-size:.6rem}
       .sidebar.m-collapsed .sidebar-title::before{content:'\25B6 '}
       .sidebar.m-collapsed .agent-grid{display:none}
+      .sidebar-title .m-count{display:none;font-weight:400;color:var(--text-faint);font-size:.7rem}
+      .sidebar.m-collapsed .sidebar-title .m-count{display:inline}
       .agent-grid{grid-template-columns:repeat(3,1fr);max-height:80px;overflow-y:auto;gap:.35rem;padding:0 .5rem .5rem}
       .agent-card{padding:.3rem;gap:.15rem}
       .agent-avatar{width:26px;height:26px;font-size:.65rem}
@@ -157,9 +161,14 @@
       .tasks-panel.m-collapsed{display:none;flex:0}
       .msg-item{flex-direction:column;gap:.3rem}
       .msg-meta{flex-direction:row;gap:.5rem;min-width:unset}
+      .task-row{flex-wrap:wrap}
+      .task-meta-line{display:flex!important;gap:.5rem;width:100%;font-size:.7rem;color:var(--text-muted)}
+      .task-meta-line .task-assignee{font-size:.7rem;opacity:1}
+      .task-assignee-desktop{display:none}
       .theme-switcher{position:relative;flex-wrap:wrap}
       .theme-switcher:not(.expanded) .theme-btn:not(.active){display:none}
       .theme-switcher.expanded .theme-btn{display:inline-block}
+      .footer{flex-shrink:0}
     }
   </style>
 </head>
@@ -185,7 +194,7 @@
     </header>
     <div class="main">
       <aside class="sidebar">
-        <div class="sidebar-title">Agents</div>
+        <div class="sidebar-title">Agents <span class="m-count" id="agent-m-count"></span></div>
         <div class="agent-grid" id="agents"></div>
       </aside>
       <div class="content">
@@ -244,6 +253,7 @@
       const el=document.getElementById('agents'),assignees=[...new Set(tasks.map(t=>t.assignee).filter(Boolean))];
       el.innerHTML=assignees.map(id=>{const at=tasks.filter(t=>t.assignee===id),done=at.filter(t=>t.status==='done').length,ip=at.filter(t=>t.status==='in_progress').length,fc=activeAgentFilters.has(id)?' filter-active':'',col=agentColor(id),meta=agentMeta[id]||{},aliases=meta.aliases||[],role=meta.role||'',tip=aliases.length?'aka '+aliases.join(', ')+(role?' \xb7 '+role:''):(role||id);return'<div class="agent-card'+fc+'" data-agent="'+id+'" title="'+tip+'"><div class="agent-avatar" style="background:'+col+'">'+agentInitial(id)+'</div><div class="agent-name">'+id+'</div><div class="agent-stats"><span><span class="mini-dot done"></span>'+done+'</span>'+(ip?'<span><span class="mini-dot active"></span>'+ip+'</span>':'')+'</div></div>'}).join('');
       el.querySelectorAll('.agent-card').forEach(c=>c.addEventListener('click',()=>{const id=c.dataset.agent;activeAgentFilters.has(id)?activeAgentFilters.delete(id):activeAgentFilters.add(id);c.classList.toggle('filter-active');applyFilters()}));
+      const mc=document.getElementById('agent-m-count');if(mc)mc.textContent='('+assignees.length+')';
     }
 
     function renderFilterBar(tasks){
@@ -262,7 +272,7 @@
 
     function renderTaskPage(el,sorted,addS,chM,knownAgents){
       const visible=sorted.slice(0,taskShowCount);
-      el.innerHTML=visible.map(t=>{const isN=addS.has(t.id),ch=chM.get(t.id),tc=isN?' new-task':(ch?' changed-task':''),bc=ch&&ch.statusChanged?' status-changed':'',ac=ch&&ch.assigneeChanged?' assignee-changed':'',unknownAgent=t.assignee&&!knownAgents.has(t.assignee),isBlocked=t.status==='blocked'&&t.notes,canExpand=!!t.description,inlineNote=isBlocked?'<div class="task-blocked-reason">\u2298 '+t.notes+'</div>':'',agentWarning=unknownAgent?'<span title="Unknown agent"> \u203c\ufe0f</span>':'',detail=t.result?'<strong>Result:</strong> '+t.result:t.description||'';return'<div class="task'+tc+'" data-task-id="'+t.id+'"'+(canExpand?' data-expandable':'')+'><div class="task-row"><span class="badge badge-'+t.status+bc+'">'+t.status.replace('_',' ')+'</span><span class="task-title">'+t.title+'</span>'+(t.assignee?'<span class="task-assignee'+ac+'">'+t.assignee+agentWarning+'</span>':'')+(canExpand?'<span class="task-chevron">\u25b8</span>':'')+'</div>'+inlineNote+(canExpand?'<div class="task-detail">'+detail+'</div>':'')+'</div>'}).join('');
+      el.innerHTML=visible.map(t=>{const isN=addS.has(t.id),ch=chM.get(t.id),tc=isN?' new-task':(ch?' changed-task':''),bc=ch&&ch.statusChanged?' status-changed':'',ac=ch&&ch.assigneeChanged?' assignee-changed':'',unknownAgent=t.assignee&&!knownAgents.has(t.assignee),isBlocked=t.status==='blocked'&&t.notes,canExpand=!!t.description,inlineNote=isBlocked?'<div class="task-blocked-reason">\u2298 '+t.notes+'</div>':'',agentWarning=unknownAgent?'<span title="Unknown agent"> \u203c\ufe0f</span>':'',detail=t.result?'<strong>Result:</strong> '+t.result:t.description||'',dateStr=t.created_at?new Date(t.created_at).toLocaleDateString():'',metaLine=(t.assignee||dateStr)?'<div class="task-meta-line">'+(t.assignee?'<span class="task-assignee'+ac+'">'+t.assignee+agentWarning+'</span>':'')+(dateStr?'<span>'+dateStr+'</span>':'')+'</div>':'';return'<div class="task'+tc+'" data-task-id="'+t.id+'"'+(canExpand?' data-expandable':'')+'>'+metaLine+'<div class="task-row"><span class="badge badge-'+t.status+bc+'">'+t.status.replace('_',' ')+'</span><span class="task-title">'+t.title+'</span>'+(t.assignee?'<span class="task-assignee'+ac+' task-assignee-desktop">'+t.assignee+agentWarning+'</span>':'')+(canExpand?'<span class="task-chevron">\u25b8</span>':'')+'</div>'+inlineNote+(canExpand?'<div class="task-detail">'+detail+'</div>':'')+'</div>'}).join('');
       if(taskShowCount<sorted.length)el.innerHTML+='<div class="show-more-btn" onclick="showMoreTasks()">Show more ('+(sorted.length-taskShowCount)+' remaining)</div>';
       el.querySelectorAll('.task[data-expandable]').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('expanded')));applyFilters();
     }
