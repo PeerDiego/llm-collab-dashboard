@@ -133,27 +133,28 @@
     @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
     @media(max-width:700px){
-      html,body{overflow:auto}
-      .app{height:auto;min-height:100vh}
-      .main{flex-direction:column;overflow:visible}
-      .sidebar{width:100%;border-right:none;border-bottom:1px solid var(--border);max-height:none;overflow:visible}
-      .sidebar.m-collapsed .agent-grid{display:none}
+      .main{flex-direction:column;overflow:hidden}
+      .sidebar{width:100%;border-right:none;border-bottom:1px solid var(--border);flex-shrink:0;overflow:hidden}
       .sidebar-title{cursor:pointer;user-select:none}
       .sidebar-title::before{content:'\25BC ';font-size:.6rem}
       .sidebar.m-collapsed .sidebar-title::before{content:'\25B6 '}
-      .content{overflow:visible}
-      .messages-panel{overflow:visible;max-height:none}
-      .panel-header{cursor:pointer;user-select:none}
+      .sidebar.m-collapsed .agent-grid{display:none}
+      .agent-grid{grid-template-columns:repeat(3,1fr);max-height:80px;overflow-y:auto;gap:.35rem;padding:0 .5rem .5rem}
+      .agent-card{padding:.3rem;gap:.15rem}
+      .agent-avatar{width:26px;height:26px;font-size:.65rem}
+      .agent-name{font-size:.58rem}
+      .agent-stats{font-size:.52rem}
+      .content{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+      .messages-panel{flex:1;overflow-y:auto;min-height:0}
+      .messages-panel.m-collapsed{display:none;flex:0}
+      .panel-header{cursor:pointer;user-select:none;flex-shrink:0}
       .panel-header .collapse-arrow::before{content:'\25BC ';font-size:.6rem}
-      .messages-panel.m-collapsed{display:none}
-      .messages-panel.m-collapsed+.tasks-header .collapse-arrow::before,.panel-header.m-hdr-collapsed .collapse-arrow::before{content:'\25B6 '}
-      .tasks-panel{overflow:visible;max-height:none}
-      .tasks-header{cursor:pointer;user-select:none}
+      .panel-header.m-hdr-collapsed .collapse-arrow::before{content:'\25B6 '}
+      .tasks-header{cursor:pointer;user-select:none;flex-shrink:0}
       .tasks-header .collapse-arrow::before{content:'\25BC ';font-size:.6rem}
-      .tasks-panel.m-collapsed{display:none}
-      .tasks-panel.m-collapsed~.footer .collapse-arrow::before{content:''}
       .tasks-header.m-hdr-collapsed .collapse-arrow::before{content:'\25B6 '}
-      .agent-grid{grid-template-columns:repeat(3,1fr)}
+      .tasks-panel{flex:1;overflow-y:auto;min-height:0}
+      .tasks-panel.m-collapsed{display:none;flex:0}
       .msg-item{flex-direction:column;gap:.3rem}
       .msg-meta{flex-direction:row;gap:.5rem;min-width:unset}
       .theme-switcher{position:relative;flex-wrap:wrap}
