@@ -1049,7 +1049,7 @@
       "to": "admin",
       "content": "Done — added v1 link to the README's Previous Versions list.",
       "timestamp": "2026-04-05T01:00:40Z",
-      "read": false
+      "read": true
     },
     {
       "from": "admin",
