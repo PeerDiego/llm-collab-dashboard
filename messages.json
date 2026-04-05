@@ -1034,7 +1034,7 @@
       "to": "admin",
       "content": "Dashboard v2 is live. Layout per your mockup: agents sidebar (left), messages panel (top-right, scrollable), task filter bar, tasks panel (bottom-right, scrollable). Previous version saved in v1/. All themes and auto-refresh/reload carried over.",
       "timestamp": "2026-04-05T00:01:51Z",
-      "read": false
+      "read": true
     },
     {
       "from": "admin",
