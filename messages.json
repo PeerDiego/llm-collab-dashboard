@@ -1027,6 +1027,14 @@
       "content": "First, mark your message to me as read. Next, create a new dashboard. Bump the current dashboard to v1, similar to how we bumped the original dashboard to v0. Find a layout mockup of the new desired layout in an image in this repo's root. Please carry over the auto-refresh and auto-reload functionality. Please ask questions if anything is unclear.",
       "timestamp": "2026-04-04T23:45:02Z",
       "read": true
+    },
+    {
+      "id": "6c24c1d2",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Dashboard v2 is live. Layout per your mockup: agents sidebar (left), messages panel (top-right, scrollable), task filter bar, tasks panel (bottom-right, scrollable). Previous version saved in v1/. All themes and auto-refresh/reload carried over.",
+      "timestamp": "2026-04-05T00:01:51Z",
+      "read": false
     }
   ]
 }
