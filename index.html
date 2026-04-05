@@ -28,8 +28,9 @@
     .header h1{font-size:1.3rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
     .header h1 span{font-weight:400;color:var(--text-muted)}
     .header-right{display:flex;align-items:center;gap:1rem}
-    .theme-switcher{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden}
-    .theme-btn{background:none;border:none;color:var(--text-muted);font-size:.7rem;padding:.25rem .5rem;cursor:pointer;transition:all .2s}
+    .theme-switcher{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:6px;position:relative;flex-wrap:nowrap;cursor:pointer}
+    .theme-switcher:not(.expanded) .theme-btn:not(.active){max-width:0;padding-left:0;padding-right:0;overflow:hidden;opacity:0;pointer-events:none}
+    .theme-btn{background:none;border:none;color:var(--text-muted);font-size:.7rem;padding:.25rem .5rem;cursor:pointer;transition:max-width .4s cubic-bezier(.34,1.56,.64,1),padding .4s cubic-bezier(.34,1.56,.64,1),opacity .2s ease,color .2s,background .2s;max-width:80px;opacity:1;overflow:hidden;white-space:nowrap}
     .theme-btn:hover{color:var(--text);background:var(--bg-hover)}
     .theme-btn.active{color:var(--accent);background:var(--accent-dim)}
     .poll-indicator{display:flex;align-items:center;gap:.4rem;color:var(--text-faint);font-size:.75rem;white-space:nowrap}
@@ -40,7 +41,7 @@
 
     .sidebar{width:220px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg-raised)}
     .sidebar-title{font-size:.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;padding:.7rem .85rem .5rem}
-    .agent-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:0 .65rem .65rem;overflow-y:auto;flex:1}
+    .agent-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:0 .65rem .65rem;overflow-y:auto;max-height:260px}
     .agent-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.5rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:pointer;transition:all .2s;text-align:center}
     .agent-card:hover{border-color:var(--border-hover)}
     .agent-card.filter-active{border-color:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
@@ -117,6 +118,7 @@
     .task-chevron{color:var(--text-faint);font-size:.6rem;transition:transform .2s}
     .task.expanded .task-chevron{transform:rotate(90deg)}
     .task-meta-line{display:none}
+    .task-time{font-size:.65rem;color:var(--text-faint);margin-left:auto;white-space:nowrap}
     .show-more-btn{background:var(--bg-raised);border:1px solid var(--border);border-radius:8px;padding:.45rem;text-align:center;color:var(--text-muted);font-size:.72rem;cursor:pointer;transition:all .2s}
     .show-more-btn:hover{border-color:var(--border-hover);color:var(--text-secondary)}
     .show-more-btn.all-loaded{cursor:default;font-style:italic;color:var(--text-faint);border-style:dashed}
@@ -228,7 +230,7 @@
     function agentInitial(n){return n.split('-').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
 
     function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t))}
-    document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',function(e){const sw=document.querySelector('.theme-switcher');if(window.innerWidth<=700&&this.classList.contains('active')){e.stopPropagation();sw.classList.toggle('expanded')}else{setTheme(this.dataset.theme);sw.classList.remove('expanded')}}));
+    document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',function(e){const sw=document.querySelector('.theme-switcher');if(this.classList.contains('active')){e.stopPropagation();sw.classList.toggle('expanded')}else{setTheme(this.dataset.theme);sw.classList.remove('expanded')}}));
     const saved=localStorage.getItem('dashboard-theme');if(saved)setTheme(saved);
 
     function diffTasks(o,n){const m=new Map(o.map(t=>[t.id,t])),a=[],c=[];for(const t of n){if(!m.has(t.id))a.push(t.id);else{const p=m.get(t.id);if(p.status!==t.status||p.assignee!==t.assignee||p.result!==t.result)c.push({id:t.id,statusChanged:p.status!==t.status,assigneeChanged:p.assignee!==t.assignee})}}return{added:a,changed:c}}
@@ -272,7 +274,7 @@
 
     function renderTaskPage(el,sorted,addS,chM,knownAgents){
       const visible=sorted.slice(0,taskShowCount);
-      el.innerHTML=visible.map(t=>{const isN=addS.has(t.id),ch=chM.get(t.id),tc=isN?' new-task':(ch?' changed-task':''),bc=ch&&ch.statusChanged?' status-changed':'',ac=ch&&ch.assigneeChanged?' assignee-changed':'',unknownAgent=t.assignee&&!knownAgents.has(t.assignee),isBlocked=t.status==='blocked'&&t.notes,canExpand=!!t.description,inlineNote=isBlocked?'<div class="task-blocked-reason">\u2298 '+t.notes+'</div>':'',agentWarning=unknownAgent?'<span title="Unknown agent"> \u203c\ufe0f</span>':'',detail=t.result?'<strong>Result:</strong> '+t.result:t.description||'',dateStr=t.created_at?new Date(t.created_at).toLocaleDateString():'',metaLine=(t.assignee||dateStr)?'<div class="task-meta-line">'+(t.assignee?'<span class="task-assignee'+ac+'">'+t.assignee+agentWarning+'</span>':'')+(dateStr?'<span>'+dateStr+'</span>':'')+'</div>':'';return'<div class="task'+tc+'" data-task-id="'+t.id+'"'+(canExpand?' data-expandable':'')+'>'+metaLine+'<div class="task-row"><span class="badge badge-'+t.status+bc+'">'+t.status.replace('_',' ')+'</span><span class="task-title">'+t.title+'</span>'+(t.assignee?'<span class="task-assignee'+ac+' task-assignee-desktop">'+t.assignee+agentWarning+'</span>':'')+(canExpand?'<span class="task-chevron">\u25b8</span>':'')+'</div>'+inlineNote+(canExpand?'<div class="task-detail">'+detail+'</div>':'')+'</div>'}).join('');
+      el.innerHTML=visible.map(t=>{const isN=addS.has(t.id),ch=chM.get(t.id),tc=isN?' new-task':(ch?' changed-task':''),bc=ch&&ch.statusChanged?' status-changed':'',ac=ch&&ch.assigneeChanged?' assignee-changed':'',unknownAgent=t.assignee&&!knownAgents.has(t.assignee),isBlocked=t.status==='blocked'&&t.notes,canExpand=!!t.description,inlineNote=isBlocked?'<div class="task-blocked-reason">\u2298 '+t.notes+'</div>':'',agentWarning=unknownAgent?'<span title="Unknown agent"> \u203c\ufe0f</span>':'',detail=t.result?'<strong>Result:</strong> '+t.result:t.description||'';const tsRaw=t.completed_at||t.started_at||t.created_at||'';const dateStr=tsRaw?new Date(tsRaw).toLocaleDateString(undefined,{month:'short',day:'numeric'}):'';const metaLine=(t.assignee||dateStr)?'<div class="task-meta-line">'+(t.assignee?'<span class="task-assignee'+ac+'">'+t.assignee+agentWarning+'</span>':'')+(dateStr?'<span>'+dateStr+'</span>':'')+'</div>':'';return'<div class="task'+tc+'" data-task-id="'+t.id+'"'+(canExpand?' data-expandable':'')+'>'+metaLine+'<div class="task-row"><span class="badge badge-'+t.status+bc+'">'+t.status.replace('_',' ')+'</span><span class="task-title">'+t.title+'</span>'+(t.assignee?'<span class="task-assignee'+ac+' task-assignee-desktop">'+t.assignee+agentWarning+'</span>':'')+(dateStr?'<span class="task-time">'+dateStr+'</span>':'')+(canExpand?'<span class="task-chevron">\u25b8</span>':'')+'</div>'+inlineNote+(canExpand?'<div class="task-detail">'+detail+'</div>':'')+'</div>'}).join('');
       if(taskShowCount<sorted.length)el.innerHTML+='<div class="show-more-btn" onclick="showMoreTasks()">Show more ('+(sorted.length-taskShowCount)+' remaining)</div>';
       el.querySelectorAll('.task[data-expandable]').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('expanded')));applyFilters();
     }
