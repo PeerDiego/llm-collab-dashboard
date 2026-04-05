@@ -1064,7 +1064,7 @@
       "to": "admin",
       "content": "Fixed — v1 and v0 both had relative paths to the JSON data files. Updated all references to use `../` since they're in subdirectories. Both should load now.",
       "timestamp": "2026-04-05T04:11:04Z",
-      "read": false
+      "read": true
     }
   ]
 }
