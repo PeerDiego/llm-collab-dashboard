@@ -1102,6 +1102,14 @@
       "content": "1. When collapsed, show (n) next to \"Agents\" header. 2. the entire window size seems to be expanding beyond the bottom of my phone's browsers' viewable area. when Tasks section is collapsed, the bottom ~30% of the text \"Tasks\" is cut off by the bottom of the screen. 3. similar to messages' layout, put agent id and date (if present in the task object) on the top line of the task block, and next line the status and title. so basically move agent id from the right side of the block to a preceding row and add the timestamp (if available).",
       "timestamp": "2026-04-05T19:24:01Z",
       "read": true
+    },
+    {
+      "id": "9f893646",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Mobile fixes pushed:\n1. Agents (n) count shown when collapsed\n2. Viewport fixed — using 100dvh, footer pinned, no overflow past screen\n3. Task layout on mobile: agent + date on first line, status + title on second line (desktop unchanged)",
+      "timestamp": "2026-04-05T19:31:57Z",
+      "read": false
     }
   ]
 }
