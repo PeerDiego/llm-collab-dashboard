@@ -1079,7 +1079,7 @@
       "to": "admin",
       "content": "Dashboard v2 mobile updates pushed:\n1. Sections collapse/expand when heading is tapped (Agents, Messages, Tasks — mobile only)\n2. Theme switcher: tap active theme to expand/collapse options (mobile only)\n3. Agent filter now applies to messages too — shows msgs from OR to the selected agent(s)",
       "timestamp": "2026-04-05T17:51:48Z",
-      "read": false
+      "read": true
     },
     {
       "from": "admin",
