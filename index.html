@@ -276,7 +276,16 @@
       if(!handle||!tasksPanel||!content)return;
       const STOR_KEY='tasks-panel-height';
       const savedH=localStorage.getItem(STOR_KEY);
-      if(savedH)tasksPanel.style.height=savedH+'px';
+      function applyHeight(h){tasksPanel.style.height=h+'px';}
+      if(savedH){
+        applyHeight(parseInt(savedH));
+      } else {
+        // default to ~50% of content area after layout settles
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          const h=Math.round(content.offsetHeight*0.5);
+          applyHeight(h);
+        }));
+      }
       let dragging=false,startY=0,startH=0;
       handle.addEventListener('mousedown',function(e){
         if(window.innerWidth<=700)return;
