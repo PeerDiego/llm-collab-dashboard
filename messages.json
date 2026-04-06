@@ -1117,7 +1117,7 @@
       "to": "admin",
       "content": "Dashboard updates pushed:\n1. Theme switcher now collapses/expands on all screen sizes — click the active theme to toggle. Bouncy animation on expand/collapse via spring easing\n2. Desktop agent grid now has a max height (260px) with scroll — won't stretch to fill the whole sidebar\n3. Task items now show a date (completed → started → created, whichever is available) on the right side of each task row",
       "timestamp": "2026-04-05T23:41:10Z",
-      "read": false
+      "read": true
     }
   ]
 }
