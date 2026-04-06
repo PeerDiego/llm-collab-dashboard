@@ -282,7 +282,7 @@
       } else {
         // default to ~50% of content area after layout settles
         requestAnimationFrame(()=>requestAnimationFrame(()=>{
-          const h=Math.round(content.offsetHeight*0.5);
+          const h=Math.round(content.offsetHeight*0.4);
           applyHeight(h);
         }));
       }
