@@ -99,8 +99,10 @@
     .filter-chip.active{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
     .filter-chip .chip-count{margin-left:.15rem;opacity:.7}
 
-    .tasks-panel{flex:1;overflow-y:auto;min-height:0}
-    .task-list{display:flex;flex-direction:column;gap:.35rem;padding:.5rem .75rem}
+    .tasks-panel{overflow-y:auto;min-height:60px;flex-shrink:0}
+    .panel-resize-handle{height:5px;cursor:ns-resize;background:transparent;flex-shrink:0;position:relative;z-index:2}
+    .panel-resize-handle::after{content:'';position:absolute;left:50%;transform:translateX(-50%);top:50%;margin-top:-1px;width:40px;height:2px;border-radius:2px;background:var(--border);transition:background .2s,width .2s}
+    .panel-resize-handle:hover::after,.panel-resize-handle.dragging::after{background:var(--accent);width:60px}
     .task{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.45rem .7rem;cursor:pointer;transition:all .2s}
     .task:hover{border-color:var(--border-hover)}
     .task.filtered-out{display:none}
@@ -179,6 +181,7 @@
       .tasks-header .collapse-arrow::before{content:'\25BC ';font-size:.6rem}
       .tasks-header.m-hdr-collapsed .collapse-arrow::before{content:'\25B6 '}
       .tasks-panel{flex:1;overflow-y:auto;min-height:0}
+      .panel-resize-handle{display:none}
       .tasks-panel.m-collapsed{display:none;flex:0}
       .msg-item{flex-direction:column;gap:.3rem}
       .msg-meta{flex-direction:row;gap:.5rem;min-width:unset}
@@ -225,6 +228,7 @@
           <span class="panel-title"><span class="collapse-arrow"></span><span class="icon">&#x1F4AC;</span> Messages <span class="msg-count-btn" id="msg-count" onclick="event.stopPropagation();toggleMsgFilter()"></span></span>
         </div>
         <div class="messages-panel"><div class="msg-list" id="messages"></div></div>
+        <div class="panel-resize-handle" id="panel-resize-handle"></div>
         <div class="tasks-header">
           <div class="tasks-header-left">
             <span class="panel-title"><span class="collapse-arrow"></span><span class="icon">&#x1F4CB;</span> Tasks</span>
@@ -263,6 +267,42 @@
     function setTheme(t){const r=document.documentElement;r.classList.add('theme-transition');r.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));setTimeout(()=>r.classList.remove('theme-transition'),_themeDelay+Math.max(_bgDur,_fgDur)+50)}
     document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',function(e){const sw=document.querySelector('.theme-switcher');if(this.classList.contains('active')){e.stopPropagation();sw.classList.toggle('expanded')}else{setTheme(this.dataset.theme);sw.classList.remove('expanded')}}));
     const saved=localStorage.getItem('dashboard-theme');if(saved)setTheme(saved);
+
+    // --- Panel resize ---
+    (function(){
+      const handle=document.getElementById('panel-resize-handle');
+      const tasksPanel=document.querySelector('.tasks-panel');
+      const content=document.querySelector('.content');
+      if(!handle||!tasksPanel||!content)return;
+      const STOR_KEY='tasks-panel-height';
+      const savedH=localStorage.getItem(STOR_KEY);
+      if(savedH)tasksPanel.style.height=savedH+'px';
+      let dragging=false,startY=0,startH=0;
+      handle.addEventListener('mousedown',function(e){
+        if(window.innerWidth<=700)return;
+        dragging=true;startY=e.clientY;startH=tasksPanel.offsetHeight;
+        handle.classList.add('dragging');
+        document.body.style.cursor='ns-resize';
+        document.body.style.userSelect='none';
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove',function(e){
+        if(!dragging)return;
+        const delta=startY-e.clientY;
+        const contentH=content.offsetHeight;
+        const minH=60,maxH=contentH-80;
+        const newH=Math.min(maxH,Math.max(minH,startH+delta));
+        tasksPanel.style.height=newH+'px';
+      });
+      document.addEventListener('mouseup',function(){
+        if(!dragging)return;
+        dragging=false;
+        handle.classList.remove('dragging');
+        document.body.style.cursor='';
+        document.body.style.userSelect='';
+        localStorage.setItem(STOR_KEY,tasksPanel.offsetHeight);
+      });
+    })();
 
     function diffTasks(o,n){const m=new Map(o.map(t=>[t.id,t])),a=[],c=[];for(const t of n){if(!m.has(t.id))a.push(t.id);else{const p=m.get(t.id);if(p.status!==t.status||p.assignee!==t.assignee||p.result!==t.result)c.push({id:t.id,statusChanged:p.status!==t.status,assigneeChanged:p.assignee!==t.assignee})}}return{added:a,changed:c}}
     function setPollStatus(t,f){document.getElementById('poll-text').textContent=t;document.getElementById('poll-dot').classList.toggle('fetching',!!f)}
