@@ -18,6 +18,8 @@
     :root[data-theme="midnight"]{--bg:#0b1021;--bg-raised:#131a2e;--bg-hover:#1a2340;--surface:#131a2e;--border:#2a3a5c;--border-hover:#3d5a8a;--text:#c8d6e5;--text-secondary:#8395a7;--text-muted:#576574;--text-faint:#3d4f6a;--accent:#54a0ff;--accent-dim:rgba(84,160,255,.15);--accent-glow:rgba(84,160,255,.4);--green:#1dd1a1;--green-dim:rgba(29,209,161,.15);--yellow:#feca57;--yellow-dim:rgba(254,202,87,.15);--red:#ff6b6b;--red-dim:rgba(255,107,107,.15);--blue:#48dbfb;--badge-pending-bg:#1a2340;--badge-pending-fg:#576574;--shadow:0 1px 3px rgba(0,0,0,.5);--shadow-lg:0 8px 24px rgba(0,0,0,.7)}
     :root[data-theme="pastel"]{--bg:#ffe0f0;--bg-raised:#d4f0ff;--bg-hover:#fff3c4;--surface:#d5ffd0;--border:#ffb3d9;--border-hover:#ff80bf;--text:#7b2d8e;--text-secondary:#c44dbb;--text-muted:#e080d0;--text-faint:#f0b0e0;--accent:#ff6ba6;--accent-dim:rgba(255,107,166,.25);--accent-glow:rgba(255,107,166,.5);--green:#5cd65c;--green-dim:rgba(92,214,92,.25);--yellow:#ffd24d;--yellow-dim:rgba(255,210,77,.25);--red:#ff6666;--red-dim:rgba(255,102,102,.25);--blue:#66b3ff;--badge-pending-bg:#fff3c4;--badge-pending-fg:#e080d0;--shadow:0 1px 4px rgba(255,107,166,.2);--shadow-lg:0 8px 24px rgba(255,107,166,.25)}
     :root[data-theme="crimson"]{--bg:#0a0a0a;--bg-raised:#1a0a0a;--bg-hover:#2a1010;--surface:#1a0a0a;--border:#3d1515;--border-hover:#5c1f1f;--text:#f0d0d0;--text-secondary:#d4a0a0;--text-muted:#8c5555;--text-faint:#5c2e2e;--accent:#e63946;--accent-dim:rgba(230,57,70,.18);--accent-glow:rgba(230,57,70,.5);--green:#4caf50;--green-dim:rgba(76,175,80,.18);--yellow:#d4a017;--yellow-dim:rgba(212,160,23,.18);--red:#ff1744;--red-dim:rgba(255,23,68,.18);--blue:#e05555;--badge-pending-bg:#2a1010;--badge-pending-fg:#8c5555;--shadow:0 1px 3px rgba(0,0,0,.6);--shadow-lg:0 8px 24px rgba(230,57,70,.2);--font-override:'Barlow Semi Condensed',sans-serif}
+    :root[data-theme="fiice"]{--bg:#0c0811;--bg-raised:#130d1e;--bg-hover:#1e1530;--surface:#130d1e;--border:#2d1f40;--border-hover:#4a2d68;--text:#e8eeff;--text-secondary:#b8c0e8;--text-muted:#7060a0;--text-faint:#3d2a58;--accent:#d060e0;--accent-dim:rgba(208,96,224,.18);--accent-glow:rgba(208,96,224,.5);--green:#4dd8f0;--green-dim:rgba(77,216,240,.15);--yellow:#ff7a30;--yellow-dim:rgba(255,122,48,.15);--red:#e03030;--red-dim:rgba(224,48,48,.18);--blue:#90c8ff;--badge-pending-bg:#1e1530;--badge-pending-fg:#7060a0;--shadow:0 1px 3px rgba(0,0,0,.6);--shadow-lg:0 8px 24px rgba(208,96,224,.25)}
+    :root[data-theme="sunset"]{--bg:#090608;--bg-raised:#130e08;--bg-hover:#1f1510;--surface:#130e08;--border:#2a1e0e;--border-hover:#4a3218;--text:#f5ddb0;--text-secondary:#d4a060;--text-muted:#8a6030;--text-faint:#4a2e10;--accent:#f08020;--accent-dim:rgba(240,128,32,.18);--accent-glow:rgba(240,128,32,.5);--green:#3a9068;--green-dim:rgba(58,144,104,.15);--yellow:#fbbf24;--yellow-dim:rgba(251,191,36,.15);--red:#e03520;--red-dim:rgba(224,53,32,.18);--blue:#8878b0;--badge-pending-bg:#1f1510;--badge-pending-fg:#8a6030;--shadow:0 1px 3px rgba(0,0,0,.6);--shadow-lg:0 8px 24px rgba(240,128,32,.2)}
     *{margin:0;padding:0;box-sizing:border-box}
     html,body{height:100%;overflow:hidden}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text-secondary);line-height:1.5;transition:background .4s,color .4s}
@@ -139,7 +141,7 @@
     @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
     /* Background-first theme transition: backgrounds move immediately, foreground follows */
-    :root{--theme-fg-delay:500ms;--theme-bg-dur:350ms;--theme-fg-dur:350ms}
+    :root{--theme-fg-delay:400ms;--theme-bg-dur:800ms;--theme-fg-dur:1000ms}
     :root.theme-transition body{transition:background-color var(--theme-bg-dur) ease 0s,color var(--theme-fg-dur) ease var(--theme-fg-delay)!important}
     :root.theme-transition .header,:root.theme-transition .sidebar,:root.theme-transition .panel-header,:root.theme-transition .footer,:root.theme-transition .layout{transition:background-color var(--theme-bg-dur) ease 0s!important}
     :root.theme-transition .agent-card,:root.theme-transition .task,:root.theme-transition .show-more-btn{transition:background-color var(--theme-bg-dur) ease 0s,color var(--theme-fg-dur) ease var(--theme-fg-delay),border-color var(--theme-fg-dur) ease var(--theme-fg-delay),box-shadow var(--theme-fg-dur) ease var(--theme-fg-delay)!important}
@@ -198,6 +200,8 @@
           <button class="theme-btn" data-theme="midnight">Midnight</button>
           <button class="theme-btn" data-theme="pastel">Pastel</button>
           <button class="theme-btn" data-theme="crimson">Crimson</button>
+          <button class="theme-btn" data-theme="fiice">Fi&#xb7;Ice</button>
+          <button class="theme-btn" data-theme="sunset">Sunset</button>
         </div>
         <div class="poll-indicator">
           <span class="poll-dot" id="poll-dot"></span>
@@ -240,9 +244,9 @@
     function agentColor(n){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return AGENT_COLORS[Math.abs(h)%AGENT_COLORS.length]}
     function agentInitial(n){return n.split('-').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
 
-    let _themeDelay=parseInt(localStorage.getItem('theme-fg-delay'))||500;
-    let _bgDur=parseInt(localStorage.getItem('theme-bg-dur'))||350;
-    let _fgDur=parseInt(localStorage.getItem('theme-fg-dur'))||350;
+    let _themeDelay=parseInt(localStorage.getItem('theme-fg-delay'))||400;
+    let _bgDur=parseInt(localStorage.getItem('theme-bg-dur'))||800;
+    let _fgDur=parseInt(localStorage.getItem('theme-fg-dur'))||1000;
     function _applyThemeVars(){const r=document.documentElement;r.style.setProperty('--theme-fg-delay',_themeDelay+'ms');r.style.setProperty('--theme-bg-dur',_bgDur+'ms');r.style.setProperty('--theme-fg-dur',_fgDur+'ms')}
     _applyThemeVars();
     const _log=(n,v)=>console.log('%c'+n+' → '+v+'ms','color:#8b5cf6;font-weight:bold');
