@@ -139,12 +139,12 @@
     @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
     /* Background-first theme transition: backgrounds move immediately, foreground follows */
-    :root{--theme-fg-delay:150ms}
-    :root.theme-transition body{transition:background-color .35s ease 0s,color .35s ease var(--theme-fg-delay)!important}
-    :root.theme-transition .header,:root.theme-transition .sidebar,:root.theme-transition .panel-header,:root.theme-transition .footer,:root.theme-transition .layout{transition:background-color .35s ease 0s!important}
-    :root.theme-transition .agent-card,:root.theme-transition .task,:root.theme-transition .show-more-btn{transition:background-color .35s ease 0s,color .35s ease var(--theme-fg-delay),border-color .35s ease var(--theme-fg-delay),box-shadow .35s ease var(--theme-fg-delay)!important}
-    :root.theme-transition .badge,:root.theme-transition .filter-chip,:root.theme-transition .theme-btn{transition:background-color .35s ease 0s,color .35s ease var(--theme-fg-delay),border-color .35s ease var(--theme-fg-delay)!important}
-    :root.theme-transition .msg-item,:root.theme-transition .msg-from,:root.theme-transition .msg-to,:root.theme-transition .msg-body{transition:background-color .35s ease 0s,color .35s ease var(--theme-fg-delay),border-color .35s ease var(--theme-fg-delay)!important}
+    :root{--theme-fg-delay:500ms;--theme-bg-dur:350ms;--theme-fg-dur:350ms}
+    :root.theme-transition body{transition:background-color var(--theme-bg-dur) ease 0s,color var(--theme-fg-dur) ease var(--theme-fg-delay)!important}
+    :root.theme-transition .header,:root.theme-transition .sidebar,:root.theme-transition .panel-header,:root.theme-transition .footer,:root.theme-transition .layout{transition:background-color var(--theme-bg-dur) ease 0s!important}
+    :root.theme-transition .agent-card,:root.theme-transition .task,:root.theme-transition .show-more-btn{transition:background-color var(--theme-bg-dur) ease 0s,color var(--theme-fg-dur) ease var(--theme-fg-delay),border-color var(--theme-fg-dur) ease var(--theme-fg-delay),box-shadow var(--theme-fg-dur) ease var(--theme-fg-delay)!important}
+    :root.theme-transition .badge,:root.theme-transition .filter-chip,:root.theme-transition .theme-btn{transition:background-color var(--theme-bg-dur) ease 0s,color var(--theme-fg-dur) ease var(--theme-fg-delay),border-color var(--theme-fg-dur) ease var(--theme-fg-delay)!important}
+    :root.theme-transition .msg-item,:root.theme-transition .msg-from,:root.theme-transition .msg-to,:root.theme-transition .msg-body{transition:background-color var(--theme-bg-dur) ease 0s,color var(--theme-fg-dur) ease var(--theme-fg-delay),border-color var(--theme-fg-dur) ease var(--theme-fg-delay)!important}
 
     @media(max-width:700px){
       .app{height:100dvh;height:100vh;max-height:100dvh}
@@ -240,12 +240,17 @@
     function agentColor(n){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return AGENT_COLORS[Math.abs(h)%AGENT_COLORS.length]}
     function agentInitial(n){return n.split('-').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
 
-    let _themeDelay=parseInt(localStorage.getItem('theme-fg-delay'))||150;
-    function _applyThemeDelay(ms){document.documentElement.style.setProperty('--theme-fg-delay',ms+'ms')}
-    _applyThemeDelay(_themeDelay);
-    Object.defineProperty(window,'themeDelay',{get:()=>_themeDelay,set:(v)=>{_themeDelay=v;_applyThemeDelay(v);localStorage.setItem('theme-fg-delay',v);console.log('%cthemeDelay → '+v+'ms','color:#8b5cf6;font-weight:bold')}});
+    let _themeDelay=parseInt(localStorage.getItem('theme-fg-delay'))||500;
+    let _bgDur=parseInt(localStorage.getItem('theme-bg-dur'))||350;
+    let _fgDur=parseInt(localStorage.getItem('theme-fg-dur'))||350;
+    function _applyThemeVars(){const r=document.documentElement;r.style.setProperty('--theme-fg-delay',_themeDelay+'ms');r.style.setProperty('--theme-bg-dur',_bgDur+'ms');r.style.setProperty('--theme-fg-dur',_fgDur+'ms')}
+    _applyThemeVars();
+    const _log=(n,v)=>console.log('%c'+n+' → '+v+'ms','color:#8b5cf6;font-weight:bold');
+    Object.defineProperty(window,'themeDelay',{get:()=>_themeDelay,set:(v)=>{_themeDelay=v;_applyThemeVars();localStorage.setItem('theme-fg-delay',v);_log('themeDelay',v)}});
+    Object.defineProperty(window,'bgDuration',{get:()=>_bgDur,set:(v)=>{_bgDur=v;_applyThemeVars();localStorage.setItem('theme-bg-dur',v);_log('bgDuration',v)}});
+    Object.defineProperty(window,'fgDuration',{get:()=>_fgDur,set:(v)=>{_fgDur=v;_applyThemeVars();localStorage.setItem('theme-fg-dur',v);_log('fgDuration',v)}});
 
-    function setTheme(t){const r=document.documentElement;r.classList.add('theme-transition');r.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));setTimeout(()=>r.classList.remove('theme-transition'),400+_themeDelay)}
+    function setTheme(t){const r=document.documentElement;r.classList.add('theme-transition');r.setAttribute('data-theme',t);localStorage.setItem('dashboard-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));setTimeout(()=>r.classList.remove('theme-transition'),_themeDelay+Math.max(_bgDur,_fgDur)+50)}
     document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',function(e){const sw=document.querySelector('.theme-switcher');if(this.classList.contains('active')){e.stopPropagation();sw.classList.toggle('expanded')}else{setTheme(this.dataset.theme);sw.classList.remove('expanded')}}));
     const saved=localStorage.getItem('dashboard-theme');if(saved)setTheme(saved);
 
