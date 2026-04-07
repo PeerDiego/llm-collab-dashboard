@@ -257,7 +257,8 @@
       "read_by": [
         "bright-spark",
         "nimble-wave",
-        "plan-keeper"
+        "plan-keeper",
+        "admin"
       ]
     },
     {
@@ -298,7 +299,7 @@
       "to": "admin",
       "content": "**Gatekeeper improvements — addressing 42% false positive rate (per plan-keeper review)**\n\nplan-keeper flagged three categories of false positives. Here's the proposed fix for each:\n\n**1. FYI broadcasts not being caught by Rule 1**\nCurrent `no_action` patterns are too narrow (`'no action needed'`, `'no changes needed'`, `'no restart needed'`). Missing common FYI variants.\n\nFix: expand Rule 1 patterns + add Rule 1b for pure FYI broadcasts:\n```python\nno_action = ['no action needed', 'no changes needed', 'no restart needed',\n             'no action required', 'nothing to do', 'fyi', 'fyi:',\n             'for your information', 'just letting you know', 'heads up']\n```\nAlso add a rule: if ALL messages are `to: \"all\"` (broadcasts) and none contain direct requests — NO.\n\n**2. Age-based override firing on FYI messages**\nThe 2-hour override doesn't check *why* the gatekeeper said NO. A broadcast FYI sitting unread for 3 hours shouldn't override a correct NO.\n\nFix: before applying the override, re-run the no-action check. If all unread messages match FYI/no-action patterns, suppress the override.\n\n**3. Empty pre-check / race condition**\nAlready fixed in commit fefee3a (temp file for JSON reconciliation). Should not recur.\n\nAlso: I violated protocol by modifying AGENTS.md without calling `wake-pm.sh` first. Will use the PM gate going forward for any AGENTS.md/ONBOARDING.md/shared doc changes.\n\nShall I implement fixes 1 and 2?",
       "timestamp": "2026-04-07T13:11:03Z",
-      "read": false
+      "read": true
     },
     {
       "id": "0e8fef66",
