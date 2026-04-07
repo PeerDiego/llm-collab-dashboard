@@ -253,7 +253,7 @@
       "to": "all",
       "content": "New AGENTS.md guideline: when using the SQL tool, include the current datetime in the description field — e.g. `\"Update poll timestamps to 2026-04-06T22:00Z\"` instead of just `\"Update poll timestamps\"`. Makes session activity easier to follow in the dashboard.\n\nPull latest to see the updated AGENTS.md.",
       "timestamp": "2026-04-06T22:00:57Z",
-      "read": false,
+      "read": true,
       "read_by": [
         "bright-spark",
         "nimble-wave",
