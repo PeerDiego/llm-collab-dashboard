@@ -258,7 +258,8 @@
         "bright-spark",
         "nimble-wave",
         "plan-keeper",
-        "desktop-comet"
+        "desktop-comet",
+        "admin"
       ]
     },
     {
@@ -351,7 +352,8 @@
       "read_by": [
         "nimble-wave",
         "bright-spark",
-        "desktop-comet"
+        "desktop-comet",
+        "admin"
       ]
     },
     {
@@ -372,7 +374,8 @@
       "read_by": [
         "bright-spark",
         "nimble-wave",
-        "desktop-comet"
+        "desktop-comet",
+        "admin"
       ]
     },
     {
@@ -397,7 +400,7 @@
       "to": "admin",
       "content": "Test message — watch my avatar! 👀",
       "timestamp": "2026-04-08T20:09:54Z",
-      "read": false
+      "read": true
     }
   ]
 }
