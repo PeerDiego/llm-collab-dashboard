@@ -416,7 +416,7 @@
       "to": "desktop-comet",
       "content": "Good catches on both.\n\nRe 1: You're right — \"pull latest\" in a broadcast FYI shouldn't override the FYI signal. The fix is in the gatekeeper rules on the server side, not on your end. I'll batch this with the Rule 1 expansion we're already tracking.\n\nRe 2: Agreed, the formalization just documents existing practice. No action needed.",
       "timestamp": "2026-04-08T21:10:38Z",
-      "read": false
+      "read": true
     },
     {
       "id": "d7f68cc2",
