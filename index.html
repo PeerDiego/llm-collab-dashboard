@@ -51,8 +51,11 @@
     .sidebar.d-partial .agent-grid{grid-template-columns:1fr}
     .sidebar.d-partial .agent-name,.sidebar.d-partial .agent-stats{display:none}
     .sidebar.d-partial .sidebar-collapse-btn::before{content:'\003E'}
-    .sidebar.d-hidden{width:0;border-right:none}
-    .sidebar.d-hidden .sidebar-title,.sidebar.d-hidden .agent-grid{visibility:hidden}
+    .sidebar.d-hidden{width:32px;overflow:hidden}
+    .sidebar.d-hidden .agent-grid{display:none}
+    .sidebar.d-hidden .sidebar-title{writing-mode:vertical-rl;transform:rotate(180deg);cursor:pointer;justify-content:center;padding:.75rem 0;width:32px;height:100%;letter-spacing:.1em}
+    .sidebar.d-hidden .sidebar-title:hover{color:var(--accent)}
+    .sidebar.d-hidden .sidebar-collapse-btn{display:none}
     .agent-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:0 .75rem .75rem;overflow-y:auto;overflow-x:hidden;min-height:270px;max-height:none}
     .agent-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.5rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:pointer;transition:all .2s;text-align:center}
     .agent-card:hover{border-color:var(--border-hover)}
@@ -399,7 +402,10 @@
     if(sessionStorage.getItem('page-reload-reason')==='update'){sessionStorage.removeItem('page-reload-reason');console.log('['+new Date().toLocaleString()+'] Webpage refreshed to load update')}
 
     /* Mobile collapsible sections */
-    document.querySelector('.sidebar-title').addEventListener('click',function(){if(window.innerWidth<=700)this.closest('.sidebar').classList.toggle('m-collapsed')});
+    document.querySelector('.sidebar-title').addEventListener('click',function(e){
+      if(window.innerWidth<=700){this.closest('.sidebar').classList.toggle('m-collapsed');return}
+      if(document.querySelector('.sidebar').classList.contains('d-hidden')){e.stopPropagation();sidebarState='expanded';applySidebarState(sidebarState)}
+    });
     document.querySelector('.panel-header').addEventListener('click',function(){if(window.innerWidth<=700){const mp=document.querySelector('.messages-panel');mp.classList.toggle('m-collapsed');this.classList.toggle('m-hdr-collapsed')}});
     document.querySelector('.tasks-header').addEventListener('click',function(e){if(window.innerWidth<=700&&!e.target.closest('.filter-chip')){const tp=document.querySelector('.tasks-panel');tp.classList.toggle('m-collapsed');this.classList.toggle('m-hdr-collapsed')}});
 
@@ -410,8 +416,8 @@
       const sb=document.querySelector('.sidebar');
       const btn=document.getElementById('sidebar-collapse-btn');
       sb.classList.remove('d-partial','d-hidden');
-      if(s==='partial'){sb.classList.add('d-partial');btn.textContent='<';btn.title='Collapse agents panel'}
-      else if(s==='hidden'){sb.classList.add('d-hidden');btn.textContent='>';btn.title='Expand agents panel';btn.style.position='fixed';btn.style.left='0';btn.style.top='50%';btn.style.zIndex='50';btn.style.background='var(--bg-raised)';btn.style.border='1px solid var(--border)';btn.style.borderLeft='none';btn.style.padding='.25rem .3rem';btn.style.borderRadius='0 4px 4px 0'}
+      if(s==='partial'){sb.classList.add('d-partial');btn.textContent='<';btn.title='Collapse agents panel';btn.style.cssText=''}
+      else if(s==='hidden'){sb.classList.add('d-hidden');btn.textContent='<';btn.title=''}
       else{btn.textContent='<';btn.title='Collapse agents panel';btn.style.cssText=''}
       localStorage.setItem('sidebar-state',s);
     }
