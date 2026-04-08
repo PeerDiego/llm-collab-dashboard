@@ -59,7 +59,24 @@
     .agent-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.5rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:pointer;transition:all .2s;text-align:center}
     .agent-card:hover{border-color:var(--border-hover)}
     .agent-card.filter-active{border-color:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
-    .agent-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:#fff}
+    .agent-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:#fff;position:relative}
+
+    /* Avatar animations */
+    @keyframes av-orbit{0%{box-shadow:0 -20px 0 3px var(--accent)}25%{box-shadow:20px 0 0 3px var(--accent)}50%{box-shadow:0 20px 0 3px var(--accent)}75%{box-shadow:-20px 0 0 3px var(--accent)}100%{box-shadow:0 -20px 0 3px var(--accent)}}
+    @keyframes av-heartbeat{0%,100%{transform:scale(1)}10%{transform:scale(1.25)}20%{transform:scale(1)}30%{transform:scale(1.15)}40%{transform:scale(1)}}
+    @keyframes av-ripple{0%{box-shadow:0 0 0 0 rgba(255,255,255,.6),0 0 0 0 rgba(255,255,255,.3)}70%{box-shadow:0 0 0 12px rgba(255,255,255,0),0 0 0 24px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0),0 0 0 0 rgba(255,255,255,0)}}
+    @keyframes av-jello{0%,100%{transform:scale(1,1)}20%{transform:scale(1.25,.75)}35%{transform:scale(.75,1.25)}50%{transform:scale(1.15,.9)}65%{transform:scale(.95,1.05)}80%{transform:scale(1.05,.95)}}
+    @keyframes av-strobe{0%,100%{filter:hue-rotate(0deg) brightness(1)}15%{filter:hue-rotate(90deg) brightness(1.4)}30%{filter:hue-rotate(180deg) brightness(1.2)}45%{filter:hue-rotate(270deg) brightness(1.5)}60%{filter:hue-rotate(45deg) brightness(1.3)}75%{filter:hue-rotate(135deg) brightness(1.1)}}
+    @keyframes av-spinbounce{0%{transform:rotate(0deg) translateY(0)}25%{transform:rotate(180deg) translateY(-10px)}50%{transform:rotate(360deg) translateY(0)}65%{transform:rotate(360deg) translateY(-5px)}80%{transform:rotate(360deg) translateY(0)}100%{transform:rotate(360deg) translateY(0)}}
+    @keyframes av-shake{0%,100%{transform:translateX(0)}10%{transform:translateX(-6px)}20%{transform:translateX(6px)}30%{transform:translateX(-5px)}40%{transform:translateX(5px)}50%{transform:translateX(-3px)}60%{transform:translateX(3px)}70%{transform:translateX(-8px) scale(1.1)}80%{transform:translateX(8px) scale(1.1)}90%{transform:translateX(0) scale(1.05)}}
+
+    .agent-avatar.av-0{animation:av-orbit .8s linear infinite}
+    .agent-avatar.av-1{animation:av-heartbeat .6s ease-in-out infinite}
+    .agent-avatar.av-2{animation:av-ripple 1.5s ease-out infinite}
+    .agent-avatar.av-3{animation:av-jello .7s ease-in-out infinite}
+    .agent-avatar.av-4{animation:av-strobe .5s linear infinite}
+    .agent-avatar.av-5{animation:av-spinbounce 1s ease-in-out infinite}
+    .agent-avatar.av-6{animation:av-shake .6s ease-in-out infinite}
     .agent-name{font-size:.68rem;font-weight:600;color:var(--accent);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%}
     .agent-stats{font-size:.6rem;color:var(--text-muted);display:flex;gap:.35rem;justify-content:center}
     .mini-dot{width:5px;height:5px;border-radius:50%;display:inline-block;vertical-align:middle}
@@ -376,11 +393,50 @@
     function applyFilters(){document.querySelectorAll('.task[data-task-id]').forEach(el=>{const t=currentTasks.find(x=>x.id===el.dataset.taskId);if(!t)return;const sOk=!activeFilters.size||activeFilters.has(t.status),aOk=!activeAgentFilters.size||activeAgentFilters.has(t.assignee||'');el.classList.toggle('filtered-out',!(sOk&&aOk))});updateTaskCount();applyMsgAgentFilter()}
     function applyMsgAgentFilter(){document.querySelectorAll('.msg-item').forEach(el=>{if(!activeAgentFilters.size){el.classList.remove('filtered-out');return}const from=el.querySelector('.msg-from')?.textContent||'';const toEl=el.querySelector('.msg-to')?.textContent||'';const match=[...activeAgentFilters].some(a=>from===a||toEl.includes(a));el.classList.toggle('filtered-out',!match)})}
 
+    /* Avatar animation system */
+    const avatarAnims=[
+      {name:'Orbit pulse',      desc:'Glowing ring orbits the avatar',                  cls:'av-0'},
+      {name:'Heartbeat',        desc:'Scale pulses in a heartbeat rhythm',              cls:'av-1'},
+      {name:'Ripple burst',     desc:'Concentric rings expand and fade outward',        cls:'av-2'},
+      {name:'Jello wobble',     desc:'Alternating scaleX/scaleY squish and stretch',    cls:'av-3'},
+      {name:'Color strobe',     desc:'Background hue cycles rapidly then snaps back',   cls:'av-4'},
+      {name:'Spin + bounce',    desc:'Full rotation combined with vertical bounce',      cls:'av-5'},
+      {name:'Shake',            desc:'Rapid horizontal jitter then bounce-in',          cls:'av-6'},
+    ];
+    const _animTimers={};
+    function triggerAgentAnim(agentId,index,seconds){
+      const anim=avatarAnims[index];if(!anim)return;
+      const card=document.querySelector('.agent-card[data-agent="'+agentId+'"]');
+      if(!card)return;
+      const avatar=card.querySelector('.agent-avatar');if(!avatar)return;
+      const dur=(typeof seconds==='number'&&seconds>0?seconds:10)*1000;
+      avatarAnims.forEach(a=>avatar.classList.remove(a.cls));
+      clearTimeout(_animTimers[agentId]);
+      avatar.classList.add(anim.cls);
+      _animTimers[agentId]=setTimeout(()=>avatar.classList.remove(anim.cls),dur);
+    }
+    window.testAnim=function(agentId,index,seconds){
+      const anim=avatarAnims[index];
+      if(!anim){console.warn('testAnim: invalid index '+index+'. Valid: 0–'+(avatarAnims.length-1));return}
+      const dur=typeof seconds==='number'&&seconds>0?seconds:10;
+      console.log('Agent: '+agentId+' | Animation '+index+': '+anim.name+' — '+anim.desc+' | Duration: '+dur+'s');
+      triggerAgentAnim(agentId,index,dur);
+    };
+    let _prevMsgIds=null;
+
     async function fetchMessages(){
       try{const r=await fetch('messages.json?_='+Date.now());if(!r.ok)return;const data=await r.json();const allMsgs=(data.messages||[]).filter(m=>!m.retracted).slice().reverse();const el=document.getElementById('messages');
-      if(!allMsgs.length){el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:2rem">No messages</div>';return}
+      if(!allMsgs.length){el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:2rem">No messages</div>';_prevMsgIds=new Set();return}
       const agents=Object.keys(agentMeta);
       function isMsgRead(m){if(m.to==='all'){const rb=(m.read_by||[]).filter(a=>a!==m.from);const expected=agents.filter(a=>a!==m.from);return!!m.read||(expected.length>0&&expected.every(a=>rb.includes(a)))}return!!m.read}
+
+      /* Detect new messages and animate sender avatar */
+      const curIds=new Set(allMsgs.map(m=>m.id));
+      if(_prevMsgIds!==null){
+        allMsgs.forEach((m,i)=>{if(!_prevMsgIds.has(m.id)&&m.from){triggerAgentAnim(m.from,i%avatarAnims.length)}});
+      }
+      _prevMsgIds=curIds;
+
       const unread=allMsgs.filter(m=>!isMsgRead(m)).length;const countEl=document.getElementById('msg-count');countEl.textContent=(unread||msgFilterUnread)?'('+unread+')':'';countEl.classList.toggle('active',msgFilterUnread);
       const todayBtn=document.getElementById('msg-today-btn');todayBtn.classList.toggle('active',msgFilterToday);
       const todayStr=new Date().toISOString().slice(0,10);
