@@ -44,17 +44,14 @@
     .main{display:flex;flex:1;overflow:hidden}
 
     .sidebar{width:250px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg-raised);overflow-x:hidden;transition:width .2s ease}
-    .sidebar-title{font-size:.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;padding:.7rem .85rem .5rem;display:flex;align-items:center}
-    .sidebar-collapse-btn{margin-left:auto;cursor:pointer;color:var(--text-faint);font-size:.7rem;padding:0 .3rem;border-radius:3px;user-select:none;transition:color .15s}
-    .sidebar-collapse-btn:hover{color:var(--accent)}
+    .sidebar-title{font-size:.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;padding:.7rem .85rem .5rem;display:flex;align-items:center;gap:.3rem;cursor:pointer;user-select:none}
+    .sidebar-title:hover{color:var(--accent)}
     .sidebar.d-partial{width:110px}
     .sidebar.d-partial .agent-grid{grid-template-columns:1fr}
     .sidebar.d-partial .agent-name,.sidebar.d-partial .agent-stats{display:none}
     .sidebar.d-hidden{width:32px;overflow:hidden}
     .sidebar.d-hidden .agent-grid{display:none}
-    .sidebar.d-hidden .sidebar-title{writing-mode:vertical-rl;transform:rotate(180deg);cursor:pointer;justify-content:flex-end;padding:.75rem 0;width:32px;height:100%;letter-spacing:.1em}
-    .sidebar.d-hidden .sidebar-title:hover{color:var(--accent)}
-    .sidebar.d-hidden .sidebar-collapse-btn{display:none}
+    .sidebar.d-hidden .sidebar-title{writing-mode:vertical-rl;transform:rotate(180deg);justify-content:flex-end;padding:.75rem 0;width:32px;height:100%;letter-spacing:.1em}
     .agent-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:0 .75rem .75rem;overflow-y:auto;overflow-x:hidden;min-height:270px;max-height:none}
     .agent-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.5rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:pointer;transition:all .2s;text-align:center}
     .agent-card:hover{border-color:var(--border-hover)}
@@ -230,7 +227,7 @@
     </header>
     <div class="main">
       <aside class="sidebar">
-        <div class="sidebar-title">Agents <span class="m-count" id="agent-m-count"></span><span class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Collapse agents panel">&#x3C;</span></div>
+        <div class="sidebar-title">Agents <span class="m-count" id="agent-m-count"></span></div>
         <div class="agent-grid" id="agents"></div>
       </aside>
       <div class="content">
@@ -346,7 +343,7 @@
       const el=document.getElementById('agents'),assignees=[...new Set(tasks.map(t=>t.assignee).filter(Boolean))];
       el.innerHTML=assignees.map(id=>{const at=tasks.filter(t=>t.assignee===id),done=at.filter(t=>t.status==='done').length,ip=at.filter(t=>t.status==='in_progress').length,fc=activeAgentFilters.has(id)?' filter-active':'',col=agentColor(id),meta=agentMeta[id]||{},aliases=meta.aliases||[],role=meta.role||'',tip=aliases.length?'aka '+aliases.join(', ')+(role?' \xb7 '+role:''):(role||id);return'<div class="agent-card'+fc+'" data-agent="'+id+'" title="'+tip+'"><div class="agent-avatar" style="background:'+col+'">'+agentInitial(id)+'</div><div class="agent-name">'+id+'</div><div class="agent-stats"><span><span class="mini-dot done"></span>'+done+'</span>'+(ip?'<span><span class="mini-dot active"></span>'+ip+'</span>':'')+'</div></div>'}).join('');
       el.querySelectorAll('.agent-card').forEach(c=>c.addEventListener('click',()=>{const id=c.dataset.agent;activeAgentFilters.has(id)?activeAgentFilters.delete(id):activeAgentFilters.add(id);c.classList.toggle('filter-active');applyFilters()}));
-      const mc=document.getElementById('agent-m-count');if(mc)mc.textContent=' ('+assignees.length+')';
+      const mc=document.getElementById('agent-m-count');if(mc)mc.textContent='('+assignees.length+')';
     }
 
     function renderFilterBar(tasks){
@@ -400,10 +397,13 @@
     async function checkPageUpdate(){try{const r=await fetch('index.html?_='+Date.now());if(!r.ok)return;const txt=await r.text();let h=0;for(let i=0;i<txt.length;i++){h=((h<<5)-h)+txt.charCodeAt(i);h|=0}if(pageHash===null){pageHash=h}else if(h!==pageHash){document.getElementById('reload-overlay').classList.add('visible');sessionStorage.setItem('page-reload-reason','update');setTimeout(()=>location.reload(),3e3)}}catch(e){}}
     if(sessionStorage.getItem('page-reload-reason')==='update'){sessionStorage.removeItem('page-reload-reason');console.log('['+new Date().toLocaleString()+'] Webpage refreshed to load update')}
 
-    /* Mobile collapsible sections */
+    /* Sidebar collapse — mobile toggle, desktop 3-state cycle via heading click */
     document.querySelector('.sidebar-title').addEventListener('click',function(e){
       if(window.innerWidth<=700){this.closest('.sidebar').classList.toggle('m-collapsed');return}
-      if(document.querySelector('.sidebar').classList.contains('d-hidden')){e.stopPropagation();sidebarState='expanded';applySidebarState(sidebarState)}
+      e.stopPropagation();
+      const idx=sidebarStates.indexOf(sidebarState);
+      sidebarState=sidebarStates[(idx+1)%sidebarStates.length];
+      applySidebarState(sidebarState);
     });
     document.querySelector('.panel-header').addEventListener('click',function(){if(window.innerWidth<=700){const mp=document.querySelector('.messages-panel');mp.classList.toggle('m-collapsed');this.classList.toggle('m-hdr-collapsed')}});
     document.querySelector('.tasks-header').addEventListener('click',function(e){if(window.innerWidth<=700&&!e.target.closest('.filter-chip')){const tp=document.querySelector('.tasks-panel');tp.classList.toggle('m-collapsed');this.classList.toggle('m-hdr-collapsed')}});
@@ -413,21 +413,12 @@
     let sidebarState=localStorage.getItem('sidebar-state')||'expanded';
     function applySidebarState(s){
       const sb=document.querySelector('.sidebar');
-      const btn=document.getElementById('sidebar-collapse-btn');
       sb.classList.remove('d-partial','d-hidden');
-      if(s==='partial'){sb.classList.add('d-partial');btn.textContent='<';btn.title='Collapse agents panel';btn.style.cssText=''}
-      else if(s==='hidden'){sb.classList.add('d-hidden');btn.textContent='<';btn.title=''}
-      else{btn.textContent='<';btn.title='Collapse agents panel';btn.style.cssText=''}
+      if(s==='partial')sb.classList.add('d-partial');
+      else if(s==='hidden')sb.classList.add('d-hidden');
       localStorage.setItem('sidebar-state',s);
     }
     applySidebarState(sidebarState);
-    document.getElementById('sidebar-collapse-btn').addEventListener('click',function(e){
-      e.stopPropagation();
-      if(window.innerWidth<=700)return;
-      const idx=sidebarStates.indexOf(sidebarState);
-      sidebarState=sidebarStates[(idx+1)%sidebarStates.length];
-      applySidebarState(sidebarState);
-    });
 
     async function fetchAll(){await checkPageUpdate();await fetchAgentMeta();await fetchPlan();await fetchMessages()}
     fetchAll().then(()=>{pollTimer=setInterval(fetchAll,pollIntervalMs)});
