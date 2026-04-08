@@ -51,7 +51,8 @@
     .sidebar.d-partial .agent-name,.sidebar.d-partial .agent-stats{display:none}
     .sidebar.d-hidden{width:32px;overflow:hidden}
     .sidebar.d-hidden .agent-grid{display:none}
-    .sidebar.d-hidden .sidebar-title{writing-mode:vertical-rl;transform:rotate(180deg);justify-content:flex-end;padding:.75rem 0;width:32px;height:100%;letter-spacing:.1em}
+    @keyframes agentCollapseIn{from{opacity:0;transform:rotate(180deg) translateX(12px)}to{opacity:1;transform:rotate(180deg)}}
+    .sidebar.d-hidden .sidebar-title{writing-mode:vertical-rl;transform:rotate(180deg);justify-content:flex-end;padding:.75rem 0;width:32px;height:100%;letter-spacing:.1em;animation:agentCollapseIn .35s cubic-bezier(.34,1.2,.64,1) forwards}
     .agent-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:0 .75rem .75rem;overflow-y:auto;overflow-x:hidden;min-height:270px;max-height:none}
     .agent-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.5rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:pointer;transition:all .2s;text-align:center}
     .agent-card:hover{border-color:var(--border-hover)}
@@ -66,7 +67,8 @@
     .panel-header{padding:.5rem 1rem;border-bottom:1px solid var(--border);background:var(--bg-raised);display:flex;align-items:center;gap:.5rem;flex-shrink:0}
     .panel-title{font-size:.78rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:.4rem}
     .panel-title .icon{font-size:1rem}
-    .msg-count-btn{cursor:pointer;border-radius:4px;padding:0 4px;font-size:.72rem;color:var(--text-faint)}
+    .heading-count{font-size:.7rem;color:var(--text-faint);font-weight:400}
+    .msg-count-btn{cursor:pointer;border-radius:4px;padding:0 4px}
     .msg-count-btn:hover{background:var(--accent-dim);color:var(--accent)}
     .msg-count-btn.active{color:var(--accent);background:var(--accent-dim)}
     .messages-panel{flex:1;overflow-y:auto;min-height:0}
@@ -227,19 +229,19 @@
     </header>
     <div class="main">
       <aside class="sidebar">
-        <div class="sidebar-title">Agents <span class="m-count" id="agent-m-count"></span></div>
+        <div class="sidebar-title">Agents <span class="m-count heading-count" id="agent-m-count"></span></div>
         <div class="agent-grid" id="agents"></div>
       </aside>
       <div class="content">
         <div class="panel-header">
-          <span class="panel-title"><span class="collapse-arrow"></span><span class="icon">&#x1F4AC;</span> Messages <span class="msg-count-btn" id="msg-count" onclick="event.stopPropagation();toggleMsgFilter()"></span></span><span class="filter-chip" id="msg-today-btn" style="margin-left:auto" onclick="event.stopPropagation();toggleMsgTodayFilter()" title="Show today's messages only">Today</span>
+          <span class="panel-title"><span class="collapse-arrow"></span><span class="icon">&#x1F4AC;</span> Messages <span class="msg-count-btn heading-count" id="msg-count" onclick="event.stopPropagation();toggleMsgFilter()"></span></span><span class="filter-chip" id="msg-today-btn" style="margin-left:auto" onclick="event.stopPropagation();toggleMsgTodayFilter()" title="Show today's messages only">Today</span>
         </div>
         <div class="messages-panel"><div class="msg-list" id="messages"></div></div>
         <div class="panel-resize-handle" id="panel-resize-handle"></div>
         <div class="tasks-header">
           <div class="tasks-header-left">
             <span class="panel-title"><span class="collapse-arrow"></span><span class="icon">&#x1F4CB;</span> Tasks</span>
-            <span id="task-count" style="font-size:0.68rem;color:var(--text-faint)"></span>
+            <span id="task-count" class="heading-count"></span>
           </div>
           <div class="filter-bar" id="filter-bar"></div>
         </div>
