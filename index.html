@@ -50,10 +50,9 @@
     .sidebar.d-partial{width:110px}
     .sidebar.d-partial .agent-grid{grid-template-columns:1fr}
     .sidebar.d-partial .agent-name,.sidebar.d-partial .agent-stats{display:none}
-    .sidebar.d-partial .sidebar-collapse-btn::before{content:'\003E'}
     .sidebar.d-hidden{width:32px;overflow:hidden}
     .sidebar.d-hidden .agent-grid{display:none}
-    .sidebar.d-hidden .sidebar-title{writing-mode:vertical-rl;transform:rotate(180deg);cursor:pointer;justify-content:center;padding:.75rem 0;width:32px;height:100%;letter-spacing:.1em}
+    .sidebar.d-hidden .sidebar-title{writing-mode:vertical-rl;transform:rotate(180deg);cursor:pointer;justify-content:flex-end;padding:.75rem 0;width:32px;height:100%;letter-spacing:.1em}
     .sidebar.d-hidden .sidebar-title:hover{color:var(--accent)}
     .sidebar.d-hidden .sidebar-collapse-btn{display:none}
     .agent-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:0 .75rem .75rem;overflow-y:auto;overflow-x:hidden;min-height:270px;max-height:none}
@@ -347,7 +346,7 @@
       const el=document.getElementById('agents'),assignees=[...new Set(tasks.map(t=>t.assignee).filter(Boolean))];
       el.innerHTML=assignees.map(id=>{const at=tasks.filter(t=>t.assignee===id),done=at.filter(t=>t.status==='done').length,ip=at.filter(t=>t.status==='in_progress').length,fc=activeAgentFilters.has(id)?' filter-active':'',col=agentColor(id),meta=agentMeta[id]||{},aliases=meta.aliases||[],role=meta.role||'',tip=aliases.length?'aka '+aliases.join(', ')+(role?' \xb7 '+role:''):(role||id);return'<div class="agent-card'+fc+'" data-agent="'+id+'" title="'+tip+'"><div class="agent-avatar" style="background:'+col+'">'+agentInitial(id)+'</div><div class="agent-name">'+id+'</div><div class="agent-stats"><span><span class="mini-dot done"></span>'+done+'</span>'+(ip?'<span><span class="mini-dot active"></span>'+ip+'</span>':'')+'</div></div>'}).join('');
       el.querySelectorAll('.agent-card').forEach(c=>c.addEventListener('click',()=>{const id=c.dataset.agent;activeAgentFilters.has(id)?activeAgentFilters.delete(id):activeAgentFilters.add(id);c.classList.toggle('filter-active');applyFilters()}));
-      const mc=document.getElementById('agent-m-count');if(mc)mc.textContent='('+assignees.length+')';
+      const mc=document.getElementById('agent-m-count');if(mc)mc.textContent=' ('+assignees.length+')';
     }
 
     function renderFilterBar(tasks){
