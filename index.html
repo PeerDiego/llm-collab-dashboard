@@ -451,7 +451,7 @@
       /* Detect new messages and animate sender avatar */
       const curIds=new Set(allMsgs.map(m=>m.id));
       if(_prevMsgIds!==null){
-        allMsgs.forEach((m,i)=>{if(!_prevMsgIds.has(m.id)&&m.from){triggerAgentAnim(m.from,i%avatarAnims.length)}});
+        allMsgs.forEach(m=>{if(!_prevMsgIds.has(m.id)&&m.from){triggerAgentAnim(m.from,Math.floor(Math.random()*avatarAnims.length))}});
       }
       _prevMsgIds=curIds;
 
