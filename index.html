@@ -225,7 +225,7 @@
       </aside>
       <div class="content">
         <div class="panel-header">
-          <span class="panel-title"><span class="collapse-arrow"></span><span class="icon">&#x1F4AC;</span> Messages <span class="msg-count-btn" id="msg-count" onclick="event.stopPropagation();toggleMsgFilter()"></span></span>
+          <span class="panel-title"><span class="collapse-arrow"></span><span class="icon">&#x1F4AC;</span> Messages <span class="msg-count-btn" id="msg-count" onclick="event.stopPropagation();toggleMsgFilter()"></span><span class="msg-count-btn" id="msg-today-btn" onclick="event.stopPropagation();toggleMsgTodayFilter()" title="Show today's messages only">Today</span></span>
         </div>
         <div class="messages-panel"><div class="msg-list" id="messages"></div></div>
         <div class="panel-resize-handle" id="panel-resize-handle"></div>
@@ -248,6 +248,7 @@
     const DEFAULT_POLL_MS=3e4,PLAN_URL='plan.json',AGENT_COLORS=['#8b5cf6','#ec4899','#f59e0b','#10b981','#3b82f6','#ef4444','#06b6d4','#84cc16'];
     let pollIntervalMs=parseInt(localStorage.getItem('poll-interval'))||DEFAULT_POLL_MS;
     let msgFilterUnread=localStorage.getItem('msg-filter-unread')==='1';
+    let msgFilterToday=localStorage.getItem('msg-filter-today')==='1';
     let previousPlan=null,pollTimer=null,activeFilters=new Set(),activeAgentFilters=new Set(),currentTasks=[],agentMeta={};
     const TASK_PAGE_SIZE=30;let taskShowCount=TASK_PAGE_SIZE,sortedTasks=[];
 
@@ -370,13 +371,18 @@
       const agents=Object.keys(agentMeta);
       function isMsgRead(m){if(m.to==='all'){const rb=(m.read_by||[]).filter(a=>a!==m.from);const expected=agents.filter(a=>a!==m.from);return!!m.read||(expected.length>0&&expected.every(a=>rb.includes(a)))}return!!m.read}
       const unread=allMsgs.filter(m=>!isMsgRead(m)).length;const countEl=document.getElementById('msg-count');countEl.textContent=(unread||msgFilterUnread)?'('+unread+')':'';countEl.classList.toggle('active',msgFilterUnread);
-      const msgs=msgFilterUnread?allMsgs.filter(m=>!isMsgRead(m)):allMsgs;
+      const todayBtn=document.getElementById('msg-today-btn');todayBtn.classList.toggle('active',msgFilterToday);
+      const todayStr=new Date().toISOString().slice(0,10);
+      let msgs=allMsgs;
+      if(msgFilterToday)msgs=msgs.filter(m=>m.timestamp&&m.timestamp.slice(0,10)===todayStr);
+      if(msgFilterUnread)msgs=msgs.filter(m=>!isMsgRead(m));
       el.innerHTML=msgs.slice(0,30).map(m=>{const ts=m.timestamp?new Date(m.timestamp).toLocaleString():'';const cls=isMsgRead(m)?'':'unread';let toLabel='\u2192 '+m.to;if(m.to==='all'){const expected=agents.filter(a=>a!==m.from);const rb=(m.read_by||[]).filter(a=>a!==m.from&&expected.includes(a));const ur=expected.filter(a=>!rb.includes(a));if(rb.length>0||ur.length>0){const readLine=rb.length?'<div class="read-line">Read: '+rb.join(', ')+'</div>':'';const unreadLine=ur.length?'<div class="unread-line">Unread: '+ur.join(', ')+'</div>':'';toLabel='\u2192 all <span class="msg-read-status">('+rb.length+'/'+expected.length+')<span class="read-tooltip">'+readLine+unreadLine+'</span></span>'}}return'<div class="msg-item '+cls+'"><div class="msg-meta"><span class="msg-from">'+m.from+'</span><span class="msg-to">'+toLabel+'</span><span class="msg-time">'+ts+'</span></div><div class="msg-content">'+marked.parse(m.content||'')+'</div></div>'}).join('');
-      if(msgFilterUnread&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No unread messages</div>';
+      if((msgFilterUnread||msgFilterToday)&&!msgs.length)el.innerHTML='<div style="color:var(--text-faint);text-align:center;padding:1rem">No '+(msgFilterToday&&msgFilterUnread?'unread messages today':msgFilterToday?'messages today':'unread messages')+'</div>';
       applyMsgAgentFilter();
       }catch(e){}
     }
     function toggleMsgFilter(){msgFilterUnread=!msgFilterUnread;localStorage.setItem('msg-filter-unread',msgFilterUnread?'1':'0');fetchMessages()}
+    function toggleMsgTodayFilter(){msgFilterToday=!msgFilterToday;localStorage.setItem('msg-filter-today',msgFilterToday?'1':'0');fetchMessages()}
 
     async function fetchAgentMeta(){try{const r=await fetch('agents.json?_='+Date.now());if(r.ok)agentMeta=await r.json()}catch(e){}}
 
