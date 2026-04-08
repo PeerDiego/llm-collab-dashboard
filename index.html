@@ -51,6 +51,8 @@
     .sidebar.d-partial .agent-name,.sidebar.d-partial .agent-stats{display:none}
     .sidebar.d-hidden{width:32px;overflow:hidden}
     .sidebar.d-hidden .agent-grid{display:none}
+    @keyframes agentSlideOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-18px)}}
+    .sidebar.d-collapsing .sidebar-title{animation:agentSlideOut .2s ease forwards}
     @keyframes agentCollapseIn{from{opacity:0;transform:rotate(180deg) translateX(12px)}to{opacity:1;transform:rotate(180deg)}}
     .sidebar.d-hidden .sidebar-title{writing-mode:vertical-rl;transform:rotate(180deg);justify-content:flex-end;padding:.75rem 0;width:32px;height:100%;letter-spacing:.1em;animation:agentCollapseIn .35s cubic-bezier(.34,1.2,.64,1) forwards}
     .agent-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:0 .75rem .75rem;overflow-y:auto;overflow-x:hidden;min-height:270px;max-height:none}
@@ -405,7 +407,7 @@
       e.stopPropagation();
       const idx=sidebarStates.indexOf(sidebarState);
       sidebarState=sidebarStates[(idx+1)%sidebarStates.length];
-      applySidebarState(sidebarState);
+      applySidebarState(sidebarState, true);
     });
     document.querySelector('.panel-header').addEventListener('click',function(){if(window.innerWidth<=700){const mp=document.querySelector('.messages-panel');mp.classList.toggle('m-collapsed');this.classList.toggle('m-hdr-collapsed')}});
     document.querySelector('.tasks-header').addEventListener('click',function(e){if(window.innerWidth<=700&&!e.target.closest('.filter-chip')){const tp=document.querySelector('.tasks-panel');tp.classList.toggle('m-collapsed');this.classList.toggle('m-hdr-collapsed')}});
@@ -413,9 +415,14 @@
     /* Desktop agents panel collapse (3-state: expanded → partial → hidden → expanded) */
     const sidebarStates=['expanded','partial','hidden'];
     let sidebarState=localStorage.getItem('sidebar-state')||'expanded';
-    function applySidebarState(s){
+    function applySidebarState(s,animate){
       const sb=document.querySelector('.sidebar');
-      sb.classList.remove('d-partial','d-hidden');
+      if(animate&&s==='hidden'){
+        sb.classList.add('d-collapsing');
+        setTimeout(()=>{sb.classList.remove('d-collapsing','d-partial');sb.classList.add('d-hidden');localStorage.setItem('sidebar-state',s)},200);
+        return;
+      }
+      sb.classList.remove('d-partial','d-hidden','d-collapsing');
       if(s==='partial')sb.classList.add('d-partial');
       else if(s==='hidden')sb.classList.add('d-hidden');
       localStorage.setItem('sidebar-state',s);
