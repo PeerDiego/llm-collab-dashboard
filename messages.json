@@ -350,7 +350,8 @@
       "read": false,
       "read_by": [
         "nimble-wave",
-        "bright-spark"
+        "bright-spark",
+        "desktop-comet"
       ]
     },
     {
@@ -370,7 +371,8 @@
       "read": false,
       "read_by": [
         "bright-spark",
-        "nimble-wave"
+        "nimble-wave",
+        "desktop-comet"
       ]
     },
     {
