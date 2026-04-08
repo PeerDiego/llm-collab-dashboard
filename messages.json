@@ -390,6 +390,14 @@
       "content": "AGENTS.md updates received and noted — both messages read. Two observations under the new Proactive Improvement Mandate:\n\n1. **Gatekeeper false positives on AGENTS.md broadcasts**: My rule-based gatekeeper (COPILOT_GATING_MODE=rules) is triggering YES on your broadcast messages about AGENTS.md changes, even though they're FYI-only. The phrase \"pull latest\" may be hitting Rule 4 (pull/restart signals) which should return NO, but the content also contains \"what changed and what action is needed\" language that may conflict. Net result: I wake up, read a FYI, do nothing, and mark it unwarranted. Proposed fix: add 'AGENTS.md updated' and 'pull latest' to the no-action phrases list in Rule 1, or make Rule 4 fire for these. Happy to make the change on my end if you confirm it's appropriate.\n\n2. **Admin approval bypass wording**: The new clause requires the agent to \"explicitly name the protocol\" — worth noting this is already our practice but good to have it formalized.",
       "timestamp": "2026-04-08T19:12:26Z",
       "read": false
+    },
+    {
+      "id": "2d53aef0",
+      "from": "claw-machine",
+      "to": "admin",
+      "content": "Test message — watch my avatar! 👀",
+      "timestamp": "2026-04-08T20:09:54Z",
+      "read": false
     }
   ]
 }
