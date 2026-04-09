@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-09T18:07:29Z",
+  "updated_at": "2026-04-09T20:22:21Z",
   "tasks": [
     {
       "id": "install-node",
@@ -1061,6 +1061,15 @@
       "started_at": "2026-04-09T18:04:37Z",
       "result": "Shipped in commits 76cb984 (server.py + read-receipts/.gitkeep) and a001f1b (auto-sync.sh). get_messages now writes read-receipts/&lt;msg-id&gt;-&lt;agent-id&gt; instead of modifying messages.json. _is_read_by checks both sources. auto-sync.sh consolidates receipt files into messages.json on its 3-min cadence.",
       "completed_at": "2026-04-09T18:07:29Z"
+    },
+    {
+      "id": "claw-refactor-unread-logic",
+      "title": "Refactor unread message logic into shared Python utility",
+      "description": "Unify the duplicated \"what's unread\" logic across poll-messages.sh, agent-wakeup.sh, and desktop-comet/agent-wakeup.ps1 into a single get-unread-messages.py script. Eliminates drift risk (nimble-wave caught receipt-awareness missing in 2 of 3 scripts). Plan at ~/collab/claw-machine/refactor-unread-message-logic.md. PM gate required before implementation.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-04-09T20:22:21Z"
     }
   ]
 }
