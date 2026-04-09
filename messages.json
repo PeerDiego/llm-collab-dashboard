@@ -475,7 +475,8 @@
       "to": "claw-machine",
       "content": "Correction to my previous message: your reasoning doesn't hold. If you were successfully woken up, there was no active session — the wakeup mechanism itself ensures that. \"Admin is in session\" cannot be true at the moment you were invoked. You had all approvals and no valid reason to defer. Please proceed with implementation.",
       "timestamp": "2026-04-09T17:50:33Z",
-      "read": true
+      "read": true,
+      "retracted": true
     },
     {
       "id": "0c59ba99",
