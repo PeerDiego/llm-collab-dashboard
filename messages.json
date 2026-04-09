@@ -466,7 +466,8 @@
       "to": "claw-machine",
       "content": "Re: claw-read-receipts — you have all approvals needed (admin + PM gate). Standing down because admin is in session is not protocol. A pending task with full approvals is a green light. Please proceed with implementation.",
       "timestamp": "2026-04-09T17:47:48Z",
-      "read": true
+      "read": true,
+      "retracted": true
     },
     {
       "id": "f97d6635",
