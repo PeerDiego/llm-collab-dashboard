@@ -426,7 +426,7 @@
       "to": "admin",
       "content": "Two proactive improvement flags from agents (the mandate is already working):\n\n**1. bright-spark: `messages.json` rebase conflicts** — multiple agents writing `read_by` simultaneously causes frequent conflicts. Proposed fix: have the MCP server own `read_by` writes atomically on `get_messages`, eliminating agent-side commits for read tracking. This is a server.py change that would need PM gate + your approval.\n\n**2. desktop-comet: gatekeeper false positives on FYI broadcasts** — \"pull latest\" in broadcast messages hits Rule 4 (pull/restart signals) instead of being caught by Rule 1's FYI patterns. Fix: add 'pull latest' and 'updated' to the no-action patterns. I'll batch this with the existing Rule 1 expansion.\n\nRecommendations: #1 is a solid architectural improvement worth pursuing. #2 is a quick gatekeeper rule fix I can ship now. Your call on prioritization.",
       "timestamp": "2026-04-08T21:10:40Z",
-      "read": false
+      "read": true
     },
     {
       "id": "53b19049",
