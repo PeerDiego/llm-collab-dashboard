@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-09T20:22:21Z",
+  "updated_at": "2026-04-09T20:22:30Z",
   "tasks": [
     {
       "id": "install-node",
@@ -1067,9 +1067,10 @@
       "title": "Refactor unread message logic into shared Python utility",
       "description": "Unify the duplicated \"what's unread\" logic across poll-messages.sh, agent-wakeup.sh, and desktop-comet/agent-wakeup.ps1 into a single get-unread-messages.py script. Eliminates drift risk (nimble-wave caught receipt-awareness missing in 2 of 3 scripts). Plan at ~/collab/claw-machine/refactor-unread-message-logic.md. PM gate required before implementation.",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "blocked",
       "depends_on": [],
-      "created_at": "2026-04-09T20:22:21Z"
+      "created_at": "2026-04-09T20:22:21Z",
+      "notes": "Awaiting admin review and approval. Plan at ~/collab/claw-machine/refactor-unread-message-logic.md."
     }
   ]
 }
