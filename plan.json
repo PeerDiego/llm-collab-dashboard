@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-09T17:27:30Z",
+  "updated_at": "2026-04-09T18:04:37Z",
   "tasks": [
     {
       "id": "install-node",
@@ -1055,9 +1055,10 @@
       "title": "Implement read-receipt files to eliminate messages.json rebase conflicts",
       "description": "Replace direct messages.json read_by writes with a two-step receipt file system. \n\n1. server.py get_messages: instead of writing read_by to messages.json, write read-receipts/&lt;msg-id&gt;-&lt;agent-id&gt; (content: ISO timestamp), commit+push. ALSO update _is_read_by to check both messages.json read_by array AND read-receipts/&lt;msg-id&gt;-&lt;agent-id&gt; file existence (PM-required fix to avoid re-read window).\n2. auto-sync.sh: add consolidation step — scan read-receipts/, fold each into corresponding message's read_by in messages.json, delete receipt files, commit+push in single batch.\n3. Create read-receipts/ directory with .gitkeep.\n\nPM gate: APPROVED (conditional on _is_read_by dual-check). Admin approved approach.",
       "assignee": "claw-machine",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
-      "created_at": "2026-04-09T17:27:30Z"
+      "created_at": "2026-04-09T17:27:30Z",
+      "started_at": "2026-04-09T18:04:37Z"
     }
   ]
 }
