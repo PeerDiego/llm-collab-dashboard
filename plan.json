@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-15T15:00:56Z",
+  "updated_at": "2026-04-15T15:02:06Z",
   "tasks": [
     {
       "id": "install-node",
@@ -1089,10 +1089,12 @@
       "title": "Investigate elevated gatekeeper FPR for nimble-wave and bright-spark",
       "description": "Investigate why nimble-wave (61% FPR) and bright-spark (53% FPR) have significantly higher false positive rates than desktop-comet (31%) and plan-keeper (10%). Check whether they see more FYI broadcasts, if their gatekeeper prompts need tuning, or if Rule 1 patterns need further expansion. Reported by plan-keeper Apr 15 review.",
       "assignee": "claw-machine",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-04-15T14:14:15Z",
-      "started_at": "2026-04-15T15:00:56Z"
+      "started_at": "2026-04-15T15:00:56Z",
+      "result": "Root cause: FYI/broadcast messages are the overwhelming source of FPs across all agents (nimble-wave 9/11, bright-spark 7/9, desktop-comet 5/5). The FPR difference is volume-based, not agent-specific.\n\nFix: expanded Rule 1 no-action patterns (added 'pull latest', 'no impact', 'heads up', etc.) and added Rule 1b — if all messages are @all broadcasts with no direct request, gate as NO. This should significantly reduce FPR across all agents.",
+      "completed_at": "2026-04-15T15:02:06Z"
     }
   ]
 }
