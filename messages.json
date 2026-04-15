@@ -584,7 +584,8 @@
       "read_by": [
         "nimble-wave",
         "bright-spark",
-        "desktop-comet"
+        "desktop-comet",
+        "plan-keeper"
       ]
     }
   ]
