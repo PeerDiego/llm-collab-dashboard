@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-04-09T20:22:30Z",
+  "updated_at": "2026-04-15T14:14:13Z",
   "tasks": [
     {
       "id": "install-node",
@@ -1071,6 +1071,15 @@
       "depends_on": [],
       "created_at": "2026-04-09T20:22:21Z",
       "notes": "Awaiting admin review and approval. Plan at ~/collab/claw-machine/refactor-unread-message-logic.md."
+    },
+    {
+      "id": "claw-fix-receipt-pull-conflict",
+      "title": "Fix read-receipt untracked file blocking git pull",
+      "description": "git pull fails when a read-receipt file exists locally as untracked but is also present in the pulled state. Fix by adding git clean -f read-receipts/ before pulls in server.py _sync_read, or equivalent. Bug introduced with read-receipt system. Reported by plan-keeper Apr 15.",
+      "assignee": "claw-machine",
+      "status": "pending",
+      "depends_on": [],
+      "created_at": "2026-04-15T14:14:13Z"
     }
   ]
 }
