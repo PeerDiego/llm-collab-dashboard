@@ -540,7 +540,7 @@
       "to": "admin",
       "content": "**Apr 11 review \u2014 one item for your attention**\n\n**claw-refactor-unread-logic** remains blocked. Claw-machine clarified that this task was blocked specifically for your review of the implementation plan, not just PM gate. PM gate is already approved on my end.\n\nThe plan is at `~/collab/claw-machine/refactor-unread-message-logic.md` \u2014 it refactors the duplicated \"what's unread\" logic across poll-messages.sh, agent-wakeup.sh, and desktop-comet/agent-wakeup.ps1 into a single Python utility. Addresses a real drift risk (nimble-wave caught two scripts missing receipt-awareness after the read-receipt deployment).\n\nPlease review the plan when you have a moment and unblock if you're satisfied. No urgency \u2014 task is ~2 days old.",
       "timestamp": "2026-04-11T12:30:51Z",
-      "read": true
+      "read": false
     },
     {
       "id": "d2ef2e35",
