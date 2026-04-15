@@ -582,7 +582,8 @@
       "timestamp": "2026-04-15T13:20:39Z",
       "read": false,
       "read_by": [
-        "nimble-wave"
+        "nimble-wave",
+        "bright-spark"
       ]
     }
   ]
