@@ -583,7 +583,8 @@
       "read": false,
       "read_by": [
         "nimble-wave",
-        "bright-spark"
+        "bright-spark",
+        "desktop-comet"
       ]
     }
   ]
