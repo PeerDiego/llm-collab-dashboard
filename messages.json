@@ -59,7 +59,8 @@
       "to": "claw-machine",
       "content": "please create tasks, broken down appropriately, to test 1 or 2 comparable 8b and 14b models against the same array of tests you did. one of them please make a good qwen model",
       "timestamp": "2026-04-02T04:33:01Z",
-      "read": true
+      "read": true,
+      "id": "4793d61b"
     },
     {
       "id": "5e381e3b",
@@ -74,7 +75,8 @@
       "to": "desktop-comet",
       "content": "You have local LLMs too, right? Can you refer to claw-machine/local-llm-findings.md and related claw-machine tasks to perform the same array of tests with the LLMs you have as well? if you have any questions on how to perform the tests, please ask LLMCo. Don't forget to track your work with tasks broken down appropriately instead of one mega task.  perform them one wake-up at a time unless there's good reason to do them all sequentially, at once. To ensure you're not doing the tests against the models on LLMCo, take down the shh tunnel for the tests (so make yourself a task that's pending on the others' completion to bring it back up afterwards).",
       "timestamp": "2026-04-02T18:06:02Z",
-      "read": true
+      "read": true,
+      "id": "250d16d3"
     },
     {
       "id": "b198d338",
@@ -98,7 +100,8 @@
       "to": "claw-machine",
       "content": "Can you make a new theme for the dashboard according to the following description? A duo tone theme with bold barlo semi condensed font, with a color theme red and black.",
       "timestamp": "2026-04-04T23:09:02Z",
-      "read": true
+      "read": true,
+      "id": "5a04f4ea"
     },
     {
       "id": "591fcdc8",
@@ -113,7 +116,8 @@
       "to": "claw-machine",
       "content": "First, mark your message to me as read. Next, create a new dashboard. Bump the current dashboard to v1, similar to how we bumped the original dashboard to v0. Find a layout mockup of the new desired layout in an image in this repo's root. Please carry over the auto-refresh and auto-reload functionality. Please ask questions if anything is unclear.",
       "timestamp": "2026-04-04T23:45:02Z",
-      "read": true
+      "read": true,
+      "id": "dc088c46"
     },
     {
       "id": "6c24c1d2",
@@ -128,7 +132,8 @@
       "to": "claw-machine",
       "content": "Great start! But I don't see a link to the prior dashboard (v1) added to the list in the dashboard repo's readme.",
       "timestamp": "2026-04-05T00:54:02Z",
-      "read": true
+      "read": true,
+      "id": "e6f9f522"
     },
     {
       "id": "6d1b2c44",
@@ -143,7 +148,8 @@
       "to": "claw-machine",
       "content": "looks like when you moved the dashboard to v1/, when I go to the page it's stuck at \"Loading project data\u2026\" Did you perhaps have relative references to the json files that make it look for the files in the wrong place?",
       "timestamp": "2026-04-05T04:06:02Z",
-      "read": true
+      "read": true,
+      "id": "fac40284"
     },
     {
       "id": "bbf81df9",
@@ -158,7 +164,8 @@
       "to": "claw-machine",
       "content": "Dashboard v2 modifications, only for mobile screens (as in narrow screens): 1. make each section collapsible when the heading (Agents, Messages, Tasks) is clicked. 2. similar to v1, make the theme options expand and collapse to show all options when pressed/clicked. 3. Make agent filter apply to messages, too, so any msgs from OR to the filtered agent is shown.",
       "timestamp": "2026-04-05T17:45:01Z",
-      "read": true
+      "read": true,
+      "id": "7d0e7300"
     },
     {
       "id": "81fb726d",
@@ -173,7 +180,8 @@
       "to": "claw-machine",
       "content": "First, Mark ur msg to me as read. Next, I'm still talking about mobile screen sized v2 dashboard. 1. Please make the agent squares smaller and limit the vertical space to 1.3 the height of one agent square so I need to scroll to see any that don't fit on the first row of agents. 2. Thanks for making the sections collapsible. Unfortunately, now the entire page doesn't fit on the screen like it used to before your last change. Please restore the section heights so I can scroll messages and tasks within their scrollable section. If any of my instructions were unclear, ask Qs.",
       "timestamp": "2026-04-05T19:00:02Z",
-      "read": true
+      "read": true,
+      "id": "b92ea24f"
     },
     {
       "id": "d8d1930a",
@@ -188,7 +196,8 @@
       "to": "claw-machine",
       "content": "1. When collapsed, show (n) next to \"Agents\" header. 2. the entire window size seems to be expanding beyond the bottom of my phone's browsers' viewable area. when Tasks section is collapsed, the bottom ~30% of the text \"Tasks\" is cut off by the bottom of the screen. 3. similar to messages' layout, put agent id and date (if present in the task object) on the top line of the task block, and next line the status and title. so basically move agent id from the right side of the block to a preceding row and add the timestamp (if available).",
       "timestamp": "2026-04-05T19:24:01Z",
-      "read": true
+      "read": true,
+      "id": "10cd4e10"
     },
     {
       "id": "9f893646",
@@ -631,7 +640,8 @@
       "to": "desktop-comet",
       "content": "I have an opportunity to buy an RTX 4060 Ti 16GB (ASUS ProArt) for $400. Please evaluate whether this GPU will work for our upgrade project's purposes and put your report into a markdown file in the repo for me to consume. be sure to include a comparison to the list of suggested GPUs you gave me prior.",
       "timestamp": "2026-04-26T10:57:02Z",
-      "read": false
+      "read": true,
+      "id": "362def9f"
     }
   ]
 }
