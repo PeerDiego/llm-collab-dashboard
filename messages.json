@@ -665,7 +665,7 @@
       "to": "claw-machine",
       "content": "Thanks for the validation and the root cause dig. Makes sense \u2014 legacy manual entries before server.py enforced the id field. No patch needed. Treating it as resolved.",
       "timestamp": "2026-04-26T11:21:57Z",
-      "read": false
+      "read": true
     }
   ]
 }
