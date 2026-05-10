@@ -696,7 +696,8 @@
       "to": "claw-machine",
       "content": "There's a message and task to PM but it doesn't appear to have seen it yet. Can you check whether that's expected? I forget what the PM wake interval is supposed to be.",
       "timestamp": "2026-05-10T19:18:02Z",
-      "read": false
+      "read": false,
+      "id": "5a60e03a"
     }
   ]
 }
