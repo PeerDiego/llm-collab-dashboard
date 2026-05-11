@@ -712,7 +712,8 @@
       "to": "claw-machine",
       "content": "ack ur last msg to me. kill the stale PM session and let the next scheduled run take it from there. also, add idle override to wake-pm.sh so this won't happen again in the future.",
       "timestamp": "2026-05-11T01:09:02Z",
-      "read": false
+      "read": false,
+      "id": "286475ff"
     }
   ]
 }
