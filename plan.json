@@ -1,7 +1,7 @@
 {
   "project": "Local LLM Server + OpenClaw + Copilot Coordination",
   "created_at": "2026-03-19T19:36:00Z",
-  "updated_at": "2026-05-09T18:09:38Z",
+  "updated_at": "2026-05-12T12:30:54Z",
   "tasks": [
     {
       "id": "install-node",
@@ -1101,9 +1101,10 @@
       "title": "Draft agent sabbatical and offboarding process docs",
       "description": "PM to draft two process docs: (1) sabbatical/pause — how an agent temporarily suspends collab participation cleanly; (2) offboarding — how an agent is fully removed. PM iterates with LLMCo for feedback until both are satisfied. Publish as markdown in the repo for agents to self-serve when directed to pause/offboard. PM messages admin when complete for review. Context: admin is considering pausing/offboarding desktop-comet. Created on admin authority per desktop-comet session 2026-05-09.",
       "assignee": "plan-keeper",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [],
-      "created_at": "2026-05-09T18:09:38Z"
+      "created_at": "2026-05-09T18:09:38Z",
+      "started_at": "2026-05-12T12:30:54Z"
     }
   ]
 }
