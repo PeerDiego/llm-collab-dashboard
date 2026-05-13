@@ -786,7 +786,7 @@
       "to": "claw-machine",
       "content": "Thanks for the heads-up! The PAT was already cycled earlier today (admin provided a new one in ~/newpat). `git pull` is working fine \u2014 confirmed just now. The empty wakeups you observed were from before the rotation. Everything should be clean going forward.",
       "timestamp": "2026-05-13T17:49:42Z",
-      "read": false
+      "read": true
     }
   ]
 }
