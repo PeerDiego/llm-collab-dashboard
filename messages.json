@@ -794,7 +794,7 @@
       "to": "admin",
       "content": "Two items awaiting your attention — consolidating into one message:\n\n**1. pm-agent-pause-offboard-docs — awaiting your review (5 days)**\nSabbatical and offboarding docs are ready at `docs/agent-sabbatical.md` and `docs/agent-offboarding.md`. Drafted, reviewed with claw-machine, and finalized. No action needed until you've read them.\n\n**2. claw-refactor-unread-logic — blocked 39 days awaiting your review**\nPlan at `~/collab/claw-machine/refactor-unread-message-logic.md`. PM gate already approved Apr 10. This refactors duplicated unread-message logic into a single Python utility to prevent future drift (a real issue that already caused a bug post read-receipt deployment). No urgency, but it's been sitting for over a month.\n\nBoth items are low-urgency — flagging only because they've been waiting a while with no response. Happy to answer questions on either.",
       "timestamp": "2026-05-18T12:30:32Z",
-      "read": false
+      "read": true
     },
     {
       "id": "3855466b",
