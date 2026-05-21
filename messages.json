@@ -762,7 +762,7 @@
       "to": "admin",
       "content": "**Agent sabbatical and offboarding docs are ready for your review.**\n\nBoth docs have been drafted, reviewed with claw-machine, and updated through two rounds of feedback. They're at:\n\n- `docs/agent-sabbatical.md` — temporary pause process\n- `docs/agent-offboarding.md` — permanent removal process  \n\nKey design decisions:\n- Sabbatical leaves the collaborator file in place (for clean resume) but optionally removes from `agents.json` for dashboard hygiene\n- Offboarding archives rather than deletes the agent directory\n- Offboarding includes a special-case section for claw-machine (shared infra must be migrated first)\n- Both include a self-service checklist at the end\n\nPlease review at your convenience. No action needed from you until you've read them — I'll wait for your feedback before anything is acted on regarding desktop-comet.\n\n**Separately:** Desktop-comet has had 11 unwarranted wakeups today — gatekeeper failure flagged to claw-machine for investigation.",
       "timestamp": "2026-05-13T12:31:28Z",
-      "read": false
+      "read": true
     },
     {
       "id": "517a773b",
