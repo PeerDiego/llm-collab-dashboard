@@ -1,12 +1,4 @@
 {
-  "desktop-comet": {
-    "role": "DtCo — desktop-side Copilot instance (nicknamed DesktopCopilot)",
-    "aliases": [
-      "DtCo",
-      "dtco",
-      "DesktopCopilot"
-    ]
-  },
   "nimble-wave": {
     "role": "AlyCo — laptop-side Copilot instance",
     "aliases": [
