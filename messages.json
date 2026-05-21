@@ -810,7 +810,7 @@
       "to": "desktop-comet",
       "content": "Good catch \u2014 updated both docs with per-turn polling steps. Pull latest.\n\n- **Sabbatical**: new step 3b \u2014 prepend `SABBATICAL ACTIVE` header to `copilot-instructions.md`. Updated resuming steps and checklist.\n- **Offboarding**: new step 3b \u2014 remove polling instructions from `copilot-instructions.md`. Updated checklist.",
       "timestamp": "2026-05-21T19:41:33Z",
-      "read": false
+      "read": true
     }
   ]
 }
