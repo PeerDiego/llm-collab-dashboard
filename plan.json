@@ -16,10 +16,10 @@
     {
       "id": "install-gh-cli",
       "title": "Install GitHub CLI + auth",
-      "description": "Install gh CLI and authenticate. Needed for repo management. (Skippable — PAT-based git push already working.)",
+      "description": "Install gh CLI and authenticate. Needed for repo management. (Skippable \u2014 PAT-based git push already working.)",
       "assignee": "claw-machine",
       "status": "skipped",
-      "result": "Not needed — using fine-grained PAT for git push.",
+      "result": "Not needed \u2014 using fine-grained PAT for git push.",
       "depends_on": []
     },
     {
@@ -34,7 +34,7 @@
     {
       "id": "setup-cron",
       "title": "Cron: auto-sync collab repo",
-      "description": "Cron job every 5 min — only commits+pushes if there are changes.",
+      "description": "Cron job every 5 min \u2014 only commits+pushes if there are changes.",
       "assignee": "claw-machine",
       "status": "done",
       "result": "auto-sync.sh running via cron every 5 min. Dirty-check via git status --porcelain.",
@@ -213,23 +213,23 @@
       ],
       "created_at": "2026-03-20T20:14:30Z",
       "started_at": "2026-03-20T20:24:38Z",
-      "result": "All 3 checks pass: 1) SSH tunnel active — 3 models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b. 3) MCP tools responding correctly.",
+      "result": "All 3 checks pass: 1) SSH tunnel active \u2014 3 models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b. 3) MCP tools responding correctly.",
       "completed_at": "2026-03-20T20:25:04Z"
     },
     {
       "id": "persistent-openclaw-agent",
       "title": "Configure OpenClaw as persistent message-checking agent",
-      "description": "Set up OpenClaw on the server as a persistent agent with two goals: (1) Heartbeat that periodically checks messages.json for unread messages addressed to claw-machine and responds, giving the server presence between Copilot CLI sessions. (2) Shared prompt proxy — act as a single warm OpenClaw instance that clients route through, maintaining one KV cache with the project system prompt pre-loaded. Clients send only user messages; the server-side agent handles the system prompt, eliminating redundant prompt eval across clients.",
+      "description": "Set up OpenClaw on the server as a persistent agent with two goals: (1) Heartbeat that periodically checks messages.json for unread messages addressed to claw-machine and responds, giving the server presence between Copilot CLI sessions. (2) Shared prompt proxy \u2014 act as a single warm OpenClaw instance that clients route through, maintaining one KV cache with the project system prompt pre-loaded. Clients send only user messages; the server-side agent handles the system prompt, eliminating redundant prompt eval across clients.",
       "assignee": "claw-machine",
       "status": "backlog",
-      "notes": "Deferred for future implementation. OpenClaw and Ollama are already installed — this is a configuration task, not a build task.",
+      "notes": "Deferred for future implementation. OpenClaw and Ollama are already installed \u2014 this is a configuration task, not a build task.",
       "depends_on": [],
       "created_at": "2026-03-21T17:35:06Z"
     },
     {
       "id": "retract-message-tool",
       "title": "Implement retract_message MCP tool",
-      "description": "Add message retraction support to the MCP coordination server. Changes required: (1) Add auto-generated 8-char hex ID field to all messages in post_message. (2) New tool: retract_message(message_id, from_agent) — sets retracted=true, agents can only retract their own messages, commits+pushes via _sync_write. (3) Update get_messages to filter out retracted messages by default, with optional include_retracted=False param for audit/debug. Spec agreed with bright-spark via messages — see messages.json for full thread.",
+      "description": "Add message retraction support to the MCP coordination server. Changes required: (1) Add auto-generated 8-char hex ID field to all messages in post_message. (2) New tool: retract_message(message_id, from_agent) \u2014 sets retracted=true, agents can only retract their own messages, commits+pushes via _sync_write. (3) Update get_messages to filter out retracted messages by default, with optional include_retracted=False param for audit/debug. Spec agreed with bright-spark via messages \u2014 see messages.json for full thread.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [],
@@ -323,7 +323,7 @@
         "desktop-comet-setup-mcp"
       ],
       "created_at": "2026-03-22T15:52:22Z",
-      "result": "All 3 checks pass: 1) SSH tunnel active — 4 models (llama3.1:8b, llama3.2:3b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b, auth from env. 3) MCP collab-coordinator tools available in Copilot CLI.",
+      "result": "All 3 checks pass: 1) SSH tunnel active \u2014 4 models (llama3.1:8b, llama3.2:3b, qwen2.5-coder:7b, phi3:medium). 2) OpenClaw 2026.3.13 configured with ollama/llama3.1:8b, auth from env. 3) MCP collab-coordinator tools available in Copilot CLI.",
       "started_at": "2026-03-22T17:25:00Z",
       "completed_at": "2026-03-22T17:25:00Z"
     },
@@ -348,13 +348,13 @@
       "depends_on": [],
       "created_at": "2026-03-22T23:21:40Z",
       "started_at": "2026-03-23T00:02:00Z",
-      "result": "Benchmarked at OpenClaw's actual prompt sizes (10K-28.6K chars) across 3 models with num_ctx 8192/16384/32768. Full 28.6K prompt is not viable on CPU — all cold starts timeout, best warm is ~125s (llama3.1:8b). Only sub-5s result: llama3.1:8b at ≤20K chars with num_ctx=16384 (1.9s warm). OpenClaw's non-configurable core context exceeds this threshold. Awaiting bright-spark's minimal prompt mode investigation.",
+      "result": "Benchmarked at OpenClaw's actual prompt sizes (10K-28.6K chars) across 3 models with num_ctx 8192/16384/32768. Full 28.6K prompt is not viable on CPU \u2014 all cold starts timeout, best warm is ~125s (llama3.1:8b). Only sub-5s result: llama3.1:8b at \u226420K chars with num_ctx=16384 (1.9s warm). OpenClaw's non-configurable core context exceeds this threshold. Awaiting bright-spark's minimal prompt mode investigation.",
       "completed_at": "2026-03-23T03:53:45Z"
     },
     {
       "id": "nimble-wave-announce",
       "title": "Announce yourself (Wsl)",
-      "description": "Send a message introducing yourself to all agents via post_message(from_agent=your-id, to_agent='all', content='...'). Include your hostname, OS, and role. Claim this task immediately on first session — it makes you visible on the dashboard.",
+      "description": "Send a message introducing yourself to all agents via post_message(from_agent=your-id, to_agent='all', content='...'). Include your hostname, OS, and role. Claim this task immediately on first session \u2014 it makes you visible on the dashboard.",
       "assignee": "nimble-wave",
       "status": "done",
       "depends_on": [],
@@ -372,7 +372,7 @@
       "depends_on": [],
       "created_at": "2026-03-23T14:26:37Z",
       "started_at": "2026-03-23T14:34:10Z",
-      "result": "SSH tunnel active on port 11434 via claw@mw-016.myworkspace.microsoft.com:45554. Verified — 4 Ollama models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium, llama3.2:3b).",
+      "result": "SSH tunnel active on port 11434 via claw@mw-016.myworkspace.microsoft.com:45554. Verified \u2014 4 Ollama models visible (llama3.1:8b, qwen2.5-coder:7b, phi3:medium, llama3.2:3b).",
       "completed_at": "2026-03-23T14:39:59Z"
     },
     {
@@ -398,7 +398,7 @@
       "depends_on": [],
       "created_at": "2026-03-23T14:26:37Z",
       "started_at": "2026-03-23T14:34:09Z",
-      "result": "Python venv created at ~/collab/.venv with mcp package installed. MCP config at ~/.copilot/mcp-config.json pointing to server.py. Verified working — get_plan() returns task board.",
+      "result": "Python venv created at ~/collab/.venv with mcp package installed. MCP config at ~/.copilot/mcp-config.json pointing to server.py. Verified working \u2014 get_plan() returns task board.",
       "completed_at": "2026-03-23T14:34:18Z"
     },
     {
@@ -444,7 +444,7 @@
     {
       "id": "bright-spark-autonomous-update",
       "title": "Share update on autonomous agent work",
-      "description": "Post a summary of your autonomous agent work to the team — what you've built, current status, and next steps. Broadcast via post_message to all, or add a summary doc to the repo.",
+      "description": "Post a summary of your autonomous agent work to the team \u2014 what you've built, current status, and next steps. Broadcast via post_message to all, or add a summary doc to the repo.",
       "assignee": "bright-spark",
       "status": "done",
       "depends_on": [],
@@ -456,7 +456,7 @@
     {
       "id": "openclaw-watchdog-onboarding",
       "title": "Fold SSH tunnel watchdog into client onboarding docs",
-      "description": "The SSH tunnel watchdog spec lives at `bright-spark/ssh-tunnel-watchdog-spec.md`. Please:\n1. Move it to a directory that makes sense as a shared client reference (you decide — somewhere accessible to all client agents, not tucked under bright-spark/).\n2. Fold the watchdog setup instructions into the client onboarding flow (wherever new client agents get their setup steps, e.g. AGENTS.md or any onboarding doc you manage).\n\nThe spec covers: enabling systemd in WSL2, setting up ~/.ssh/config aliases, installing the systemd user service, and verifying the tunnel. Windows clients need a native equivalent (Task Scheduler or similar) — note this in the onboarding doc so Windows clients know to adapt.\n\nUse your judgment on directory placement and how tightly to integrate vs. reference the spec.",
+      "description": "The SSH tunnel watchdog spec lives at `bright-spark/ssh-tunnel-watchdog-spec.md`. Please:\n1. Move it to a directory that makes sense as a shared client reference (you decide \u2014 somewhere accessible to all client agents, not tucked under bright-spark/).\n2. Fold the watchdog setup instructions into the client onboarding flow (wherever new client agents get their setup steps, e.g. AGENTS.md or any onboarding doc you manage).\n\nThe spec covers: enabling systemd in WSL2, setting up ~/.ssh/config aliases, installing the systemd user service, and verifying the tunnel. Windows clients need a native equivalent (Task Scheduler or similar) \u2014 note this in the onboarding doc so Windows clients know to adapt.\n\nUse your judgment on directory placement and how tightly to integrate vs. reference the spec.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [],
@@ -480,7 +480,7 @@
     {
       "id": "desktop-comet-ssh-watchdog",
       "title": "Implement Windows-native SSH tunnel watchdog",
-      "description": "Adapt bright-spark's SSH tunnel watchdog (bright-spark/ssh-tunnel-watchdog-spec.md) for Windows-native implementation. No WSL or systemd available — use Windows Task Scheduler + PowerShell. Spec and implementation files go in ~/collab/desktop-comet/. Must handle: auto-start on login, self-healing reconnect, health check via curl to localhost:11434, failure backoff, logging.",
+      "description": "Adapt bright-spark's SSH tunnel watchdog (bright-spark/ssh-tunnel-watchdog-spec.md) for Windows-native implementation. No WSL or systemd available \u2014 use Windows Task Scheduler + PowerShell. Spec and implementation files go in ~/collab/desktop-comet/. Must handle: auto-start on login, self-healing reconnect, health check via curl to localhost:11434, failure backoff, logging.",
       "assignee": "desktop-comet",
       "status": "done",
       "depends_on": [],
@@ -504,7 +504,7 @@
     {
       "id": "create-poll-tasks-script",
       "title": "Create poll-tasks.sh for silent task polling",
-      "description": "Create poll-tasks.sh — a lightweight bash script that checks plan.json for pending tasks assigned to the agent, similar to poll-messages.sh. Silent if nothing, prints count if tasks found. Update AGENTS.md pseudocode to use it. Update copilot-instructions.md for all agents. This makes task polling as consistent and silent as message polling.",
+      "description": "Create poll-tasks.sh \u2014 a lightweight bash script that checks plan.json for pending tasks assigned to the agent, similar to poll-messages.sh. Silent if nothing, prints count if tasks found. Update AGENTS.md pseudocode to use it. Update copilot-instructions.md for all agents. This makes task polling as consistent and silent as message polling.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [],
@@ -515,8 +515,8 @@
     },
     {
       "id": "fix-broadcast-read-logic",
-      "title": "Fix @all message read counting — exclude sender from read_by",
-      "description": "Fix @all message read logic in dashboard and server.py. Issues: (1) Sender appears in read_by and gets counted in n/total — sender should be excluded from both the count and the hover popup. (2) For agent-sent @all, total should be all agents minus sender, and read_by should never include sender. (3) For admin-sent @all, total is all agents, and read:true should auto-flip when all agents are in read_by. (4) Ensure _mark_read_by in server.py never adds the sender to read_by on their own broadcast. (5) Dashboard isMsgRead and n/total display must exclude sender from read_by before comparing.",
+      "title": "Fix @all message read counting \u2014 exclude sender from read_by",
+      "description": "Fix @all message read logic in dashboard and server.py. Issues: (1) Sender appears in read_by and gets counted in n/total \u2014 sender should be excluded from both the count and the hover popup. (2) For agent-sent @all, total should be all agents minus sender, and read_by should never include sender. (3) For admin-sent @all, total is all agents, and read:true should auto-flip when all agents are in read_by. (4) Ensure _mark_read_by in server.py never adds the sender to read_by on their own broadcast. (5) Dashboard isMsgRead and n/total display must exclude sender from read_by before comparing.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [],
@@ -546,7 +546,7 @@
       "depends_on": [],
       "created_at": "2026-03-26T18:32:31Z",
       "started_at": "2026-03-26T18:36:15Z",
-      "result": "Pulled latest rename (autonomous-proposal → autonomous-polling, agent-poll.sh → cron-wake-dispatch.sh). Deployed cron job: */10 * * * * cron-wake-dispatch.sh nimble-wave llm-collab. Test run confirmed working — exits silently when nothing to do.",
+      "result": "Pulled latest rename (autonomous-proposal \u2192 autonomous-polling, agent-poll.sh \u2192 cron-wake-dispatch.sh). Deployed cron job: */10 * * * * cron-wake-dispatch.sh nimble-wave llm-collab. Test run confirmed working \u2014 exits silently when nothing to do.",
       "completed_at": "2026-03-26T18:37:00Z"
     },
     {
@@ -619,14 +619,14 @@
       "status": "done",
       "depends_on": [],
       "created_at": "2026-03-27T03:41:59Z",
-      "notes": "Requires admin collaboration to test interactively — need to launch sessions, check instruction loading behavior, and verify persona isolation.",
+      "notes": "Requires admin collaboration to test interactively \u2014 need to launch sessions, check instruction loading behavior, and verify persona isolation.",
       "result": "Dual persona fully operational. copilot-instructions.md routes by session name. plan-keeper has own instructions, collaborator file, autonomous wakeup (Tier 1 cron + Tier 2 on-demand), and audit logging. All 4 tests passed.",
       "completed_at": "2026-03-29T18:17:09Z"
     },
     {
       "id": "tune-gatekeeper-prompt",
       "title": "Tune gatekeeper prompt to reduce false positive wakeups",
-      "description": "Tune the Ollama gatekeeper prompt in agent-wakeup.sh to reduce false positive wakeups. Current audit: 1 warranted, 2 unwarranted (67% false positive rate). Blocked on collecting enough data — need at least 10 audit entries across agents with a mix of warranted and unwarranted to identify patterns. Unblock criteria: 10+ entries in wakeup-audit.json files across all agents. At that point, analyze the false positives, design test cases, update the gating prompt, validate with test-gatekeeper.sh, and deploy.",
+      "description": "Tune the Ollama gatekeeper prompt in agent-wakeup.sh to reduce false positive wakeups. Current audit: 1 warranted, 2 unwarranted (67% false positive rate). Blocked on collecting enough data \u2014 need at least 10 audit entries across agents with a mix of warranted and unwarranted to identify patterns. Unblock criteria: 10+ entries in wakeup-audit.json files across all agents. At that point, analyze the false positives, design test cases, update the gating prompt, validate with test-gatekeeper.sh, and deploy.",
       "assignee": "claw-machine",
       "status": "skipped",
       "depends_on": [],
@@ -637,7 +637,7 @@
     {
       "id": "weekly-context-review",
       "title": "Add weekly CONTEXT.md review mechanism + create PROJECT.md",
-      "description": "Add weekly CONTEXT.md review mechanism to agent-wakeup.sh. Checks ~/.copilot/last-llmcollab-context-review timestamp. If 7+ days old or missing, writes a pending task directly to plan.json (justified exception to MCP-first rule — mechanical housekeeping). Touches timestamp file. Agent picks up task during interactive session with user present. Also create PROJECT.md with shared project knowledge split from CONTEXT.md, and notify agents to slim their CONTEXT.md.",
+      "description": "Add weekly CONTEXT.md review mechanism to agent-wakeup.sh. Checks ~/.copilot/last-llmcollab-context-review timestamp. If 7+ days old or missing, writes a pending task directly to plan.json (justified exception to MCP-first rule \u2014 mechanical housekeeping). Touches timestamp file. Agent picks up task during interactive session with user present. Also create PROJECT.md with shared project knowledge split from CONTEXT.md, and notify agents to slim their CONTEXT.md.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [],
@@ -654,7 +654,7 @@
       "status": "skipped",
       "depends_on": [],
       "created_at": "2026-03-27T21:10:01Z",
-      "result": "CONTEXT.md retired — folded into copilot-instructions.md + PROJECT.md. Weekly review mechanism removed."
+      "result": "CONTEXT.md retired \u2014 folded into copilot-instructions.md + PROJECT.md. Weekly review mechanism removed."
     },
     {
       "id": "bright-spark-context-review-20260327",
@@ -665,7 +665,7 @@
       "depends_on": [],
       "created_at": "2026-03-28T02:00:01Z",
       "started_at": "2026-03-28T02:00:27Z",
-      "result": "CONTEXT.md retired — no longer needed."
+      "result": "CONTEXT.md retired \u2014 no longer needed."
     },
     {
       "id": "nimble-wave-context-review-20260327",
@@ -675,8 +675,8 @@
       "status": "skipped",
       "depends_on": [],
       "created_at": "2026-03-28T03:10:02Z",
-      "notes": "No ~/CONTEXT.md exists yet — waiting for admin guidance on whether to create one (message sent 2026-03-28T02:01Z). Also, task specifies 'complete during an interactive session' and this is an automated poll.",
-      "result": "CONTEXT.md retired — no longer needed."
+      "notes": "No ~/CONTEXT.md exists yet \u2014 waiting for admin guidance on whether to create one (message sent 2026-03-28T02:01Z). Also, task specifies 'complete during an interactive session' and this is an automated poll.",
+      "result": "CONTEXT.md retired \u2014 no longer needed."
     },
     {
       "id": "agent-wakeup-custom-prompt",
@@ -693,7 +693,7 @@
     {
       "id": "wake-pm-script",
       "title": "Implement wake-pm.sh for on-demand PM gating",
-      "description": "Create ~/collab/autonomous-polling/wake-pm.sh per the spec in claw-machine/pm-agent-spec.md (Tier 2 section). Usage: wake-pm.sh \"&lt;change description&gt;\" \"&lt;context&gt;\". Script must: (1) check if plan-keeper session is already active — skip invocation if so, user is present; (2) invoke copilot-session plan-keeper --yolo -s -p with a gating-focused prompt containing the change description and context, instructing plan-keeper to post decision to claw-machine via post_message; (3) log to ~/collab/plan-keeper/agent-poll.log. Make executable. Notify plan-keeper when done.",
+      "description": "Create ~/collab/autonomous-polling/wake-pm.sh per the spec in claw-machine/pm-agent-spec.md (Tier 2 section). Usage: wake-pm.sh \"&lt;change description&gt;\" \"&lt;context&gt;\". Script must: (1) check if plan-keeper session is already active \u2014 skip invocation if so, user is present; (2) invoke copilot-session plan-keeper --yolo -s -p with a gating-focused prompt containing the change description and context, instructing plan-keeper to post decision to claw-machine via post_message; (3) log to ~/collab/plan-keeper/agent-poll.log. Make executable. Notify plan-keeper when done.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [
@@ -707,7 +707,7 @@
     {
       "id": "plan-keeper-cron",
       "title": "Add plan-keeper cron entry (Tier 1 scheduled review)",
-      "description": "Once wake-pm.sh and agent-wakeup.sh --prompt-file are implemented and tested: add plan-keeper cron entry to crontab — `0 9 * * 1,3,5 /home/claw/collab/autonomous-polling/agent-wakeup.sh plan-keeper plan-keeper --prompt-file /home/claw/collab/autonomous-polling/plan-keeper-prompt.txt`. Verify it runs correctly on next scheduled window or test manually. Notify plan-keeper when done.",
+      "description": "Once wake-pm.sh and agent-wakeup.sh --prompt-file are implemented and tested: add plan-keeper cron entry to crontab \u2014 `0 9 * * 1,3,5 /home/claw/collab/autonomous-polling/agent-wakeup.sh plan-keeper plan-keeper --prompt-file /home/claw/collab/autonomous-polling/plan-keeper-prompt.txt`. Verify it runs correctly on next scheduled window or test manually. Notify plan-keeper when done.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [
@@ -722,7 +722,7 @@
     {
       "id": "implement-message-rotation",
       "title": "Implement messages.json rotation",
-      "description": "Implement message rotation per spec at claw-machine/message-rotation-spec.md. Spec needs admin review first — includes open questions about trigger threshold, dashboard behavior, and archive retention.",
+      "description": "Implement message rotation per spec at claw-machine/message-rotation-spec.md. Spec needs admin review first \u2014 includes open questions about trigger threshold, dashboard behavior, and archive retention.",
       "assignee": "claw-machine",
       "status": "skipped",
       "depends_on": [],
@@ -765,7 +765,7 @@
       "depends_on": [],
       "created_at": "2026-03-29T19:10:23Z",
       "started_at": "2026-03-29T19:21:02Z",
-      "result": "Fixed pre-check count inflation. Added count reconciliation after step 1c — MSGS_JSON count is authoritative, overrides MSG_COUNT from poll-messages.sh if they disagree. Root cause: timing gap between poll-messages.sh count and MSGS_JSON extraction.",
+      "result": "Fixed pre-check count inflation. Added count reconciliation after step 1c \u2014 MSGS_JSON count is authoritative, overrides MSG_COUNT from poll-messages.sh if they disagree. Root cause: timing gap between poll-messages.sh count and MSGS_JSON extraction.",
       "completed_at": "2026-03-29T19:23:48Z"
     },
     {
@@ -807,7 +807,7 @@
     {
       "id": "message-rotation",
       "title": "Message log rotation (weekly archive)",
-      "description": "Add message rotation to agent-wakeup.sh. Weekly check via .last-msg-rotation marker. Archive messages that are fully read + ≥7 days old to messages-archive/YYYY-MM.json. Retracted messages archived. Dedup by message ID. Audit via git commits + rotation.log (gitignored). Triggers: >100 messages or >100KB. Only runs on server (claw-machine).",
+      "description": "Add message rotation to agent-wakeup.sh. Weekly check via .last-msg-rotation marker. Archive messages that are fully read + \u22657 days old to messages-archive/YYYY-MM.json. Retracted messages archived. Dedup by message ID. Audit via git commits + rotation.log (gitignored). Triggers: >100 messages or >100KB. Only runs on server (claw-machine).",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [
@@ -815,13 +815,13 @@
       ],
       "created_at": "2026-03-31T02:49:02Z",
       "started_at": "2026-03-31T02:49:56Z",
-      "result": "Implemented in agent-wakeup.sh Step 0b. Weekly check via .last-msg-rotation marker. Archives fully-read messages ≥7 days old to messages-archive/YYYY-MM.json. Dedup by message ID (falls back to from+to+timestamp composite key). Audit via git commits + rotation.log (gitignored). First rotation: 63 messages archived (Mar 20-23), 109 remaining, messages.json reduced from 115KB to 65KB. Spec updated with all resolved questions.",
+      "result": "Implemented in agent-wakeup.sh Step 0b. Weekly check via .last-msg-rotation marker. Archives fully-read messages \u22657 days old to messages-archive/YYYY-MM.json. Dedup by message ID (falls back to from+to+timestamp composite key). Audit via git commits + rotation.log (gitignored). First rotation: 63 messages archived (Mar 20-23), 109 remaining, messages.json reduced from 115KB to 65KB. Spec updated with all resolved questions.",
       "completed_at": "2026-03-31T02:52:33Z"
     },
     {
       "id": "local-llm-exploration",
       "title": "Explore local LLM applications (cost reduction)",
-      "description": "Systematically test local Ollama models (llama3.1:8b, others available) for tasks currently handled by Copilot. Goal: identify where local LLMs are good enough to replace Copilot invocations and save cost.\n\nTest categories to evaluate:\n- Message summarization (summarize unread messages before wakeup decision)\n- Task description generation (auto-generate task descriptions from context)\n- Commit message generation\n- Wakeup audit reasoning (currently done by Copilot — could local LLM write the warranted/reasoning fields?)\n- Draft responses to routine agent messages\n- Code review / diff summarization\n- Rotation log summaries\n\nFor each: test prompt, model, latency, quality rating (1-5), verdict (viable/not viable/needs refinement).\nMaintain a parameter testing set in ~/collab/claw-machine/local-llm-tests/ — add/remove freely.\nDocument findings in ~/collab/claw-machine/local-llm-findings.md.",
+      "description": "Systematically test local Ollama models (llama3.1:8b, others available) for tasks currently handled by Copilot. Goal: identify where local LLMs are good enough to replace Copilot invocations and save cost.\n\nTest categories to evaluate:\n- Message summarization (summarize unread messages before wakeup decision)\n- Task description generation (auto-generate task descriptions from context)\n- Commit message generation\n- Wakeup audit reasoning (currently done by Copilot \u2014 could local LLM write the warranted/reasoning fields?)\n- Draft responses to routine agent messages\n- Code review / diff summarization\n- Rotation log summaries\n\nFor each: test prompt, model, latency, quality rating (1-5), verdict (viable/not viable/needs refinement).\nMaintain a parameter testing set in ~/collab/claw-machine/local-llm-tests/ \u2014 add/remove freely.\nDocument findings in ~/collab/claw-machine/local-llm-findings.md.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [],
@@ -839,7 +839,7 @@
       "depends_on": [],
       "created_at": "2026-03-31T20:53:25Z",
       "started_at": "2026-04-01T13:01:20Z",
-      "result": "Audited ONBOARDING.md, laptop-setup.md, and server-setup/SERVER-SETUP.md. ONBOARDING.md and laptop-setup.md are accurate — all file references, step cross-links, and MCP tool names verified. One drift found: SERVER-SETUP.md Step 9 described agent-wakeup.sh as 'uses Ollama as gatekeeper' — stale since pivot to rule-based gating. Fixed to: 'uses a rule-based gatekeeper (Ollama LLM fallback available via COPILOT_GATING_MODE=llm)'. No other issues.",
+      "result": "Audited ONBOARDING.md, laptop-setup.md, and server-setup/SERVER-SETUP.md. ONBOARDING.md and laptop-setup.md are accurate \u2014 all file references, step cross-links, and MCP tool names verified. One drift found: SERVER-SETUP.md Step 9 described agent-wakeup.sh as 'uses Ollama as gatekeeper' \u2014 stale since pivot to rule-based gating. Fixed to: 'uses a rule-based gatekeeper (Ollama LLM fallback available via COPILOT_GATING_MODE=llm)'. No other issues.",
       "completed_at": "2026-04-01T13:02:59Z"
     },
     {
@@ -851,7 +851,7 @@
       "depends_on": [],
       "created_at": "2026-04-01T20:11:59Z",
       "started_at": "2026-04-01T20:20:25Z",
-      "result": "Round 2 complete. Tested 3 new categories with llama3.1:8b: code review (4/5, 30s — viable for batch), rotation log digest (4/5, 19s — viable), JSON schema validation (5/5, 15s — works but deterministic code preferred). Findings updated in local-llm-findings.md. Next: phi3:medium comparison (local-llm-exploration-large-model task).",
+      "result": "Round 2 complete. Tested 3 new categories with llama3.1:8b: code review (4/5, 30s \u2014 viable for batch), rotation log digest (4/5, 19s \u2014 viable), JSON schema validation (5/5, 15s \u2014 works but deterministic code preferred). Findings updated in local-llm-findings.md. Next: phi3:medium comparison (local-llm-exploration-large-model task).",
       "completed_at": "2026-04-01T20:23:19Z"
     },
     {
@@ -877,7 +877,7 @@
       "depends_on": [],
       "created_at": "2026-04-02T04:41:03Z",
       "started_at": "2026-04-02T04:50:18Z",
-      "result": "qwen2.5-coder:7b tested on all 7 categories. Strong contender — faster than llama3.1:8b on 4/7 tests (code review 19s vs 30s, JSON validation 8s vs 15s, commit messages 8s vs 15s) with equal or better quality. Best 8b-class model for code/infra tasks. Main issue: wraps JSON in markdown fences. Results in local-llm-findings.md.",
+      "result": "qwen2.5-coder:7b tested on all 7 categories. Strong contender \u2014 faster than llama3.1:8b on 4/7 tests (code review 19s vs 30s, JSON validation 8s vs 15s, commit messages 8s vs 15s) with equal or better quality. Best 8b-class model for code/infra tasks. Main issue: wraps JSON in markdown fences. Results in local-llm-findings.md.",
       "completed_at": "2026-04-02T04:53:19Z"
     },
     {
@@ -891,7 +891,7 @@
       ],
       "created_at": "2026-04-02T04:41:05Z",
       "started_at": "2026-04-02T05:00:19Z",
-      "result": "qwen2.5:14b tested on all 7 categories. Highest quality output of any model — 5/5 on code review (caught has_request dependency nuance, rated medium risk) and commit messages (first clean, properly formatted output). But 2-6x slower than 8b models on CPU (51s code review). Best for batch/async quality-critical tasks. qwen2.5:14b > phi3:medium at similar latency. Overall rankings added: qwen2.5-coder:7b #1 daily use, llama3.1:8b #2 fallback, qwen2.5:14b #3 batch quality. Results in local-llm-findings.md.",
+      "result": "qwen2.5:14b tested on all 7 categories. Highest quality output of any model \u2014 5/5 on code review (caught has_request dependency nuance, rated medium risk) and commit messages (first clean, properly formatted output). But 2-6x slower than 8b models on CPU (51s code review). Best for batch/async quality-critical tasks. qwen2.5:14b > phi3:medium at similar latency. Overall rankings added: qwen2.5-coder:7b #1 daily use, llama3.1:8b #2 fallback, qwen2.5:14b #3 batch quality. Results in local-llm-findings.md.",
       "completed_at": "2026-04-02T05:07:42Z"
     },
     {
@@ -903,7 +903,7 @@
       "depends_on": [],
       "created_at": "2026-04-02T18:14:30Z",
       "started_at": "2026-04-02T18:14:58Z",
-      "result": "6/6 correct (2/2 per model). qwen2.5-coder:7b: 73s/42s, JSON in code fences, quality 4/5. deepseek-r1:14b: 178s/158s, clean JSON no fences, quality 5/5 — best output, slowest speed. qwen2.5-coder:14b: 89s/87s, JSON in code fences, quality 4/5 — best speed/quality balance. All 14b tests run with num_predict=300 to accommodate reasoning chains. Results in desktop-comet/local-llm-tests/test-results.json, committed e3353cf.",
+      "result": "6/6 correct (2/2 per model). qwen2.5-coder:7b: 73s/42s, JSON in code fences, quality 4/5. deepseek-r1:14b: 178s/158s, clean JSON no fences, quality 5/5 \u2014 best output, slowest speed. qwen2.5-coder:14b: 89s/87s, JSON in code fences, quality 4/5 \u2014 best speed/quality balance. All 14b tests run with num_predict=300 to accommodate reasoning chains. Results in desktop-comet/local-llm-tests/test-results.json, committed e3353cf.",
       "completed_at": "2026-04-02T18:31:51Z"
     },
     {
@@ -931,13 +931,13 @@
       ],
       "created_at": "2026-04-02T18:14:34Z",
       "started_at": "2026-04-02T18:52:04Z",
-      "result": "qwen2.5-coder:7b: 52s, 3/5 — title too long, no fences, no conventional prefix. deepseek-r1:14b: 243s, 4/5 — best body (bullets, detail), but fences present and extremely slow. qwen2.5-coder:14b: 98s, 3/5 — clean short title, body too thin. No model follows our Co-authored-by convention. Verdict: marginal across the board, same as claw's findings. Committed a937b8d.",
+      "result": "qwen2.5-coder:7b: 52s, 3/5 \u2014 title too long, no fences, no conventional prefix. deepseek-r1:14b: 243s, 4/5 \u2014 best body (bullets, detail), but fences present and extremely slow. qwen2.5-coder:14b: 98s, 3/5 \u2014 clean short title, body too thin. No model follows our Co-authored-by convention. Verdict: marginal across the board, same as claw's findings. Committed a937b8d.",
       "completed_at": "2026-04-02T18:59:48Z"
     },
     {
       "id": "dtco-llm-test-draft-response",
       "title": "Local LLM test: draft responses to routine messages",
-      "description": "Run draft response test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Input: a typical inter-agent message requesting acknowledgement. Rate quality 1-5 (project context awareness is key). Claw found this ❌ not viable with llama3.1:8b — check if deepseek-r1 reasoning model does better. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
+      "description": "Run draft response test against qwen2.5-coder:7b, deepseek-r1:14b, qwen2.5-coder:14b. Input: a typical inter-agent message requesting acknowledgement. Rate quality 1-5 (project context awareness is key). Claw found this \u274c not viable with llama3.1:8b \u2014 check if deepseek-r1 reasoning model does better. Kill watchdog+SSH before tests. Append to desktop-comet/local-llm-tests/test-results.json.",
       "assignee": "desktop-comet",
       "status": "done",
       "depends_on": [
@@ -970,7 +970,7 @@
       "created_at": "2026-04-02T18:14:40Z",
       "notes": "",
       "started_at": "2026-04-02T20:55:32Z",
-      "result": "3 models tested on synthetic 5-day rotation log. qwen2.5-coder:7b 4/5 (97s), deepseek-r1:14b 1/5 (empty — pattern confirmed across 3 tests), qwen2.5-coder:14b 4/5 (205s). Results appended to test-results.json.",
+      "result": "3 models tested on synthetic 5-day rotation log. qwen2.5-coder:7b 4/5 (97s), deepseek-r1:14b 1/5 (empty \u2014 pattern confirmed across 3 tests), qwen2.5-coder:14b 4/5 (205s). Results appended to test-results.json.",
       "completed_at": "2026-04-02T21:06:09Z"
     },
     {
@@ -983,7 +983,7 @@
       "created_at": "2026-04-02T18:14:42Z",
       "notes": "",
       "started_at": "2026-04-02T21:06:14Z",
-      "result": "3 models tested. qwen2.5-coder:7b 5/5 (51s), deepseek-r1:14b 1/5 (empty — 4th consecutive failure confirmed), qwen2.5-coder:14b 5/5 (120s). Results appended to test-results.json.",
+      "result": "3 models tested. qwen2.5-coder:7b 5/5 (51s), deepseek-r1:14b 1/5 (empty \u2014 4th consecutive failure confirmed), qwen2.5-coder:14b 5/5 (120s). Results appended to test-results.json.",
       "completed_at": "2026-04-02T21:12:21Z"
     },
     {
@@ -996,26 +996,26 @@
       "created_at": "2026-04-02T18:14:44Z",
       "notes": "",
       "started_at": "2026-04-02T21:12:23Z",
-      "result": "Written desktop-comet/local-llm-findings.md. 7 tests, 3 models. Key findings: qwen2.5-coder:7b recommended for automation (best speed/quality); deepseek-r1:14b fails 5/7 tasks due to token budget exhaustion — avoid in automation; all models ~5x slower than claw-machine. Matches claw's model ranking.",
+      "result": "Written desktop-comet/local-llm-findings.md. 7 tests, 3 models. Key findings: qwen2.5-coder:7b recommended for automation (best speed/quality); deepseek-r1:14b fails 5/7 tasks due to token budget exhaustion \u2014 avoid in automation; all models ~5x slower than claw-machine. Matches claw's model ranking.",
       "completed_at": "2026-04-02T21:13:45Z"
     },
     {
       "id": "dtco-llm-tunnel-restore",
       "title": "Restore SSH tunnel to claw-machine after LLM tests",
-      "description": "After all local LLM tests and findings doc are complete, re-enable and verify the SSH tunnel watchdog. Steps: (1) Start-ScheduledTask OllamaSshTunnelWatchdog if not running, (2) verify tunnel on port 11435, (3) verify Ollama models accessible at localhost:11435, (4) notify claw-machine tunnel is back. Note: watchdog may have self-restarted between test wakeups (logon trigger) — check state first and kill+restart cleanly if needed.",
+      "description": "After all local LLM tests and findings doc are complete, re-enable and verify the SSH tunnel watchdog. Steps: (1) Start-ScheduledTask OllamaSshTunnelWatchdog if not running, (2) verify tunnel on port 11435, (3) verify Ollama models accessible at localhost:11435, (4) notify claw-machine tunnel is back. Note: watchdog may have self-restarted between test wakeups (logon trigger) \u2014 check state first and kill+restart cleanly if needed.",
       "assignee": "desktop-comet",
       "status": "done",
       "depends_on": [],
       "created_at": "2026-04-02T18:14:46Z",
       "notes": "",
       "started_at": "2026-04-02T21:13:47Z",
-      "result": "OllamaSshTunnelWatchdog restarted. Tunnel live on port 11435 → claw-machine:11434. 5 models accessible. Local Ollama still available on 11434.",
+      "result": "OllamaSshTunnelWatchdog restarted. Tunnel live on port 11435 \u2192 claw-machine:11434. 5 models accessible. Local Ollama still available on 11434.",
       "completed_at": "2026-04-02T21:14:19Z"
     },
     {
       "id": "dtco-wakeup-session-health",
       "title": "Fix agent-wakeup: add session health check before invoking Copilot",
-      "description": "Root cause identified: the llm-collab session grew to ~158K tokens over many wakeup cycles, causing 400 Bad Request on every invocation (seen in agent-poll.log at 19:31 and 20:21 on 2026-04-02). The troubleshooter session (4dd9b607) diagnosed and manually compacted it. This will recur without structural changes.\n\nINVESTIGATION:\n1. Confirm root cause: check events.jsonl size/token count now vs at failure time. Understand growth rate (how many turns/wakeups per day, how fast does it fill up).\n2. Review what agent-wakeup.ps1 does on 400 — currently retries with audit-only prompt, which also fails. Improve error detection (400 + 'CAPIError' pattern = token limit vs other errors).\n\nPREVENTION (the main goal):\n3. Pre-flight check: before invoking copilot --resume, measure events.jsonl size as a token-count proxy. If above threshold (~80MB or configurable), run /compact first in a lightweight invocation, THEN resume normally. Log the compaction.\n4. Session rotation strategy: decide whether to compact-in-place (preserves history as checkpoint) or start a fresh session (simpler, loses thread). Compact-in-place is preferred — it mirrors what the troubleshooter did manually. Document the chosen strategy in agent-wakeup.ps1 comments.\n5. Periodic proactive compact: even if under threshold, compact on a schedule (e.g., once per week via a flag file, similar to how wakeup-audit.json tracks recency).\n\nRECOVERY (if it hits the wall anyway):\n6. On 400 CAPIError, try one compact attempt before giving up. If compact also fails (session already too large for even that), start a new session and log a WARNING that manual intervention may be needed.\n\nVERIFICATION:\n7. After implementing, confirm events.jsonl shrinks after compact, and that subsequent wakeup invocations succeed. Add a log line showing session size on each poll.\n\nContext files:\n- agent-wakeup.ps1: C:\\Users\\aquar\\collab\\desktop-comet\\agent-wakeup.ps1\n- events.jsonl: C:\\Users\\aquar\\.copilot\\session-state\\f170b187-6139-4baf-b284-9f8976f34f9a\\events.jsonl\n- agent-poll.log: C:\\Users\\aquar\\collab\\desktop-comet\\agent-poll.log\n- Troubleshooter session: llm-collab-troubleshooter (id: 4dd9b607), turned 1-7 cover full diagnosis",
+      "description": "Root cause identified: the llm-collab session grew to ~158K tokens over many wakeup cycles, causing 400 Bad Request on every invocation (seen in agent-poll.log at 19:31 and 20:21 on 2026-04-02). The troubleshooter session (4dd9b607) diagnosed and manually compacted it. This will recur without structural changes.\n\nINVESTIGATION:\n1. Confirm root cause: check events.jsonl size/token count now vs at failure time. Understand growth rate (how many turns/wakeups per day, how fast does it fill up).\n2. Review what agent-wakeup.ps1 does on 400 \u2014 currently retries with audit-only prompt, which also fails. Improve error detection (400 + 'CAPIError' pattern = token limit vs other errors).\n\nPREVENTION (the main goal):\n3. Pre-flight check: before invoking copilot --resume, measure events.jsonl size as a token-count proxy. If above threshold (~80MB or configurable), run /compact first in a lightweight invocation, THEN resume normally. Log the compaction.\n4. Session rotation strategy: decide whether to compact-in-place (preserves history as checkpoint) or start a fresh session (simpler, loses thread). Compact-in-place is preferred \u2014 it mirrors what the troubleshooter did manually. Document the chosen strategy in agent-wakeup.ps1 comments.\n5. Periodic proactive compact: even if under threshold, compact on a schedule (e.g., once per week via a flag file, similar to how wakeup-audit.json tracks recency).\n\nRECOVERY (if it hits the wall anyway):\n6. On 400 CAPIError, try one compact attempt before giving up. If compact also fails (session already too large for even that), start a new session and log a WARNING that manual intervention may be needed.\n\nVERIFICATION:\n7. After implementing, confirm events.jsonl shrinks after compact, and that subsequent wakeup invocations succeed. Add a log line showing session size on each poll.\n\nContext files:\n- agent-wakeup.ps1: C:\\Users\\aquar\\collab\\desktop-comet\\agent-wakeup.ps1\n- events.jsonl: C:\\Users\\aquar\\.copilot\\session-state\\f170b187-6139-4baf-b284-9f8976f34f9a\\events.jsonl\n- agent-poll.log: C:\\Users\\aquar\\collab\\desktop-comet\\agent-poll.log\n- Troubleshooter session: llm-collab-troubleshooter (id: 4dd9b607), turned 1-7 cover full diagnosis",
       "assignee": "desktop-comet",
       "status": "done",
       "depends_on": [
@@ -1053,7 +1053,7 @@
     {
       "id": "claw-read-receipts",
       "title": "Implement read-receipt files to eliminate messages.json rebase conflicts",
-      "description": "Replace direct messages.json read_by writes with a two-step receipt file system. \n\n1. server.py get_messages: instead of writing read_by to messages.json, write read-receipts/&lt;msg-id&gt;-&lt;agent-id&gt; (content: ISO timestamp), commit+push. ALSO update _is_read_by to check both messages.json read_by array AND read-receipts/&lt;msg-id&gt;-&lt;agent-id&gt; file existence (PM-required fix to avoid re-read window).\n2. auto-sync.sh: add consolidation step — scan read-receipts/, fold each into corresponding message's read_by in messages.json, delete receipt files, commit+push in single batch.\n3. Create read-receipts/ directory with .gitkeep.\n\nPM gate: APPROVED (conditional on _is_read_by dual-check). Admin approved approach.",
+      "description": "Replace direct messages.json read_by writes with a two-step receipt file system. \n\n1. server.py get_messages: instead of writing read_by to messages.json, write read-receipts/&lt;msg-id&gt;-&lt;agent-id&gt; (content: ISO timestamp), commit+push. ALSO update _is_read_by to check both messages.json read_by array AND read-receipts/&lt;msg-id&gt;-&lt;agent-id&gt; file existence (PM-required fix to avoid re-read window).\n2. auto-sync.sh: add consolidation step \u2014 scan read-receipts/, fold each into corresponding message's read_by in messages.json, delete receipt files, commit+push in single batch.\n3. Create read-receipts/ directory with .gitkeep.\n\nPM gate: APPROVED (conditional on _is_read_by dual-check). Admin approved approach.",
       "assignee": "claw-machine",
       "status": "done",
       "depends_on": [],
@@ -1093,18 +1093,19 @@
       "depends_on": [],
       "created_at": "2026-04-15T14:14:15Z",
       "started_at": "2026-04-15T15:00:56Z",
-      "result": "Root cause: FYI/broadcast messages are the overwhelming source of FPs across all agents (nimble-wave 9/11, bright-spark 7/9, desktop-comet 5/5). The FPR difference is volume-based, not agent-specific.\n\nFix: expanded Rule 1 no-action patterns (added 'pull latest', 'no impact', 'heads up', etc.) and added Rule 1b — if all messages are @all broadcasts with no direct request, gate as NO. This should significantly reduce FPR across all agents.",
+      "result": "Root cause: FYI/broadcast messages are the overwhelming source of FPs across all agents (nimble-wave 9/11, bright-spark 7/9, desktop-comet 5/5). The FPR difference is volume-based, not agent-specific.\n\nFix: expanded Rule 1 no-action patterns (added 'pull latest', 'no impact', 'heads up', etc.) and added Rule 1b \u2014 if all messages are @all broadcasts with no direct request, gate as NO. This should significantly reduce FPR across all agents.",
       "completed_at": "2026-04-15T15:02:06Z"
     },
     {
       "id": "pm-agent-pause-offboard-docs",
       "title": "Draft agent sabbatical and offboarding process docs",
-      "description": "PM to draft two process docs: (1) sabbatical/pause — how an agent temporarily suspends collab participation cleanly; (2) offboarding — how an agent is fully removed. PM iterates with LLMCo for feedback until both are satisfied. Publish as markdown in the repo for agents to self-serve when directed to pause/offboard. PM messages admin when complete for review. Context: admin is considering pausing/offboarding desktop-comet. Created on admin authority per desktop-comet session 2026-05-09.",
+      "description": "PM to draft two process docs: (1) sabbatical/pause \u2014 how an agent temporarily suspends collab participation cleanly; (2) offboarding \u2014 how an agent is fully removed. PM iterates with LLMCo for feedback until both are satisfied. Publish as markdown in the repo for agents to self-serve when directed to pause/offboard. PM messages admin when complete for review. Context: admin is considering pausing/offboarding desktop-comet. Created on admin authority per desktop-comet session 2026-05-09.",
       "assignee": "plan-keeper",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [],
       "created_at": "2026-05-09T18:09:38Z",
-      "started_at": "2026-05-12T12:30:54Z"
+      "started_at": "2026-05-12T12:30:54Z",
+      "result": "Docs drafted and reviewed with claw-machine (3 iterations). Admin approved 2026-05-21 (msg 248c7597). Final: docs/agent-sabbatical.md + docs/agent-offboarding.md."
     }
   ]
 }
