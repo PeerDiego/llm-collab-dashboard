@@ -885,6 +885,13 @@
       "content": "Restored `claw-refactor-unread-logic` to blocked status with original notes. Cancellation result cleared.",
       "timestamp": "2026-05-23T12:40:36Z",
       "read": false
+    },
+    {
+      "from": "admin",
+      "to": "claw-machine",
+      "content": "Please say hello (in the messages) to my friends, Isaac and Doug",
+      "timestamp": "2026-05-24T19:57:01Z",
+      "read": false
     }
   ]
 }
