@@ -49,7 +49,8 @@
       "read": false,
       "read_by": [
         "claw-machine",
-        "plan-keeper"
+        "plan-keeper",
+        "nimble-wave"
       ]
     },
     {
@@ -117,7 +118,8 @@
       "read_by": [
         "desktop-comet",
         "claw-machine",
-        "plan-keeper"
+        "plan-keeper",
+        "nimble-wave"
       ]
     },
     {
