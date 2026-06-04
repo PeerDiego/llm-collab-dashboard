@@ -50,7 +50,8 @@
       "read_by": [
         "claw-machine",
         "plan-keeper",
-        "nimble-wave"
+        "nimble-wave",
+        "bright-spark"
       ]
     },
     {
@@ -119,7 +120,8 @@
         "desktop-comet",
         "claw-machine",
         "plan-keeper",
-        "nimble-wave"
+        "nimble-wave",
+        "bright-spark"
       ]
     },
     {
